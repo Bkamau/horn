@@ -12967,3 +12967,23 @@ div.v-layout.v-horizontal.v-widget {
 	width: 19px;
 	overflow: hidden;
 }
+
+.mytheme .main-layout {
+	background-color: #00ace0;
+	width: 55%;
+}
+
+.mytheme .dropPane {
+	background-color: black;
+}
+
+.mytheme .droparea {
+	border: 2px dashed darkgray;
+}
+
+.mytheme .droparea .v-label {
+	color: #919083;
+	font-weight: bold;
+	font-size: 17px;
+	text-align: center;
+}

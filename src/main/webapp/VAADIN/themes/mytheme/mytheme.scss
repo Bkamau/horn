@@ -35,4 +35,23 @@
   @include valo;
 
   // Insert your own theme rules here
+
+  .main-layout{
+    background-color: #00ace0;
+    width: 55%;
+  }
+
+  .dropPane{
+    background-color: black;
+  }
+
+  .droparea{
+    border:2px dashed darkgray;
+  }
+  .droparea .v-label {
+    color: #919083;
+    font-weight: bold;
+    font-size: 17px;
+    text-align: center;
+  }
 }
