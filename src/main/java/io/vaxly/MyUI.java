@@ -4,6 +4,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -25,15 +26,20 @@ public class MyUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout.setSizeFull();
+
+        VerticalLayout v1 = new VerticalLayout();
+        VerticalLayout v2 = new VerticalLayout();
+
+
         VerticalLayout mainLayout = new VerticalLayout();
         mainLayout.setWidth(100, Unit.PERCENTAGE);
         mainLayout.setMargin(true);
         mainLayout.setStyleName("main-layout");
 
         mainLayout.addComponent(new DetailLayout());
-
         mainLayout.addComponent(new AddressView());
-
         mainLayout.addComponent(new TitleView());
 
 
@@ -47,8 +53,12 @@ public class MyUI extends UI {
 
 
 
+        horizontalLayout.addComponents(v1,mainLayout,v2);
+        horizontalLayout.setExpandRatio(v1, 1);
+        horizontalLayout.setExpandRatio(mainLayout, 3);
+        horizontalLayout.setExpandRatio(v2, 1);
 
-        setContent(mainLayout);
+        setContent(horizontalLayout);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

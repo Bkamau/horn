@@ -10,24 +10,26 @@ public class TitleView extends HorizontalLayout{
 
     Label itemLabel = new Label("ITEM");
     Label descLable = new Label("DESCRIPTION");
-    Label amountLable = new Label("AMOUNT");
-    Label priceLable = new Label("PRICE");
+    Label amountLable = new Label("  AMOUNT");
+    Label priceLable = new Label("  PRICE");
+    Label noText = new Label("  ");
+    Label noText1 = new Label("  ");
 
     public TitleView() {
 
 
-        setWidth(100, Unit.PERCENTAGE);
-        addComponents(itemLabel,descLable,amountLable,priceLable);
-        setExpandRatio(itemLabel,1);
-        setExpandRatio(descLable,3);
-        setExpandRatio(amountLable,1);
-        setExpandRatio(priceLable,1);
+        addComponents(noText,itemLabel,descLable,amountLable,priceLable,noText1);
+        setExpandRatio(itemLabel,5);
+        setExpandRatio(descLable,15);
+        setExpandRatio(amountLable,5);
+        setExpandRatio(priceLable,5);
+        setExpandRatio(noText, 1);
+        setExpandRatio(noText1, 1);
+
         setSpacing(true);
-        setMargin(true);
-
-
-
-
+        setMargin(false);
+        setWidth(100, Unit.PERCENTAGE);
+        setStyleName("title-layout");
 
     }
 

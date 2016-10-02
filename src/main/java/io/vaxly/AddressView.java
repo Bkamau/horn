@@ -27,8 +27,8 @@ public class AddressView extends HorizontalLayout {
 
         setWidth(100, Unit.PERCENTAGE);
         setSpacing(true);
-        setMargin(true);
-        setStyleName("defaul-layout");
+        setMargin(false);
+        setStyleName("address-layout");
         addComponent(toTextField);
         addComponent(fromTextField);
     }

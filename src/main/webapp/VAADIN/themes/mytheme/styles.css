@@ -12969,8 +12969,9 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .main-layout {
-	background-color: #00ace0;
-	width: 55%;
+	width: 75%;
+	display: block;
+	min-width: 800px;
 }
 
 .mytheme .dropPane {
@@ -12990,4 +12991,13 @@ div.v-layout.v-horizontal.v-widget {
 
 .mytheme .bills {
 	margin-top: 5px;
+}
+
+.mytheme .address-layout {
+	margin-top: 10px;
+	margin-bottom: 30px;
+}
+
+.mytheme .title-layout {
+	margin: 10px;
 }
