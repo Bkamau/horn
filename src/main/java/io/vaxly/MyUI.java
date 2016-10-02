@@ -37,6 +37,17 @@ public class MyUI extends UI {
         mainLayout.addComponent(new TitleView());
 
 
+        mainLayout.addComponent(new BillsView());
+        mainLayout.addComponent(new BillsView());
+        mainLayout.addComponent(new BillsView());
+        mainLayout.addComponent(new BillsView());
+        mainLayout.addComponent(new BillsView());
+        mainLayout.addComponent(new BillsView());
+        mainLayout.addComponent(new BillsView());
+
+
+
+
         setContent(mainLayout);
     }
 
