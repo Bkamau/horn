@@ -13004,3 +13004,7 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .invisible {
 	visibility: hidden;
 }
+
+.mytheme .visible {
+	visibility: visible;
+}

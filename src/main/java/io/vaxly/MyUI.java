@@ -27,6 +27,9 @@ public class MyUI extends UI implements Button.ClickListener{
     Button addBtn;
     Button delBtn;
 
+    int addBtnIndex;
+    int delBtnIndex;
+
     ArrayList<Button> addBtnList = new ArrayList<>();
     ArrayList<Button> delBtnList = new ArrayList<>();
     ArrayList<Component> componentArrayList= new ArrayList<>();
@@ -56,6 +59,8 @@ public class MyUI extends UI implements Button.ClickListener{
         addDemBills();
 
 
+
+
         setContent(horizontalLayout);
     }
 
@@ -64,17 +69,20 @@ public class MyUI extends UI implements Button.ClickListener{
         if (clickEvent.getButton() == addBtn){
 
             addDemBills();
-            int addBtnIndex = addBtnList.indexOf(addBtn);
+
+            delBtnList.get((delBtnList.size()-2)).setStyleName("visible");
+            delBtnList.get((delBtnList.size()-2)).addStyleName(ValoTheme.BUTTON_BORDERLESS);
+            addBtnIndex = addBtnList.indexOf(addBtn);
             addBtnList.get(addBtnIndex-1).setStyleName("invisible");
-          //  Notification.show("" + addBtnIndex, Notification.Type.TRAY_NOTIFICATION);
+
 
         }else {
-            int delBtnIndex = delBtnList.indexOf(clickEvent.getButton());
+            delBtnIndex = delBtnList.indexOf(clickEvent.getButton());
+
             Notification.show("del" + delBtnIndex , Notification.Type.TRAY_NOTIFICATION);
 
             addBtnList.remove(delBtnIndex);
             delBtnList.remove(delBtnIndex);
-
             mainLayout.removeComponent(componentArrayList.get(delBtnIndex));
             componentArrayList.remove(delBtnIndex);
         }
@@ -88,8 +96,6 @@ public class MyUI extends UI implements Button.ClickListener{
         addBtn.addClickListener(this);
         delBtn.addClickListener(this);
 
-
-
         addBtn.setWidth(100, Unit.PERCENTAGE);
         addBtn.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
         addBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
@@ -97,6 +103,7 @@ public class MyUI extends UI implements Button.ClickListener{
         delBtn.setWidth(100, Unit.PERCENTAGE);
         delBtn.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
         delBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        delBtn.setStyleName("invisible");
 
         billsHorizontalLayout = new HorizontalLayout();
         // billsHorizontalLayout.setMargin(true);
@@ -116,9 +123,6 @@ public class MyUI extends UI implements Button.ClickListener{
         componentArrayList.add(billsHorizontalLayout);
 
         mainLayout.addComponents(billsHorizontalLayout);
-
-
-
 
 
     }
