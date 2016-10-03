@@ -13,6 +13,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by bkamau on 2.10.2016.
@@ -23,15 +25,20 @@ public class DetailLayout extends HorizontalLayout {
      VerticalLayout detailLogoLayout = new VerticalLayout();
 
      TextField invoiceField = new TextField("Invoice #", "");
-     Component issueDate = new PopupDateField("Issue Date");
-     Component dueDate = new PopupDateField("Due Date");
+     DateField issueDate = new PopupDateField("Issue Date");
+     DateField dueDate = new PopupDateField("Due Date");
 
      VerticalLayout dropPane;
      Label infoLabel;
 
+    GregorianCalendar calEnd = new GregorianCalendar();
 
 
     public DetailLayout(){
+
+
+
+
 
         detailDatesLayout.setSizeFull();
         detailDatesLayout.setSpacing(true);
@@ -47,10 +54,17 @@ public class DetailLayout extends HorizontalLayout {
         setExpandRatio(detailDatesLayout, 3);
         setExpandRatio(detailLogoLayout, 2);
 
+        calEnd.set(java.util.Calendar.DATE, 1);
+        calEnd.roll(java.util.Calendar.DATE, -1);
 
         invoiceField.setWidth(100.0f, Unit.PERCENTAGE);
+        invoiceField.setValue("001");
         issueDate.setWidth(100.0f, Unit.PERCENTAGE);
+        issueDate.setValue(new Date());
+        issueDate.setDateFormat("dd-MM-yyyy");
         dueDate.setWidth(100.0f, Unit.PERCENTAGE);
+        dueDate.setDateFormat("dd-MM-yyyy");
+        dueDate.setValue(calEnd.getTime());
         detailDatesLayout.addComponents(invoiceField,issueDate,dueDate);
 
         infoLabel = new Label("Drag and Drop your Logo Here. Max 2MB");

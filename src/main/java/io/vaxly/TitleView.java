@@ -8,7 +8,7 @@ import com.vaadin.ui.Label;
  */
 public class TitleView extends HorizontalLayout{
 
-    Label itemLabel = new Label("ITEM");
+    Label qntyLable = new Label("QUANTITY");
     Label descLable = new Label("DESCRIPTION");
     Label amountLable = new Label("  AMOUNT");
     Label priceLable = new Label("  PRICE");
@@ -18,13 +18,13 @@ public class TitleView extends HorizontalLayout{
     public TitleView() {
 
 
-        addComponents(noText,itemLabel,descLable,amountLable,priceLable,noText1);
-        setExpandRatio(itemLabel,5);
+        addComponents(noText,noText,descLable,qntyLable,amountLable,priceLable,noText1);
+        setExpandRatio(qntyLable,5);
         setExpandRatio(descLable,15);
         setExpandRatio(amountLable,5);
         setExpandRatio(priceLable,5);
-        setExpandRatio(noText, 1);
-        setExpandRatio(noText1, 1);
+        setExpandRatio(noText, 2);
+        setExpandRatio(noText1, 2);
 
         setSpacing(true);
         setMargin(false);
