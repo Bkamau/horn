@@ -13000,3 +13000,7 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .title-layout {
 	margin: 10px;
 }
+
+.mytheme .invisible {
+	visibility: hidden;
+}

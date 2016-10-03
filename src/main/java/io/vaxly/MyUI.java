@@ -26,9 +26,10 @@ public class MyUI extends UI implements Button.ClickListener{
     HorizontalLayout billz;
     Button addBtn;
     Button delBtn;
-    int btnCount = 0 ;
 
-    ArrayList<Button> btnList = new ArrayList<>();
+    ArrayList<Button> addBtnList = new ArrayList<>();
+    ArrayList<Button> delBtnList = new ArrayList<>();
+    ArrayList<Component> componentArrayList= new ArrayList<>();
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -61,20 +62,22 @@ public class MyUI extends UI implements Button.ClickListener{
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
         if (clickEvent.getButton() == addBtn){
-            addDemBills();
-            
-            /*
-            if (btnCount != btnList.indexOf(addBtn))
-                addBtn.setVisible(false);
 
-             */
+            addDemBills();
+            int addBtnIndex = addBtnList.indexOf(addBtn);
+            addBtnList.get(addBtnIndex-1).setStyleName("invisible");
+          //  Notification.show("" + addBtnIndex, Notification.Type.TRAY_NOTIFICATION);
 
         }else {
+            int delBtnIndex = delBtnList.indexOf(clickEvent.getButton());
+            Notification.show("del" + delBtnIndex , Notification.Type.TRAY_NOTIFICATION);
 
+            addBtnList.remove(delBtnIndex);
+            delBtnList.remove(delBtnIndex);
 
-            Notification.show("DELETE", Notification.Type.TRAY_NOTIFICATION);
+            mainLayout.removeComponent(componentArrayList.get(delBtnIndex));
+            componentArrayList.remove(delBtnIndex);
         }
-
     }
 
     private void addDemBills(){
@@ -85,7 +88,7 @@ public class MyUI extends UI implements Button.ClickListener{
         addBtn.addClickListener(this);
         delBtn.addClickListener(this);
 
-        btnList.add(addBtn);
+
 
         addBtn.setWidth(100, Unit.PERCENTAGE);
         addBtn.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
@@ -102,14 +105,20 @@ public class MyUI extends UI implements Button.ClickListener{
         billsHorizontalLayout.setStyleName("bills");
 
         billz = new BillsView();
+
         billsHorizontalLayout.addComponents(addBtn, billz, delBtn);
         billsHorizontalLayout.setExpandRatio(addBtn,1);
         billsHorizontalLayout.setExpandRatio(billz,15);
         billsHorizontalLayout.setExpandRatio(delBtn,1);
 
+        addBtnList.add(addBtn);
+        delBtnList.add(delBtn);
+        componentArrayList.add(billsHorizontalLayout);
+
         mainLayout.addComponents(billsHorizontalLayout);
 
-        btnCount ++;
+
+
 
 
     }
