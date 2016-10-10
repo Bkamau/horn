@@ -25,6 +25,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
     public VerticalLayout mainLayout;
     public HorizontalLayout  billsHorizontalLayout;
     HorizontalLayout billz;
+    VerticalLayout firstVerticalLayout, seconVerticalLayoutd;
 
     double quantity,amount;
 
@@ -40,6 +41,10 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
     TextField amtTextField ;
     TextField priceTextField ;
 
+    TextField subTitle ;
+    TextField taxTitle ;
+    Label totalLable ;
+
     Label priceLabel;
 
     ArrayList<Button> addBtnList = new ArrayList<>();
@@ -49,11 +54,18 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+        Panel  mainPaneL = new Panel();
+      mainPaneL.setSizeFull();
+
+
         HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.setSizeFull();
 
+        mainPaneL.setContent(horizontalLayout);
+
         VerticalLayout v1 = new VerticalLayout();
         VerticalLayout v2 = new VerticalLayout();
+
 
         mainLayout = new VerticalLayout();
         mainLayout.setMargin(true);
@@ -64,18 +76,29 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         horizontalLayout.setExpandRatio(mainLayout, 3);
         horizontalLayout.setExpandRatio(v2, 1);
 
-        mainLayout.addComponent(new DetailLayout());
-        mainLayout.addComponent(new AddressView());
-        mainLayout.addComponent(new TitleView());
+        firstVerticalLayout = new VerticalLayout();
+        seconVerticalLayoutd = new VerticalLayout();
+        seconVerticalLayoutd.setWidth(100, Unit.PERCENTAGE);
+        mainLayout.addComponents(firstVerticalLayout,seconVerticalLayoutd);
+
+        firstVerticalLayout.addComponent(new DetailLayout());
+        firstVerticalLayout.addComponent(new AddressView());
+        firstVerticalLayout.addComponent(new TitleView());
+
+
+        VerticalLayout totalVerticalLayout = totalLayout();
+
+
 
         addDemBills();
 
 
 
 
+        seconVerticalLayoutd.addComponent(totalVerticalLayout);
+        seconVerticalLayoutd.setComponentAlignment(totalVerticalLayout, Alignment.BOTTOM_RIGHT);
 
-
-        setContent(horizontalLayout);
+        setContent(mainPaneL);
     }
 
     @Override
@@ -97,7 +120,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
 
             addBtnList.remove(delBtnIndex);
             delBtnList.remove(delBtnIndex);
-            mainLayout.removeComponent(componentArrayList.get(delBtnIndex));
+            firstVerticalLayout.removeComponent(componentArrayList.get(delBtnIndex));
             componentArrayList.remove(delBtnIndex);
             priceArrayList.remove(delBtnIndex);
             totalPrice();
@@ -151,7 +174,36 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         priceArrayList.add(priceTextField);
         totalPrice();
 
-        mainLayout.addComponents(billsHorizontalLayout);
+        firstVerticalLayout.addComponents(billsHorizontalLayout);
+
+
+    }
+
+
+    private VerticalLayout totalLayout (){
+
+        VerticalLayout layout = new VerticalLayout();
+        FormLayout totalFormLayout = new FormLayout();
+
+         subTitle = new TextField("Sub Total");
+         taxTitle = new TextField("Tax");
+         totalLable = new Label("TOTAL");
+
+        taxTitle.setInputPrompt("                               24%");
+        taxTitle.addValueChangeListener(this);
+
+        totalLable.setValue(" 000");
+        totalLable.setCaption("TOTAL");
+        totalLable.setStyleName(ValoTheme.LABEL_BOLD);
+        totalLable.setStyleName(ValoTheme.LABEL_HUGE);
+        totalFormLayout.addComponents(subTitle,taxTitle,totalLable);
+
+        layout.addComponents(totalFormLayout);
+
+        layout.setMargin(true);
+        layout.setSpacing(true);
+        layout.setWidth(35, Unit.PERCENTAGE);
+        return layout;
 
 
     }
@@ -175,8 +227,22 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
 
         }
 
-        priceLabel = new Label(sum + " ");
-        mainLayout.addComponent(priceLabel);
+
+        double tax;
+
+        subTitle.setValue(String.valueOf(sum));
+
+        String taxation = taxTitle.getValue();
+        if (!taxation.isEmpty()){
+            tax = 1 + (Double.parseDouble(taxTitle.getValue())/100);
+        }else {
+            tax = 1.24;
+        }
+
+        Double finalSum = sum*tax;
+        totalLable.setValue(String.valueOf(finalSum));
+
+
 
     }
 

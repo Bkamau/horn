@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e03870b4-2b08-454f-b4d5-9758aabafbe2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/BillsView$1.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/BillsView$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/BillsView.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/BillsView.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/TotalView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/MyUI$MyUIServlet.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/MyUI$MyUIServlet.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/MyUI.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/MyUI.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/BillsView.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/BillsView.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/MyUI.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/MyUI.java" />
     </list>
     <ignored path="hornbill.iws" />
@@ -34,12 +32,26 @@
       <file leaf-file-name="MyUI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/MyUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="64" column="47" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="47" />
+            <state relative-caret-position="195">
+              <caret line="192" column="44" selection-start-line="192" selection-start-column="44" selection-end-line="192" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5039#5040#0" expanded="true" />
-                <element signature="e#5067#5068#0" expanded="true" />
+                <element signature="method#buttonClick#0;class#MyUI#0" expanded="false" />
+                <element signature="method#addDemBills#0;class#MyUI#0" expanded="false" />
+                <element signature="e#6658#6659#0" expanded="true" />
+                <element signature="e#6686#6687#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TotalView.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/TotalView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="495">
+              <caret line="33" column="38" selection-start-line="21" selection-start-column="7" selection-end-line="33" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,6 +98,7 @@
         <option value="$PROJECT_DIR$/src/main/java/io/vaxly/BillType.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/mytheme.scss" />
         <option value="$PROJECT_DIR$/src/main/java/io/vaxly/BillsView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/vaxly/TotalView.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/vaxly/MyUI.java" />
       </list>
     </option>
@@ -711,12 +724,12 @@
       <workItem from="1475353402359" duration="29000" />
       <workItem from="1475386845509" duration="49148000" />
       <workItem from="1475500349281" duration="11019000" />
-      <workItem from="1476094317313" duration="5631000" />
+      <workItem from="1476094317313" duration="10153000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65827000" />
+    <option name="totallyTimeSpent" value="70349000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="36" width="1920" height="1044" extended-state="0" />
@@ -729,7 +742,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988167" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25054467" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16993465" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -802,8 +815,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5039#5040#0" expanded="true" />
-            <element signature="e#5067#5068#0" expanded="true" />
+            <element signature="method#buttonClick#0;class#MyUI#0" expanded="false" />
+            <element signature="method#addDemBills#0;class#MyUI#0" expanded="false" />
+            <element signature="e#6658#6659#0" expanded="true" />
+            <element signature="e#6686#6687#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -850,8 +865,10 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5039#5040#0" expanded="true" />
-            <element signature="e#5067#5068#0" expanded="true" />
+            <element signature="method#buttonClick#0;class#MyUI#0" expanded="false" />
+            <element signature="method#addDemBills#0;class#MyUI#0" expanded="false" />
+            <element signature="e#6658#6659#0" expanded="true" />
+            <element signature="e#6686#6687#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -971,14 +988,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/MyUI.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/TotalView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="64" column="47" selection-start-line="64" selection-start-column="47" selection-end-line="64" selection-end-column="47" />
+        <state relative-caret-position="495">
+          <caret line="33" column="38" selection-start-line="21" selection-start-column="7" selection-end-line="33" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5039#5040#0" expanded="true" />
-            <element signature="e#5067#5068#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/MyUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="192" column="44" selection-start-line="192" selection-start-column="44" selection-end-line="192" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#buttonClick#0;class#MyUI#0" expanded="false" />
+            <element signature="method#addDemBills#0;class#MyUI#0" expanded="false" />
+            <element signature="e#6658#6659#0" expanded="true" />
+            <element signature="e#6686#6687#0" expanded="true" />
           </folding>
         </state>
       </provider>
