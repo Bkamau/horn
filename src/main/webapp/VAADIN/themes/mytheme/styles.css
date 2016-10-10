@@ -12969,8 +12969,15 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .main-layout {
-	display: block;
-	min-width: 800px;
+	border-radius: 5px;
+	border: 2px;
+	background-color: #edeff2;
+	margin: 25px;
+	box-shadow: 8px 4px 8px 4px rgba(0, 0, 0, 0.2);
+}
+
+.mytheme .main-layout:hover {
+	box-shadow: 8px 8px 16px 4px rgba(0, 0, 0, 0.2);
 }
 
 .mytheme .dropPane {
@@ -12989,7 +12996,7 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .bills {
-	margin-top: 5px;
+	margin-top: 10px;
 }
 
 .mytheme .address-layout {
@@ -12998,7 +13005,7 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .title-layout {
-	margin: 10px;
+	margin-top: 40px;
 }
 
 .mytheme .invisible {
@@ -13007,4 +13014,12 @@ div.v-layout.v-horizontal.v-widget {
 
 .mytheme .visible {
 	visibility: visible;
+}
+
+.mytheme .total-style {
+	margin-top: 60px;
+}
+
+.mytheme .textfield-background {
+	background-color: rgba(0, 0, 0, 0.1);
 }

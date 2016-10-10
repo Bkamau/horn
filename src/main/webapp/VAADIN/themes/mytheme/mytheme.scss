@@ -37,9 +37,15 @@
   // Insert your own theme rules here
 
   .main-layout{
-    display: block;
-    min-width: 800px;
+    border-radius: 5px;
+    border: 2px;
+    background-color: #edeff2;
+    margin: 25px;
+    box-shadow: 8px 4px 8px 4px rgba(0,0,0,0.2);
+  }
 
+  .main-layout:hover {
+    box-shadow: 8px 8px 16px 4px rgba(0,0,0,0.2);
   }
 
   .dropPane{
@@ -57,7 +63,7 @@
   }
 
   .bills{
-    margin-top: 5px;
+    margin-top: 10px;
   }
 
   .address-layout{
@@ -69,7 +75,8 @@
 
 
   .title-layout{
-    margin: 10px;
+    margin-top: 40px;
+
   }
 
   .invisible{
@@ -79,5 +86,12 @@
     visibility: visible;
   }
 
+  .total-style{
+    margin-top: 60px;
+  }
+
+  .textfield-background{
+    background-color: rgba(0,0,0,0.1);
+  }
 
 }

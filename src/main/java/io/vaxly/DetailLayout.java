@@ -36,10 +36,6 @@ public class DetailLayout extends HorizontalLayout {
 
     public DetailLayout(){
 
-
-
-
-
         detailDatesLayout.setSizeFull();
         detailDatesLayout.setSpacing(true);
         detailDatesLayout.setMargin(true);

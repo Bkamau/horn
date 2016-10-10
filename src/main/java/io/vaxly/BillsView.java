@@ -21,7 +21,11 @@ public class BillsView extends HorizontalLayout {
         amtTextField.setWidth(100, Unit.PERCENTAGE);
         priceTextField.setWidth(100, Unit.PERCENTAGE);
 
-        priceTextField.setId("totalman");
+       // priceTextField.setId("totalman");
+
+        qntytTextField.setImmediate(true);
+        amtTextField.setImmediate(true);
+        priceTextField.setImmediate(true);
 
         qntytTextField.addValueChangeListener(new Property.ValueChangeListener() {
             @Override
@@ -61,7 +65,7 @@ public class BillsView extends HorizontalLayout {
         setMargin(false);
         setSpacing(true);
         setWidth(100,Unit.PERCENTAGE);
-       // setStyleName("bills");
+        //setStyleName("bills");
     }
 
 

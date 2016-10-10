@@ -22,40 +22,28 @@ import java.util.ArrayList;
 @Theme("mytheme")
 public class MyUI extends UI implements Button.ClickListener, Property.ValueChangeListener{
 
-    public VerticalLayout mainLayout;
-    public HorizontalLayout  billsHorizontalLayout;
-    HorizontalLayout billz;
-    VerticalLayout firstVerticalLayout, seconVerticalLayoutd;
+    private VerticalLayout firstVerticalLayout;
 
-    double quantity,amount;
+    private Button addBtn;
 
-    Button addBtn;
-    Button delBtn;
-
-    int addBtnIndex;
-    int delBtnIndex;
-
-
-    TextField qntytTextField;
-    TextField descTextField ;
-    TextField amtTextField ;
-    TextField priceTextField ;
-
-    TextField subTitle ;
-    TextField taxTitle ;
-    Label totalLable ;
+    private TextField subTitle ;
+    private TextField taxTitle ;
+    private Label totalLable ;
 
     Label priceLabel;
 
-    ArrayList<Button> addBtnList = new ArrayList<>();
-    ArrayList<Button> delBtnList = new ArrayList<>();
-    ArrayList<Component> componentArrayList= new ArrayList<>();
-    ArrayList<TextField> priceArrayList = new ArrayList<>();
+    private ArrayList<Button> addBtnList = new ArrayList<>();
+    private ArrayList<Button> delBtnList = new ArrayList<>();
+    private ArrayList<Component> componentArrayList= new ArrayList<>();
+    private ArrayList<TextField> priceArrayList = new ArrayList<>();
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+
         Panel  mainPaneL = new Panel();
-      mainPaneL.setSizeFull();
+        mainPaneL.setResponsive(true);
+
+
 
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
@@ -67,7 +55,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         VerticalLayout v2 = new VerticalLayout();
 
 
-        mainLayout = new VerticalLayout();
+        VerticalLayout mainLayout = new VerticalLayout();
         mainLayout.setMargin(true);
         mainLayout.setStyleName("main-layout");
 
@@ -77,28 +65,29 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         horizontalLayout.setExpandRatio(v2, 1);
 
         firstVerticalLayout = new VerticalLayout();
-        seconVerticalLayoutd = new VerticalLayout();
+        VerticalLayout seconVerticalLayoutd = new VerticalLayout();
         seconVerticalLayoutd.setWidth(100, Unit.PERCENTAGE);
-        mainLayout.addComponents(firstVerticalLayout,seconVerticalLayoutd);
+        mainLayout.addComponents(firstVerticalLayout, seconVerticalLayoutd);
 
         firstVerticalLayout.addComponent(new DetailLayout());
         firstVerticalLayout.addComponent(new AddressView());
         firstVerticalLayout.addComponent(new TitleView());
 
-
         VerticalLayout totalVerticalLayout = totalLayout();
-
-
 
         addDemBills();
 
-
-
-
         seconVerticalLayoutd.addComponent(totalVerticalLayout);
-        seconVerticalLayoutd.setComponentAlignment(totalVerticalLayout, Alignment.BOTTOM_RIGHT);
+        seconVerticalLayoutd.setComponentAlignment(totalVerticalLayout, Alignment.MIDDLE_RIGHT);
+
+
+        HorizontalLayout footerLayout = new FooterView();
+        seconVerticalLayoutd.addComponent(footerLayout);
+        seconVerticalLayoutd.setComponentAlignment(footerLayout, Alignment.BOTTOM_CENTER);
+
 
         setContent(mainPaneL);
+
     }
 
     @Override
@@ -109,14 +98,14 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
 
             delBtnList.get((delBtnList.size()-2)).setStyleName("visible");
             delBtnList.get((delBtnList.size()-2)).addStyleName(ValoTheme.BUTTON_BORDERLESS);
-            addBtnIndex = addBtnList.indexOf(addBtn);
-            addBtnList.get(addBtnIndex-1).setStyleName("invisible");
+            int addBtnIndex = addBtnList.indexOf(addBtn);
+            addBtnList.get(addBtnIndex -1).setStyleName("invisible");
 
 
         }else {
-            delBtnIndex = delBtnList.indexOf(clickEvent.getButton());
+            int delBtnIndex = delBtnList.indexOf(clickEvent.getButton());
 
-            Notification.show("del" + delBtnIndex , Notification.Type.TRAY_NOTIFICATION);
+            Notification.show("del" + delBtnIndex, Notification.Type.TRAY_NOTIFICATION);
 
             addBtnList.remove(delBtnIndex);
             delBtnList.remove(delBtnIndex);
@@ -133,7 +122,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
 
 
         addBtn = new Button("", FontAwesome.PLUS_SQUARE);
-        delBtn = new Button("", FontAwesome.MINUS_SQUARE);
+        Button delBtn = new Button("", FontAwesome.MINUS_SQUARE);
         addBtn.addClickListener(this);
         delBtn.addClickListener(this);
 
@@ -146,21 +135,21 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         delBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         delBtn.setStyleName("invisible");
 
-        billsHorizontalLayout = new HorizontalLayout();
+        HorizontalLayout billsHorizontalLayout = new HorizontalLayout();
         // billsHorizontalLayout.setMargin(true);
         billsHorizontalLayout.setSpacing(true);
         billsHorizontalLayout.setWidth(100,Unit.PERCENTAGE);
         billsHorizontalLayout.setStyleName("bills");
 
 
-         qntytTextField = new TextField();
-         descTextField = new TextField();
-         amtTextField = new TextField();
-         priceTextField = new TextField();
+        TextField qntytTextField = new TextField();
+        TextField descTextField = new TextField();
+        TextField amtTextField = new TextField();
+        TextField priceTextField = new TextField();
 
        priceTextField.addValueChangeListener(this);
 
-        billz = new BillsView( qntytTextField, descTextField ,  amtTextField ,  priceTextField);
+        HorizontalLayout billz = new BillsView(qntytTextField, descTextField, amtTextField, priceTextField);
 
         billsHorizontalLayout.addComponents(addBtn, billz, delBtn);
         billsHorizontalLayout.setExpandRatio(addBtn,1);
@@ -191,6 +180,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
 
         taxTitle.setInputPrompt("                               24%");
         taxTitle.addValueChangeListener(this);
+        taxTitle.setImmediate(true);
 
         totalLable.setValue(" 000");
         totalLable.setCaption("TOTAL");
@@ -203,6 +193,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         layout.setMargin(true);
         layout.setSpacing(true);
         layout.setWidth(35, Unit.PERCENTAGE);
+        layout.setStyleName("total-style");
         return layout;
 
 
@@ -227,9 +218,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
 
         }
 
-
         double tax;
-
         subTitle.setValue(String.valueOf(sum));
 
         String taxation = taxTitle.getValue();
