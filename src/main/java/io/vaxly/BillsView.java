@@ -1,5 +1,6 @@
 package io.vaxly;
 
+import com.vaadin.data.Property;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 
@@ -8,13 +9,10 @@ import com.vaadin.ui.TextField;
  */
 public class BillsView extends HorizontalLayout {
 
-    TextField qntytTextField = new TextField();
-    TextField descTextField = new TextField();
-    TextField amtTextField = new TextField();
-    TextField priceTextField = new TextField();
+    double quantity,amount;
 
 
-    public BillsView( ) {
+    public BillsView( TextField qntytTextField,TextField descTextField , TextField amtTextField , TextField priceTextField) {
         super();
 
         descTextField.setInputPrompt("Enter product/service description");
@@ -22,6 +20,37 @@ public class BillsView extends HorizontalLayout {
         descTextField.setWidth(100, Unit.PERCENTAGE);
         amtTextField.setWidth(100, Unit.PERCENTAGE);
         priceTextField.setWidth(100, Unit.PERCENTAGE);
+
+        priceTextField.setId("totalman");
+
+        qntytTextField.addValueChangeListener(new Property.ValueChangeListener() {
+            @Override
+            public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
+                if (qntytTextField.isEmpty()){
+                    quantity = 0;
+
+                }else {
+                    quantity = Double.parseDouble(qntytTextField.getValue());
+                }
+
+                priceTextField.setValue(String.valueOf(quantity*amount));
+            }
+        });
+
+        amtTextField.addValueChangeListener(new Property.ValueChangeListener() {
+            @Override
+            public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
+                if (amtTextField.isEmpty()){
+                    amount = 0;
+                }else {
+                    amount = Double.parseDouble(amtTextField.getValue());
+                }
+
+                priceTextField.setValue(String.valueOf(quantity*amount));
+            }
+        });
+
+
 
         addComponents(descTextField,qntytTextField,amtTextField,priceTextField);
         setExpandRatio(qntytTextField, 5);

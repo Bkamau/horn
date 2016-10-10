@@ -2,6 +2,7 @@ package io.vaxly;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.data.Property;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
@@ -19,20 +20,32 @@ import java.util.ArrayList;
  * overridden to add component to the user interface and initialize non-component functionality.
  */
 @Theme("mytheme")
-public class MyUI extends UI implements Button.ClickListener{
+public class MyUI extends UI implements Button.ClickListener, Property.ValueChangeListener{
 
     public VerticalLayout mainLayout;
     public HorizontalLayout  billsHorizontalLayout;
     HorizontalLayout billz;
+
+    double quantity,amount;
+
     Button addBtn;
     Button delBtn;
 
     int addBtnIndex;
     int delBtnIndex;
 
+
+    TextField qntytTextField;
+    TextField descTextField ;
+    TextField amtTextField ;
+    TextField priceTextField ;
+
+    Label priceLabel;
+
     ArrayList<Button> addBtnList = new ArrayList<>();
     ArrayList<Button> delBtnList = new ArrayList<>();
     ArrayList<Component> componentArrayList= new ArrayList<>();
+    ArrayList<TextField> priceArrayList = new ArrayList<>();
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -43,7 +56,6 @@ public class MyUI extends UI implements Button.ClickListener{
         VerticalLayout v2 = new VerticalLayout();
 
         mainLayout = new VerticalLayout();
-       // mainLayout.setSizeFull();
         mainLayout.setMargin(true);
         mainLayout.setStyleName("main-layout");
 
@@ -57,6 +69,8 @@ public class MyUI extends UI implements Button.ClickListener{
         mainLayout.addComponent(new TitleView());
 
         addDemBills();
+
+
 
 
 
@@ -85,6 +99,10 @@ public class MyUI extends UI implements Button.ClickListener{
             delBtnList.remove(delBtnIndex);
             mainLayout.removeComponent(componentArrayList.get(delBtnIndex));
             componentArrayList.remove(delBtnIndex);
+            priceArrayList.remove(delBtnIndex);
+            totalPrice();
+
+
         }
     }
 
@@ -111,7 +129,15 @@ public class MyUI extends UI implements Button.ClickListener{
         billsHorizontalLayout.setWidth(100,Unit.PERCENTAGE);
         billsHorizontalLayout.setStyleName("bills");
 
-        billz = new BillsView();
+
+         qntytTextField = new TextField();
+         descTextField = new TextField();
+         amtTextField = new TextField();
+         priceTextField = new TextField();
+
+       priceTextField.addValueChangeListener(this);
+
+        billz = new BillsView( qntytTextField, descTextField ,  amtTextField ,  priceTextField);
 
         billsHorizontalLayout.addComponents(addBtn, billz, delBtn);
         billsHorizontalLayout.setExpandRatio(addBtn,1);
@@ -122,8 +148,35 @@ public class MyUI extends UI implements Button.ClickListener{
         delBtnList.add(delBtn);
         componentArrayList.add(billsHorizontalLayout);
 
+        priceArrayList.add(priceTextField);
+        totalPrice();
+
         mainLayout.addComponents(billsHorizontalLayout);
 
+
+    }
+
+    @Override
+    public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
+        totalPrice();
+    }
+
+    private void totalPrice(){
+
+        double sum = 0;
+        for (int i = 0; i < priceArrayList.size(); i++){
+           String value = priceArrayList.get(i).getValue();
+            if (value.isEmpty()){
+                sum = sum;
+            }else {
+                double total = Double.parseDouble(priceArrayList.get(i).getValue());
+                sum += total;
+            }
+
+        }
+
+        priceLabel = new Label(sum + " ");
+        mainLayout.addComponent(priceLabel);
 
     }
 
