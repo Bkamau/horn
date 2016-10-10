@@ -11,6 +11,7 @@ public class FooterView extends HorizontalLayout {
 
     TextField terms;
     TextField notes;
+    TextField extra;
 
     public FooterView() {
 
