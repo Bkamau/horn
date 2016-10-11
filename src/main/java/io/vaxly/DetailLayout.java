@@ -8,6 +8,7 @@ import com.vaadin.event.dd.acceptcriteria.AcceptCriterion;
 import com.vaadin.server.StreamResource;
 import com.vaadin.server.StreamVariable;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -54,7 +55,7 @@ public class DetailLayout extends HorizontalLayout {
         calEnd.roll(java.util.Calendar.DATE, -1);
 
         invoiceField.setWidth(100.0f, Unit.PERCENTAGE);
-        invoiceField.setValue("001");
+        invoiceField.setValue("  001");
         issueDate.setWidth(100.0f, Unit.PERCENTAGE);
         issueDate.setValue(new Date());
         issueDate.setDateFormat("dd-MM-yyyy");
@@ -62,6 +63,15 @@ public class DetailLayout extends HorizontalLayout {
         dueDate.setDateFormat("dd-MM-yyyy");
         dueDate.setValue(calEnd.getTime());
         detailDatesLayout.addComponents(invoiceField,issueDate,dueDate);
+
+        invoiceField.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
+        invoiceField.addStyleName("textfield-background");
+
+        issueDate.addStyleName(ValoTheme.DATEFIELD_BORDERLESS);
+        issueDate.addStyleName("textfield-background");
+
+        dueDate.addStyleName(ValoTheme.DATEFIELD_BORDERLESS);
+        dueDate.addStyleName("textfield-background");
 
         infoLabel = new Label("Drag and Drop your Logo Here. Max 2MB");
 

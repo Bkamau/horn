@@ -3,6 +3,7 @@ package io.vaxly;
 import com.vaadin.data.Property;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.themes.ValoTheme;
 
 /**
  * Created by bkamau on 2.10.2016.
@@ -21,11 +22,21 @@ public class BillsView extends HorizontalLayout {
         amtTextField.setWidth(100, Unit.PERCENTAGE);
         priceTextField.setWidth(100, Unit.PERCENTAGE);
 
-       // priceTextField.setId("totalman");
-
         qntytTextField.setImmediate(true);
         amtTextField.setImmediate(true);
         priceTextField.setImmediate(true);
+
+        descTextField.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
+        descTextField.addStyleName("textfield-background");
+
+        qntytTextField.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
+        qntytTextField.addStyleName("textfield-background");
+
+        amtTextField.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
+        amtTextField.addStyleName("textfield-background");
+
+        priceTextField.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
+        priceTextField.addStyleName("textfield-background");
 
         qntytTextField.addValueChangeListener(new Property.ValueChangeListener() {
             @Override

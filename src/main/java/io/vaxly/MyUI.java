@@ -25,6 +25,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
     private VerticalLayout firstVerticalLayout;
 
     private Button addBtn;
+    private Button btnpreview;
 
     private TextField subTitle ;
     private TextField taxTitle ;
@@ -55,6 +56,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         VerticalLayout v2 = new VerticalLayout();
 
 
+
         VerticalLayout mainLayout = new VerticalLayout();
         mainLayout.setMargin(true);
         mainLayout.setStyleName("main-layout");
@@ -80,10 +82,24 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         seconVerticalLayoutd.addComponent(totalVerticalLayout);
         seconVerticalLayoutd.setComponentAlignment(totalVerticalLayout, Alignment.MIDDLE_RIGHT);
 
+        btnpreview = new Button("PREVIEW");
+        btnpreview.addStyleName("preview-button");
+        btnpreview.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        btnpreview.addStyleName(ValoTheme.BUTTON_HUGE);
+
+
+        seconVerticalLayoutd.addComponent(btnpreview);
+        seconVerticalLayoutd.setComponentAlignment(btnpreview, Alignment.BOTTOM_RIGHT);
 
         HorizontalLayout footerLayout = new FooterView();
         seconVerticalLayoutd.addComponent(footerLayout);
         seconVerticalLayoutd.setComponentAlignment(footerLayout, Alignment.BOTTOM_CENTER);
+
+
+
+
+
+
 
 
         setContent(mainPaneL);
@@ -117,6 +133,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
 
         }
     }
+
 
     private void addDemBills(){
 
@@ -175,22 +192,66 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         FormLayout totalFormLayout = new FormLayout();
 
          subTitle = new TextField("Sub Total");
-         taxTitle = new TextField("Tax");
+         taxTitle = new TextField("Tax  (%) ");
          totalLable = new Label("TOTAL");
 
-        taxTitle.setInputPrompt("                               24%");
+        taxTitle.setValue("24");
         taxTitle.addValueChangeListener(this);
         taxTitle.setImmediate(true);
+
+        taxTitle.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
+        taxTitle.addStyleName("textfield-background");
+        subTitle.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
+        subTitle.addStyleName("textfield-background");
+
 
         totalLable.setValue(" 000");
         totalLable.setCaption("TOTAL");
         totalLable.setStyleName(ValoTheme.LABEL_BOLD);
         totalLable.setStyleName(ValoTheme.LABEL_HUGE);
-        totalFormLayout.addComponents(subTitle,taxTitle,totalLable);
+
+
+
+        Button euroBtn = new Button("Euro " , FontAwesome.EURO);
+        Button poundBtn= new Button("Pound" , FontAwesome.GBP);
+        Button dollarBtn= new Button("Dollar" , FontAwesome.DOLLAR);
+
+        euroBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        poundBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        dollarBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+
+        euroBtn.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+        poundBtn.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+        dollarBtn.addStyleName(ValoTheme.BUTTON_FRIENDLY);
+
+
+        euroBtn.addStyleName("currency-buttons");
+        poundBtn.addStyleName("currency-buttons");
+        dollarBtn.addStyleName("currency-buttons");
+
+
+        euroBtn.addClickListener(this);
+        poundBtn.addClickListener(this);
+        dollarBtn.addClickListener(this);
+
+
+
+
+        VerticalLayout popupContent = new VerticalLayout();
+        popupContent.addComponents(euroBtn,poundBtn,dollarBtn);
+
+
+        PopupView popup = new PopupView("Change Currency", popupContent);
+
+
+
+
+
+        totalFormLayout.addComponents(subTitle,taxTitle,totalLable, popup);
 
         layout.addComponents(totalFormLayout);
 
-        layout.setMargin(true);
+       // layout.setMargin(true);
         layout.setSpacing(true);
         layout.setWidth(35, Unit.PERCENTAGE);
         layout.setStyleName("total-style");
@@ -203,6 +264,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         totalPrice();
     }
+
 
     private void totalPrice(){
 

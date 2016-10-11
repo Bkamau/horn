@@ -11,9 +11,9 @@ public class FooterView extends HorizontalLayout {
 
     TextField terms;
     TextField notes;
-    TextField extra;
 
-    public FooterView() {
+
+    public FooterView( ) {
 
         terms = new TextField();
         terms.setWidth(100, Unit.PERCENTAGE);
@@ -29,9 +29,10 @@ public class FooterView extends HorizontalLayout {
         notes.setImmediate(true);
         notes.setCaption("NOTES");
 
+
+
         setWidth(100, Unit.PERCENTAGE);
         setSpacing(true);
-        setMargin(false);
         setStyleName("address-layout");
         addComponent(terms);
         addComponent(notes);
