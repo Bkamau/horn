@@ -1,4 +1,4 @@
-package io.vaxly;
+package io.vaxly.views;
 
 import com.vaadin.annotations.StyleSheet;
 import com.vaadin.event.dd.DragAndDropEvent;

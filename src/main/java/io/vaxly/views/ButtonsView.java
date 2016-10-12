@@ -1,4 +1,4 @@
-package io.vaxly;
+package io.vaxly.views;
 
 import com.vaadin.ui.Button;
 

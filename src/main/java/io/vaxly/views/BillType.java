@@ -1,4 +1,4 @@
-package io.vaxly;
+package io.vaxly.views;
 
 /**
  * Created by bkamau on 3.10.2016.

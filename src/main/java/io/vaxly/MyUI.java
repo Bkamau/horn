@@ -6,8 +6,10 @@ import com.vaadin.data.Property;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import io.vaxly.views.*;
 
 import javax.servlet.annotation.WebServlet;
 import java.util.ArrayList;
@@ -25,13 +27,21 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
     private VerticalLayout firstVerticalLayout;
 
     private Button addBtn;
+    private  Button delBtn;
     private Button btnpreview;
+
+    private Button euroBtn ;
+    private Button poundBtn ;
+    private Button dollarBtn;
 
     private TextField subTitle ;
     private TextField taxTitle ;
     private Label totalLable ;
 
+    private PopupView popup;
     Label priceLabel;
+    private String totalSum ;
+    private String currency ;
 
     private ArrayList<Button> addBtnList = new ArrayList<>();
     private ArrayList<Button> delBtnList = new ArrayList<>();
@@ -96,12 +106,6 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         seconVerticalLayoutd.setComponentAlignment(footerLayout, Alignment.BOTTOM_CENTER);
 
 
-
-
-
-
-
-
         setContent(mainPaneL);
 
     }
@@ -118,7 +122,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
             addBtnList.get(addBtnIndex -1).setStyleName("invisible");
 
 
-        }else {
+        }else if (clickEvent.getButton() == delBtn){
             int delBtnIndex = delBtnList.indexOf(clickEvent.getButton());
 
             Notification.show("del" + delBtnIndex, Notification.Type.TRAY_NOTIFICATION);
@@ -131,15 +135,27 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
             totalPrice();
 
 
+        }else if (clickEvent.getButton() == euroBtn){
+            String currency = " EURO";
+            totalLable.setValue(totalSum + "&nbsp; &nbsp; " + currency);
+            totalLable.setContentMode(ContentMode.HTML);
+            popup.setVisible(false);
+
+        }else if (clickEvent.getButton() == poundBtn){
+
+        }else if (clickEvent.getButton() == dollarBtn){
+
         }
+
     }
+
 
 
     private void addDemBills(){
 
 
         addBtn = new Button("", FontAwesome.PLUS_SQUARE);
-        Button delBtn = new Button("", FontAwesome.MINUS_SQUARE);
+        delBtn = new Button("", FontAwesome.MINUS_SQUARE);
         addBtn.addClickListener(this);
         delBtn.addClickListener(this);
 
@@ -164,7 +180,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         TextField amtTextField = new TextField();
         TextField priceTextField = new TextField();
 
-       priceTextField.addValueChangeListener(this);
+        priceTextField.addValueChangeListener(this);
 
         HorizontalLayout billz = new BillsView(qntytTextField, descTextField, amtTextField, priceTextField);
 
@@ -191,9 +207,9 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         VerticalLayout layout = new VerticalLayout();
         FormLayout totalFormLayout = new FormLayout();
 
-         subTitle = new TextField("Sub Total");
-         taxTitle = new TextField("Tax  (%) ");
-         totalLable = new Label("TOTAL");
+        subTitle = new TextField("Sub Total");
+        taxTitle = new TextField("Tax  (%) ");
+        totalLable = new Label("TOTAL");
 
         taxTitle.setValue("24");
         taxTitle.addValueChangeListener(this);
@@ -205,16 +221,15 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         subTitle.addStyleName("textfield-background");
 
 
-        totalLable.setValue(" 000");
         totalLable.setCaption("TOTAL");
         totalLable.setStyleName(ValoTheme.LABEL_BOLD);
         totalLable.setStyleName(ValoTheme.LABEL_HUGE);
 
 
 
-        Button euroBtn = new Button("Euro " , FontAwesome.EURO);
-        Button poundBtn= new Button("Pound" , FontAwesome.GBP);
-        Button dollarBtn= new Button("Dollar" , FontAwesome.DOLLAR);
+         euroBtn = new Button("Euro " , FontAwesome.EURO);
+         poundBtn= new Button("Pound" , FontAwesome.GBP);
+         dollarBtn= new Button("Dollar" , FontAwesome.DOLLAR);
 
         euroBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         poundBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
@@ -241,7 +256,8 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
         popupContent.addComponents(euroBtn,poundBtn,dollarBtn);
 
 
-        PopupView popup = new PopupView("Change Currency", popupContent);
+        popup = new PopupView("Change Currency", popupContent);
+        popup.setHideOnMouseOut(false);
 
 
 
@@ -251,7 +267,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
 
         layout.addComponents(totalFormLayout);
 
-       // layout.setMargin(true);
+        // layout.setMargin(true);
         layout.setSpacing(true);
         layout.setWidth(35, Unit.PERCENTAGE);
         layout.setStyleName("total-style");
@@ -270,7 +286,7 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
 
         double sum = 0;
         for (int i = 0; i < priceArrayList.size(); i++){
-           String value = priceArrayList.get(i).getValue();
+            String value = priceArrayList.get(i).getValue();
             if (value.isEmpty()){
                 sum = sum;
             }else {
@@ -290,8 +306,14 @@ public class MyUI extends UI implements Button.ClickListener, Property.ValueChan
             tax = 1.24;
         }
 
+
+
         Double finalSum = sum*tax;
-        totalLable.setValue(String.valueOf(finalSum));
+
+         totalSum  =  String.valueOf(finalSum);
+         currency = " EURO";
+        totalLable.setValue(totalSum + "&nbsp; &nbsp; " + currency);
+        totalLable.setContentMode(ContentMode.HTML);
 
 
 
