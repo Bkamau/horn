@@ -95,6 +95,8 @@ public class DetailLayout extends HorizontalLayout {
     @StyleSheet("dragndropexample.css")
     public class ImageDropBox extends DragAndDropWrapper implements DropHandler {
 
+        public byte[] byteArray;
+
         public Component component;
         private static final long FILE_SIZE_LIMIT = 2 * 1024 * 1024; // 2MB
 
@@ -177,13 +179,15 @@ public class DetailLayout extends HorizontalLayout {
                 @Override
                 public InputStream getStream() {
                     if (bas != null) {
-                        final byte[] byteArray = bas.toByteArray();
+                         byteArray = bas.toByteArray();
+
                         return new ByteArrayInputStream(byteArray);
                     }
                     return null;
                 }
             };
             final StreamResource resource = new StreamResource(streamSource, name);
+
 
             // show the file contents - images only for now
             final Embedded embedded = new Embedded(name, resource);

@@ -47,9 +47,8 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
 
     public CreateInvoice(){
+
         mainPaneL.setResponsive(true);
-
-
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.setSizeFull();
@@ -58,8 +57,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
         VerticalLayout v1 = new VerticalLayout();
         VerticalLayout v2 = new VerticalLayout();
-
-
 
         VerticalLayout mainLayout = new VerticalLayout();
         mainLayout.setMargin(true);
@@ -90,6 +87,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         btnpreview.addStyleName("preview-button");
         btnpreview.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         btnpreview.addStyleName(ValoTheme.BUTTON_HUGE);
+        btnpreview.addClickListener(this);
 
 
         seconVerticalLayoutd.addComponent(btnpreview);
@@ -138,6 +136,9 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         }else if (clickEvent.getButton() == poundBtn){
 
         }else if (clickEvent.getButton() == dollarBtn){
+
+        }else if (clickEvent.getButton() == btnpreview){
+
 
         }
 
@@ -320,6 +321,5 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
-
     }
 }

@@ -27,8 +27,6 @@ public class Homepage extends Panel implements View, Button.ClickListener {
         layout.setStyleName("homepage_layout");
         layout.setSizeFull();
 
-
-
         VerticalLayout logoLayout = new VerticalLayout();
         logoLayout.addStyleName("logoLayout");
         logoLayout.setSizeFull();
@@ -48,7 +46,6 @@ public class Homepage extends Panel implements View, Button.ClickListener {
         logoNameImage.setHeight(225, Unit.PIXELS);
         logoLayout.addComponent(logoNameImage);
         logoLayout.setComponentAlignment(logoNameImage,Alignment.TOP_CENTER);
-
 
         HorizontalLayout buttonsLayout = new HorizontalLayout();
         buttonsLayout.setSizeUndefined();
@@ -73,8 +70,6 @@ public class Homepage extends Panel implements View, Button.ClickListener {
         logoLayout.addComponent(buttonsLayout);
         logoLayout.setComponentAlignment(buttonsLayout, Alignment.TOP_CENTER);
 
-
-
         HorizontalLayout snapLayout = new HorizontalLayout();
 
         Resource snap = new ThemeResource("img/snap.png");
@@ -83,12 +78,6 @@ public class Homepage extends Panel implements View, Button.ClickListener {
 
         logoLayout.addComponent(snapLayout);
         logoLayout.setComponentAlignment(snapLayout, Alignment.TOP_CENTER);
-
-
-
-
-
-
 
         layout.addComponent(logoLayout);
         setContent(layout);
@@ -101,7 +90,6 @@ public class Homepage extends Panel implements View, Button.ClickListener {
 
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
-
     }
 
     @Override

@@ -8,8 +8,12 @@ import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import io.vaxly.mainUi.CreateInvoice;
 import io.vaxly.mainUi.Homepage;
+import org.parse4j.Parse;
 
 import javax.servlet.annotation.WebServlet;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -22,9 +26,17 @@ import javax.servlet.annotation.WebServlet;
 public class MyUI extends UI {
 
     Navigator navigator;
+    private final Properties properties = new Properties();
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+
+        if(this.loadProperties("constants.properties")){
+            String appID = this.properties.getProperty("APP_ID");
+            String restID = this.properties.getProperty("REST_ID");
+            String URL = this.properties.getProperty("URL");
+            Parse.initialize(appID, restID, URL);
+        }
 
         getPage().setTitle("Hornbill");
 
@@ -36,6 +48,15 @@ public class MyUI extends UI {
 
 
 
+    }
+
+    private boolean loadProperties(String filename) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filename)) {
+            this.properties.load(inputStream);
+            return true;
+        } catch (IOException | NullPointerException e) {
+            return false;
+        }
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)

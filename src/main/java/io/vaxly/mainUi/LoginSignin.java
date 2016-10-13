@@ -1,5 +1,9 @@
 package io.vaxly.mainUi;
 
+import com.vaadin.data.Property;
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener;
+import com.vaadin.server.UserError;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.parse4j.ParseException;
@@ -8,57 +12,59 @@ import org.parse4j.ParseUser;
 /**
  * Created by bkamau on 7.10.2016.
  */
-public class LoginSignin extends Window implements Button.ClickListener {
+public class LoginSignin extends Window implements View, Button.ClickListener, Property.ValueChangeListener {
 
-    TabSheet tabSheet = new TabSheet();
-    VerticalLayout loginLayout = new VerticalLayout();
-    VerticalLayout signupLayout = new VerticalLayout();
+    private TabSheet tabSheet = new TabSheet();
+    private VerticalLayout loginLayout = new VerticalLayout();
 
-    FormLayout loginFormLayout = new FormLayout();
-    FormLayout signupFormLayout = new FormLayout();
+    private TextField loginEmailTextField = new TextField("Email", "");
+    private TextField loginPasswdTextField = new TextField("Password", "");
 
-    TextField loginEmailTextField = new TextField("Email", "");
-    TextField loginPasswdTextField = new TextField("Password", "");
-
-    TextField registerNameTextField = new TextField("Username", "");
-    TextField registerEmailTextField = new TextField("Email", "");
-    TextField registerPasswdTextField = new TextField("Password", "");
-    TextField confirmPasswordTextField = new TextField("Password", "");
+    private TextField registerNameTextField = new TextField("Username", "");
+    private TextField registerEmailTextField = new TextField("Email", "");
+    private TextField registerPasswdTextField = new TextField("Password", "");
+    private TextField confirmPasswordTextField = new TextField("Password", "");
 
 
-    Button loginButton = new Button("Login");
-    Button signupButton = new Button("Sign Up");
+    private Button loginButton = new Button("Login");
 
 
-    public LoginSignin() {
+    LoginSignin() {
 
 
         tabSheet.addStyleName(ValoTheme.TABSHEET_FRAMED);
         tabSheet.addStyleName(ValoTheme.TABSHEET_PADDED_TABBAR);
         tabSheet.addTab(loginLayout, "LOGIN");
+        VerticalLayout signupLayout = new VerticalLayout();
         tabSheet.addTab(signupLayout, "SIGNUP");
-
 
         loginEmailTextField.setWidth(100.0f, Unit.PERCENTAGE);
         loginPasswdTextField.setWidth(100.0f, Unit.PERCENTAGE);
+
+        loginEmailTextField.addValueChangeListener(this);
+        loginPasswdTextField.addValueChangeListener(this);
+        loginEmailTextField.setImmediate(true);
+        loginPasswdTextField.setImmediate(true);
 
         registerNameTextField.setWidth(100.0f, Unit.PERCENTAGE);
         registerPasswdTextField.setWidth(100.0f, Unit.PERCENTAGE);
         registerEmailTextField.setWidth(100.0f, Unit.PERCENTAGE);
         confirmPasswordTextField.setWidth(100.0f, Unit.PERCENTAGE);
 
-
+        FormLayout loginFormLayout = new FormLayout();
         loginFormLayout.setSizeFull();
         loginFormLayout.setSpacing(true);
         loginFormLayout.setMargin(true);
         loginFormLayout.addComponents(loginEmailTextField,loginPasswdTextField);
 
+        FormLayout signupFormLayout = new FormLayout();
         signupFormLayout.setSizeFull();
         signupFormLayout.setSpacing(true);
         signupFormLayout.setMargin(true);
         signupFormLayout.addComponents(registerNameTextField,registerEmailTextField,registerPasswdTextField,confirmPasswordTextField);
 
         loginButton.addClickListener(this);
+        Button signupButton = new Button("Sign Up");
         signupButton.addClickListener(this);
 
         loginLayout.setMargin(true);
@@ -74,9 +80,6 @@ public class LoginSignin extends Window implements Button.ClickListener {
         signupLayout.setComponentAlignment(signupButton, Alignment.BOTTOM_RIGHT);
 
 
-
-
-
         center();
         setModal(true);
         setSizeUndefined();
@@ -87,14 +90,18 @@ public class LoginSignin extends Window implements Button.ClickListener {
 
     }
 
-
     private void loginUser(String email, String password){
-        try {
-            ParseUser.login(email,password );
-            UI.getCurrent().removeWindow(this);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            Notification.show(e.getMessage());
+        if (loginEmailTextField.isEmpty() || loginPasswdTextField.isEmpty()){
+            loginEmailTextField.setComponentError(new UserError("Cant be empyt"));
+            loginPasswdTextField.setComponentError(new UserError("Cant be empyt"));
+        }else {
+            try {
+                ParseUser.login(email,password );
+                UI.getCurrent().removeWindow(this);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                Notification.show(e.getMessage());
+            }
         }
 
     }
@@ -125,5 +132,15 @@ public class LoginSignin extends Window implements Button.ClickListener {
         }else {
             signupUser();
         }
+    }
+
+    @Override
+    public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
+
+    }
+
+    @Override
+    public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
+
     }
 }
