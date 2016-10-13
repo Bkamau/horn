@@ -44,6 +44,19 @@
     box-shadow: 8px 4px 8px 4px rgba(0,0,0,0.2);
   }
 
+.logoLayout{
+  margin-top: 80px;
+  //background-image: url("img/stage.jpg");
+  background-color: #a0a0a0;
+}
+  .homepage_layout{
+    background-color: #a0a0a0;
+  }
+
+
+  .login_buttons{
+    color: white;
+  }
 
 
   .dropPane{
@@ -90,6 +103,7 @@
   .invisible{
     visibility: hidden;
   }
+
   .visible{
     visibility: visible;
   }

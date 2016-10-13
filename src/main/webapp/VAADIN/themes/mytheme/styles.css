@@ -12976,6 +12976,19 @@ div.v-layout.v-horizontal.v-widget {
 	box-shadow: 8px 4px 8px 4px rgba(0, 0, 0, 0.2);
 }
 
+.mytheme .logoLayout {
+	margin-top: 80px;
+	background-color: #a0a0a0;
+}
+
+.mytheme .homepage_layout {
+	background-color: #a0a0a0;
+}
+
+.mytheme .login_buttons {
+	color: white;
+}
+
 .mytheme .dropPane {
 	background-color: black;
 }

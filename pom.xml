@@ -66,6 +66,13 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-themes</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>parse4j</groupId>
+			<artifactId>io.vaxly</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>/home/bkamau/parse4j.jar</systemPath>
+		</dependency>
 	</dependencies>
 
 	<build>

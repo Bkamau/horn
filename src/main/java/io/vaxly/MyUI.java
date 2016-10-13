@@ -2,17 +2,14 @@ package io.vaxly;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.data.Property;
-import com.vaadin.server.FontAwesome;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
-import com.vaadin.shared.ui.label.ContentMode;
-import com.vaadin.ui.*;
-import com.vaadin.ui.themes.ValoTheme;
-import io.vaxly.views.*;
+import com.vaadin.ui.UI;
+import io.vaxly.mainUi.CreateInvoice;
+import io.vaxly.mainUi.Homepage;
 
 import javax.servlet.annotation.WebServlet;
-import java.util.ArrayList;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
@@ -22,303 +19,24 @@ import java.util.ArrayList;
  * overridden to add component to the user interface and initialize non-component functionality.
  */
 @Theme("mytheme")
-public class MyUI extends UI implements Button.ClickListener, Property.ValueChangeListener{
+public class MyUI extends UI {
 
-    private VerticalLayout firstVerticalLayout;
-
-    private Button addBtn;
-    private  Button delBtn;
-    private Button btnpreview;
-
-    private Button euroBtn ;
-    private Button poundBtn ;
-    private Button dollarBtn;
-
-    private TextField subTitle ;
-    private TextField taxTitle ;
-    private Label totalLable ;
-
-    private PopupView popup;
-    Label priceLabel;
-    private String totalSum ;
-    private String currency ;
-
-    private ArrayList<Button> addBtnList = new ArrayList<>();
-    private ArrayList<Button> delBtnList = new ArrayList<>();
-    private ArrayList<Component> componentArrayList= new ArrayList<>();
-    private ArrayList<TextField> priceArrayList = new ArrayList<>();
+    Navigator navigator;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
 
-        Panel  mainPaneL = new Panel();
-        mainPaneL.setResponsive(true);
+        getPage().setTitle("Hornbill");
 
+        Navigator navigator = new Navigator(this, this);
 
-
-
-        HorizontalLayout horizontalLayout = new HorizontalLayout();
-        horizontalLayout.setSizeFull();
-
-        mainPaneL.setContent(horizontalLayout);
-
-        VerticalLayout v1 = new VerticalLayout();
-        VerticalLayout v2 = new VerticalLayout();
-
-
-
-        VerticalLayout mainLayout = new VerticalLayout();
-        mainLayout.setMargin(true);
-        mainLayout.setStyleName("main-layout");
-
-        horizontalLayout.addComponents(v1, mainLayout, v2);
-        horizontalLayout.setExpandRatio(v1, 1);
-        horizontalLayout.setExpandRatio(mainLayout, 3);
-        horizontalLayout.setExpandRatio(v2, 1);
-
-        firstVerticalLayout = new VerticalLayout();
-        VerticalLayout seconVerticalLayoutd = new VerticalLayout();
-        seconVerticalLayoutd.setWidth(100, Unit.PERCENTAGE);
-        mainLayout.addComponents(firstVerticalLayout, seconVerticalLayoutd);
-
-        firstVerticalLayout.addComponent(new DetailLayout());
-        firstVerticalLayout.addComponent(new AddressView());
-        firstVerticalLayout.addComponent(new TitleView());
-
-        VerticalLayout totalVerticalLayout = totalLayout();
-
-        addDemBills();
-
-        seconVerticalLayoutd.addComponent(totalVerticalLayout);
-        seconVerticalLayoutd.setComponentAlignment(totalVerticalLayout, Alignment.MIDDLE_RIGHT);
-
-        btnpreview = new Button("PREVIEW");
-        btnpreview.addStyleName("preview-button");
-        btnpreview.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        btnpreview.addStyleName(ValoTheme.BUTTON_HUGE);
-
-
-        seconVerticalLayoutd.addComponent(btnpreview);
-        seconVerticalLayoutd.setComponentAlignment(btnpreview, Alignment.BOTTOM_RIGHT);
-
-        HorizontalLayout footerLayout = new FooterView();
-        seconVerticalLayoutd.addComponent(footerLayout);
-        seconVerticalLayoutd.setComponentAlignment(footerLayout, Alignment.BOTTOM_CENTER);
-
-
-        setContent(mainPaneL);
-
-    }
-
-    @Override
-    public void buttonClick(Button.ClickEvent clickEvent) {
-        if (clickEvent.getButton() == addBtn){
-
-            addDemBills();
-
-            delBtnList.get((delBtnList.size()-2)).setStyleName("visible");
-            delBtnList.get((delBtnList.size()-2)).addStyleName(ValoTheme.BUTTON_BORDERLESS);
-            int addBtnIndex = addBtnList.indexOf(addBtn);
-            addBtnList.get(addBtnIndex -1).setStyleName("invisible");
-
-
-        }else if (clickEvent.getButton() == delBtn){
-            int delBtnIndex = delBtnList.indexOf(clickEvent.getButton());
-
-            Notification.show("del" + delBtnIndex, Notification.Type.TRAY_NOTIFICATION);
-
-            addBtnList.remove(delBtnIndex);
-            delBtnList.remove(delBtnIndex);
-            firstVerticalLayout.removeComponent(componentArrayList.get(delBtnIndex));
-            componentArrayList.remove(delBtnIndex);
-            priceArrayList.remove(delBtnIndex);
-            totalPrice();
-
-
-        }else if (clickEvent.getButton() == euroBtn){
-            String currency = " EURO";
-            totalLable.setValue(totalSum + "&nbsp; &nbsp; " + currency);
-            totalLable.setContentMode(ContentMode.HTML);
-            popup.setVisible(false);
-
-        }else if (clickEvent.getButton() == poundBtn){
-
-        }else if (clickEvent.getButton() == dollarBtn){
-
-        }
-
-    }
-
-
-
-    private void addDemBills(){
-
-
-        addBtn = new Button("", FontAwesome.PLUS_SQUARE);
-        delBtn = new Button("", FontAwesome.MINUS_SQUARE);
-        addBtn.addClickListener(this);
-        delBtn.addClickListener(this);
-
-        addBtn.setWidth(100, Unit.PERCENTAGE);
-        addBtn.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
-        addBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-
-        delBtn.setWidth(100, Unit.PERCENTAGE);
-        delBtn.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
-        delBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        delBtn.setStyleName("invisible");
-
-        HorizontalLayout billsHorizontalLayout = new HorizontalLayout();
-        // billsHorizontalLayout.setMargin(true);
-        billsHorizontalLayout.setSpacing(true);
-        billsHorizontalLayout.setWidth(100,Unit.PERCENTAGE);
-        billsHorizontalLayout.setStyleName("bills");
-
-
-        TextField qntytTextField = new TextField();
-        TextField descTextField = new TextField();
-        TextField amtTextField = new TextField();
-        TextField priceTextField = new TextField();
-
-        priceTextField.addValueChangeListener(this);
-
-        HorizontalLayout billz = new BillsView(qntytTextField, descTextField, amtTextField, priceTextField);
-
-        billsHorizontalLayout.addComponents(addBtn, billz, delBtn);
-        billsHorizontalLayout.setExpandRatio(addBtn,1);
-        billsHorizontalLayout.setExpandRatio(billz,15);
-        billsHorizontalLayout.setExpandRatio(delBtn,1);
-
-        addBtnList.add(addBtn);
-        delBtnList.add(delBtn);
-        componentArrayList.add(billsHorizontalLayout);
-
-        priceArrayList.add(priceTextField);
-        totalPrice();
-
-        firstVerticalLayout.addComponents(billsHorizontalLayout);
-
-
-    }
-
-
-    private VerticalLayout totalLayout (){
-
-        VerticalLayout layout = new VerticalLayout();
-        FormLayout totalFormLayout = new FormLayout();
-
-        subTitle = new TextField("Sub Total");
-        taxTitle = new TextField("Tax  (%) ");
-        totalLable = new Label("TOTAL");
-
-        taxTitle.setValue("24");
-        taxTitle.addValueChangeListener(this);
-        taxTitle.setImmediate(true);
-
-        taxTitle.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
-        taxTitle.addStyleName("textfield-background");
-        subTitle.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
-        subTitle.addStyleName("textfield-background");
-
-
-        totalLable.setCaption("TOTAL");
-        totalLable.setStyleName(ValoTheme.LABEL_BOLD);
-        totalLable.setStyleName(ValoTheme.LABEL_HUGE);
-
-
-
-         euroBtn = new Button("Euro " , FontAwesome.EURO);
-         poundBtn= new Button("Pound" , FontAwesome.GBP);
-         dollarBtn= new Button("Dollar" , FontAwesome.DOLLAR);
-
-        euroBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        poundBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        dollarBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-
-        euroBtn.addStyleName(ValoTheme.BUTTON_FRIENDLY);
-        poundBtn.addStyleName(ValoTheme.BUTTON_FRIENDLY);
-        dollarBtn.addStyleName(ValoTheme.BUTTON_FRIENDLY);
-
-
-        euroBtn.addStyleName("currency-buttons");
-        poundBtn.addStyleName("currency-buttons");
-        dollarBtn.addStyleName("currency-buttons");
-
-
-        euroBtn.addClickListener(this);
-        poundBtn.addClickListener(this);
-        dollarBtn.addClickListener(this);
-
-
-
-
-        VerticalLayout popupContent = new VerticalLayout();
-        popupContent.addComponents(euroBtn,poundBtn,dollarBtn);
-
-
-        popup = new PopupView("Change Currency", popupContent);
-        popup.setHideOnMouseOut(false);
-
-
-
-
-
-        totalFormLayout.addComponents(subTitle,taxTitle,totalLable, popup);
-
-        layout.addComponents(totalFormLayout);
-
-        // layout.setMargin(true);
-        layout.setSpacing(true);
-        layout.setWidth(35, Unit.PERCENTAGE);
-        layout.setStyleName("total-style");
-        return layout;
-
-
-    }
-
-    @Override
-    public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
-        totalPrice();
-    }
-
-
-    private void totalPrice(){
-
-        double sum = 0;
-        for (int i = 0; i < priceArrayList.size(); i++){
-            String value = priceArrayList.get(i).getValue();
-            if (value.isEmpty()){
-                sum = sum;
-            }else {
-                double total = Double.parseDouble(priceArrayList.get(i).getValue());
-                sum += total;
-            }
-
-        }
-
-        double tax;
-        subTitle.setValue(String.valueOf(sum));
-
-        String taxation = taxTitle.getValue();
-        if (!taxation.isEmpty()){
-            tax = 1 + (Double.parseDouble(taxTitle.getValue())/100);
-        }else {
-            tax = 1.24;
-        }
-
-
-
-        Double finalSum = sum*tax;
-
-         totalSum  =  String.valueOf(finalSum);
-         currency = " EURO";
-        totalLable.setValue(totalSum + "&nbsp; &nbsp; " + currency);
-        totalLable.setContentMode(ContentMode.HTML);
+        // Add some Views
+        navigator.addView("", new Homepage());
+        navigator.addView(CreateInvoice.NAME, new CreateInvoice());
 
 
 
     }
-
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
