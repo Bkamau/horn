@@ -1,23 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e03870b4-2b08-454f-b4d5-9758aabafbe2" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/constants.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/MyUI$MyUIServlet.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/MyUI$MyUIServlet.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/MyUI.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/MyUI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/mainUi/CreateInvoice.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/mainUi/CreateInvoice.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/mainUi/Homepage.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/mainUi/Homepage.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/mainUi/LoginSignin.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/mainUi/LoginSignin.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/views/DetailLayout$ImageDropBox$1.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/views/DetailLayout$ImageDropBox$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/views/DetailLayout$ImageDropBox$2.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/views/DetailLayout$ImageDropBox$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/views/DetailLayout$ImageDropBox.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/views/DetailLayout$ImageDropBox.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/MyUI.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/MyUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/mainUi/CreateInvoice.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/mainUi/CreateInvoice.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/mainUi/Homepage.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/mainUi/Homepage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/mainUi/LoginSignin.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/mainUi/LoginSignin.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/views/DetailLayout.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/views/DetailLayout.java" />
-    </list>
+    <list default="true" id="e03870b4-2b08-454f-b4d5-9758aabafbe2" name="Default" comment="" />
     <ignored path="hornbill.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -955,12 +939,12 @@
       <workItem from="1476211179973" duration="23974000" />
       <workItem from="1476297492779" duration="120000" />
       <workItem from="1476297634697" duration="8648000" />
-      <workItem from="1476306595468" duration="18254000" />
+      <workItem from="1476306595468" duration="18808000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143325000" />
+    <option name="totallyTimeSpent" value="143879000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="36" width="1920" height="1044" extended-state="0" />
