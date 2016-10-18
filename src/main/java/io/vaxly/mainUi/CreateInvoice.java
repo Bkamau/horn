@@ -4,13 +4,23 @@ import com.vaadin.data.Property;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.FontAwesome;
+import com.vaadin.server.*;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import io.vaxly.models.Company;
+import io.vaxly.models.User;
+import io.vaxly.utils.HtmlGenerator;
+import io.vaxly.utils.Konstants;
+import io.vaxly.utils.PdfGenerator;
 import io.vaxly.views.*;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by bkamau on 12.10.2016.
@@ -24,7 +34,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
     private Button addBtn;
     private  Button delBtn;
-    private Button btnpreview;
+    final static public Button btnpreview = new Button("PREVIEW");
 
     private Button euroBtn ;
     private Button poundBtn ;
@@ -43,7 +53,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
     private ArrayList<Button> delBtnList = new ArrayList<>();
     private ArrayList<Component> componentArrayList= new ArrayList<>();
     private ArrayList<TextField> priceArrayList = new ArrayList<>();
-
 
 
     public CreateInvoice(){
@@ -83,7 +92,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         seconVerticalLayoutd.addComponent(totalVerticalLayout);
         seconVerticalLayoutd.setComponentAlignment(totalVerticalLayout, Alignment.MIDDLE_RIGHT);
 
-        btnpreview = new Button("PREVIEW");
         btnpreview.addStyleName("preview-button");
         btnpreview.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         btnpreview.addStyleName(ValoTheme.BUTTON_HUGE);
@@ -97,10 +105,20 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         seconVerticalLayoutd.addComponent(footerLayout);
         seconVerticalLayoutd.setComponentAlignment(footerLayout, Alignment.BOTTOM_CENTER);
 
-
+        showPreview();
         setContent(mainPaneL);
     }
 
+
+    private void showPreview(){
+
+        Konstants.printInfo("Showing preview ..");
+        Resource resource = new FileResource(new File("pdfOutput/invoice.pdf"));
+        BrowserWindowOpener opener = new BrowserWindowOpener(resource);
+        opener.extend(CreateInvoice.btnpreview);
+
+
+    }
 
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
@@ -139,6 +157,9 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
         }else if (clickEvent.getButton() == btnpreview){
 
+          //  GearsView view = new GearsView();
+          //  UI.getCurrent().addWindow(view);
+            generatePdf();
 
         }
 
@@ -310,6 +331,88 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
 
 
+    }
+
+    private void generatePdf() {
+
+        String outputFilePath = "pdfOutput/invoice.pdf";
+        String tampleFile = "src/main/resources/template.html";Resource resource = new FileResource(new File("pdfOutput/invoice.pdf"));
+        BrowserWindowOpener opener = new BrowserWindowOpener(resource);
+        opener.extend(CreateInvoice.btnpreview);
+
+        Map<String,Object> variables = new HashMap<String,Object>();
+
+        //set example of user list
+        List<User> users = createUserList();
+        //you can put any variables you want, so that you can use them in freemarker template
+
+        Company company = new Company();
+        company.setAddres("beninkatu 23");
+        company.setId(23);
+
+
+        variables.put("users",users);
+        variables.put("company", company);
+
+        String htmlStr = null;
+
+        try {
+            new File(outputFilePath).delete();
+            Konstants.printInfo("File Deleted ..");
+        }catch (UnknownError ue){
+            ue.printStackTrace();
+        }
+
+        try {
+            htmlStr = HtmlGenerator.generate(tampleFile, variables);
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        try {
+            PdfGenerator.generate(htmlStr, new FileOutputStream(outputFilePath));
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private static List<User> createUserList() {
+        User user1 = createUser(1, "marine core", 12);
+        User user2 = createUser(2, "benito", 34);
+        User user3 = createUser(3, "becccccccccccccccccccccnso", 26);
+        User user4 = createUser(3, "beccccccccccccccccccccccccccccn", 5);
+        User user5 = createUser(3, "marggggggggggggggggggggggggine", 265);
+
+        User user14 = createUser(3, "beccccccccccccccccccccccccccccn", 5);
+        User user15 = createUser(3, "marggggggggggggggggggggggggine", 265);
+
+
+        List<User> users = new ArrayList<User>();
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+        users.add(user4);
+        users.add(user5);
+
+        users.add(user14);
+        users.add(user15);
+
+
+        return users;
+    }
+
+    private static User createUser(long id, String username, int age) {
+        User user = new User();
+        user.setId(id);
+        user.setUsername(username);
+        user.setAge(age);
+        return user;
     }
 
 

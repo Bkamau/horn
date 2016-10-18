@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <style>
+
+        p {
+            margin-top:5px;
+            margin-bottom:5px
+        }
+        .invoice-box{
+            max-width:800px;
+            margin:auto;
+            border:1px solid #eee;
+            box-shadow:0 0 10px rgba(0, 0, 0, .15);
+            font-family: 'Arial', 'Helvetica', 'sans-serif';
+            color:#555;
+        }
+        .invoice-box table{
+            width:100%;
+            line-height:inherit;
+            text-align:left;
+        }
+        .invoice-box table td{
+            padding:3px;
+            vertical-align:top;
+        }
+        .invoice-box table tr td:nth-child(2){
+            text-align:right;
+        }
+        .invoice-box table tr.top table td{
+            padding-bottom:20px;
+        }
+        .invoice-box table tr.top table td.title{
+            font-size:45px;
+            line-height:45px;
+            color:#333;
+        }
+        .invoice-box table tr.information table td{
+            padding-bottom:40px;
+        }
+        .invoice-box table tr.heading td{
+            background:#eee;
+            border-bottom:1px solid #ddd;
+            font-weight:bold;
+        }
+        .invoice-box table tr.details td{
+            padding-bottom:20px;
+        }
+        .invoice-box table tr.item td{
+            border-bottom:1px solid #eee;
+        }
+        .invoice-box table tr.item.last td{
+            border-bottom:none;
+
+        }
+        .textaligncenter{
+            text-align: center;
+        }
+        .textalignleft{
+            text-align: left;
+        }
+        .invoice-box table tr.total td:nth-child(2){
+            padding-top: 10px;
+            border-top:3px solid #eee;
+            font-weight:bold;
+            text-align: right;
+
+        }
+        .invoice-box table tr.total td:nth-child(3){
+            font-weight:bold;
+            text-align: right;
+
+        }
+        .myTotal{
+            font-weight:bold;
+            text-align: right;
+        }
+
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Arial', 'Helvetica', 'sans-serif';
+        }
+        .page{
+            margin-top: 40px;
+        }
+        .invoice {
+            position: relative;
+            width: 766.488188976px;
+            height: 384px;
+            border-top: 1px dashed #000000;
+        }
+        .invoice--label {
+            position: absolute;
+            top: 65.61mm;
+            left: 0.5mm;
+            width: 33.86mm;
+            font-size: 8pt;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: bold;
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+            -webkit-transform-origin: left top 0;
+            -moz-transform-origin: left top 0;
+            -ms-transform-origin: left top 0;
+            -o-transform-origin: left top 0;
+            transform-origin: left top 0;
+        }
+        .invoice--terms {
+            position: absolute;
+            top: 80.08mm;
+            left: 145mm;
+            font-size: 6pt;
+            width: 54mm;
+            padding-top: 3mm;
+        }
+        .recipient-bank--label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20mm;
+            height: 17.92mm;
+            border-bottom: 2px solid #000000;
+            border-right: 2px solid #000000;
+            padding: 1mm 1mm 0 0;
+            text-align: right;
+            font-size: 7pt;
+        }
+        .recipient-bank--iban {
+            position: absolute;
+            top: 0;
+            left: 20mm;
+            width: 91.4mm;
+            height: 18.93mm;
+            border-bottom: 2px solid #000000;
+            border-right: 2px solid #000000;
+        }
+        .recipient-bank--iban--label {
+            position: absolute;
+            top: 1px;
+            left: 20mm;
+            font-size: 7pt;
+            padding: 0 0 0 2mm;
+        }
+        .recipient-bank--iban--list {
+            list-style: none;
+            font-size: 7pt;
+            padding: 1mm 0 0 0;
+            display: table;
+        }
+        .recipient-bank--iban--list li {
+            display: table-row;
+        }
+        .recipient-bank--iban--list--bank {
+            padding-left: 2mm;
+            display: table-cell;
+        }
+        .recipient-bank--iban--list--number {
+            padding: 0 2mm;
+            text-align: right;
+            display: table-cell;
+        }
+        .recipient-bank--bic {
+            position: absolute;
+            top: 0;
+            left: 111.4mm;
+            width: 91.4mm;
+            height: 18.92mm;
+            border-bottom: 2px solid #000000;
+        }
+        .recipient-bank--bic--label {
+            position: absolute;
+            top: 1px;
+            left: 111.4mm;
+            font-size: 7pt;
+            padding: 0 0 0 2mm;
+        }
+        .recipient-bank--bic--list {
+            list-style: none;
+            font-size: 7pt;
+            padding: 1mm 0 0 0;
+        }
+        .recipient-bank--bic--list li {
+            padding-left: 2mm;
+        }
+        .recipient--label {
+            position: absolute;
+            top: 18.92mm;
+            left: 0;
+            width: 20mm;
+            height: 14.82mm;
+            border-right: 2px solid #000000;
+            border-bottom: 2px solid #000000;
+            padding: 1mm 1mm 0 0;
+            text-align: right;
+            font-size: 7pt;
+        }
+        .recipient--name {
+            position: absolute;
+            top: 17.92mm;
+            left: 18mm;
+            width: 83.4mm;
+            height: 6.81mm;
+            border-right: 2px solid #000000;
+            border-bottom: 2px solid #000000;
+            font-size: 9pt;
+            padding: 5mm;
+        }
+        .payer--personal {
+            position: absolute;
+            top: 34.75mm;
+            left: 25mm;
+            width: 84.4mm;
+            height: 33.86mm;
+            border-right: 2px solid #000000;
+            font-size: 9pt;
+            padding: 1mm;
+        }
+        .payer--personal--label {
+            position: absolute;
+            top: 35.75mm;
+            left: 0;
+            width: 18mm;
+            padding: 1mm 1mm 0 4mm;
+            font-size: 7pt;
+            padding-right: 1mm;
+            text-align: right;
+            line-height: normal;
+        }
+        .payer--personal--label span {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: normal;
+        }
+        .payer--signature {
+            position: absolute;
+            top: 61.38mm;
+            left: 20mm;
+            width: 90.4mm;
+            padding-left: 1mm;
+            border-top: 1px solid #808080;
+        }
+        .payer--signature--label {
+            position: absolute;
+            top: 58.78mm;
+            left: 0;
+            width: 20mm;
+            padding-left: 0mm;
+            font-size: 7pt;
+            padding-right: 4mm;
+            text-align: right;
+            line-height: normal;
+        }
+        .payer--signature--label span {
+            display: inline-block;
+            vertical-align: middle;
+            line-height: normal;
+        }
+        .payer--from-account {
+            position: absolute;
+            top: 70.61mm;
+            left: 25mm;
+            width: 85.4mm;
+            height: 9.42mm;
+            border-top: 2px solid #000000;
+            border-right: 2px solid #000000;
+            border-bottom: 2px solid #000000;
+            font-size: 9pt;
+            padding-left: 1mm;
+            line-height: 8.47mm;
+        }
+        .payer--from-account--label {
+            position: absolute;
+            top: 70.61mm;
+            left: 0;
+            width: 20mm;
+            padding: 1mm 1mm 0 4mm;
+            border-top: 2px solid #000000;
+            border-bottom: 2px solid #000000;
+            border-right: 1px solid #000000;
+            height: 8.47mm;
+            font-size: 7pt;
+            text-align: right;
+        }
+        .payment--info {
+            position: absolute;
+            left: 111.4mm;
+            top: 20.93mm;
+            height: 40.7mm;
+            width: 91.4mm;
+            border-bottom: 2px solid #000000;
+            font-size: 9pt;
+            padding: 1mm;
+        }
+        .payment--reference {
+            position: absolute;
+            left: 130.4mm;
+            top: 63.00mm;
+            width: 74.4mm;
+            height: 7.60mm;
+            border-bottom: 2px solid #000000;
+            font-size: 9pt;
+            padding-left: 1mm;
+            line-height: 8.47mm;
+        }
+        .payment--reference--label {
+            position: absolute;
+            left: 110.4mm;
+            top: 64.00mm;
+            width: 17mm;
+            height: 3.60mm;
+            border-bottom: 2px solid #000000;
+            border-right: 2px solid #000000;
+            font-size: 7pt;
+            padding: 1.5mm;
+        }
+        .payment--due {
+            position: absolute;
+            left: 130.4mm;
+            top: 72.5mm;
+            width: 30mm;
+            height: 8.05mm;
+            border-bottom: 2px solid #000000;
+            border-right: 2px solid #000000;
+            font-size: 9pt;
+            padding-left: 1mm;
+            line-height: 8.47mm;
+        }
+        .payment--due--label {
+            position: absolute;
+            left: 111.4mm;
+            top: 70.5mm;
+            width: 17mm;
+            height: 8.05mm;
+            border-bottom: 2px solid #000000;
+            border-right: 2px solid #000000;
+            font-size: 7pt;
+            padding: 1mm;
+        }
+        .payment--amount {
+            position: absolute;
+            top: 72.5mm;
+            left: 140.4mm;
+            width: 44.4mm;
+            height: 8.05mm;
+            border-bottom: 2px solid #000000;
+            font-size: 9pt;
+            padding-left: 1mm;
+            padding-right: 3mm;
+            line-height: 8.47mm;
+            text-align: right;
+        }
+        .payment--amount--label {
+            position: absolute;
+            top: 71.1mm;
+            left: 163.4mm;
+            font-size: 7pt;
+            padding: 0 0 0 2mm;
+            padding-left: 1mm;
+        }
+    </style>
+</head>
+<body>
+<div class="invoice-box">
+    <table cellpadding="0" cellspacing="0" >
+        <tr class="top">
+            <td colspan="4">
+                <table>
+                    <tr>
+                        <td class="title">
+                            <img src="/images/hornbill.png" style="width:100px; max-width:300px;"/>
+                        </td>
+
+                        <td >
+                            Invoice #: 123<br/>
+                            Created: January 1, 2015<br/>
+                            Due: February 1, 2015
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr class="information">
+            <td colspan="4">
+                <table>
+                    <tr>
+                        <td>
+                            <p>Next Step Webs, Inc.</p>
+                            <p>12345 Sunny Road </p>
+                            <p>Sunnyville TX 12345</p>
+                        </td>
+
+                        <td>
+                            <p>Acme Corp. </p>
+                            <p>John Doe </p>
+                            <p>john@example.com </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr class="heading">
+            <td width="70%">
+                Description
+            </td>
+
+            <td width="10%">
+                Quantity
+            </td>
+            <td width="10%">
+                Amount
+            </td>
+
+            <td width="10%">
+                Price
+            </td>
+        </tr>
+        <#list 1..users?size as i>
+            <tr class="item last">
+                <td style="text-align: left">
+                    ${users[i-1].username}
+                </td>
+
+                <td style="text-align: center">
+                    ${users[i-1].id}
+                </td>
+
+                <td style="text-align: center">
+                    ${users[i-1].age}
+                </td>
+
+                <td style="text-align: center">
+                    ${users[i-1].age}
+                </td>
+            </tr>
+
+
+        </#list>
+        <tr class="total" >
+            <td></td>
+            <td  colspan="3"> Sub Total:    385.00 </td>
+        </tr>
+        <tr class="myTotal" >
+            <td></td> <td></td>
+            <td  colspan="3"> Tax 24%:  385.00 </td>
+        </tr>
+        <tr class="myTotal" >
+            <td></td> <td></td>
+            <td  colspan="3"> Total:    385.00 </td>
+        </tr>
+    </table>
+</div>
+<!--<div style="page-break-after: always;"> </div>    -->
+<div class="page">
+    <div class="content">
+    </div>
+    <div class="invoice">
+
+        <span class="invoice--terms">
+      The payment will be cleared for the recipient in accordance with the
+      General terms for payment transmission and only on the basis of the
+      account number given by the payer.
+    </span>
+        <div class="recipient-bank">
+            <label class="recipient-bank--label">
+                <span>Recipient’s account number</span>
+            </label>
+            <label class="recipient-bank--iban--label">
+                IBAN
+            </label>
+            <span class="recipient-bank--iban">
+        <ul class="recipient-bank--iban--list">
+          <li>
+            <span class="recipient-bank--iban--list--bank">
+              SAMPO PANKKI
+            </span>
+            <span class="recipient-bank--iban--list--number">
+              FI16 8000 1400 0502 67
+            </span>
+          </li>
+
+        </ul>
+      </span>
+            <label class="recipient-bank--bic--label">
+                BIC
+            </label>
+            <span class="recipient-bank--bic">
+        <ul class="recipient-bank--bic--list">
+          <li>DABAFIHH</li>
+          <li>NDEAFIHH</li>
+          <li>OKOYFIHH</li>
+          <li>HELSFIHH</li>
+        </ul>
+      </span>
+     </div>
+        <div class="recipient">
+            <label class="recipient--label">
+                <span>Recipient</span>
+            </label>
+            <span class="recipient--name">
+        OY YRITYS AB<br/>
+        YRITYSKUJA 12, 4. KRS<br/>
+        12345 KAUPUNKI<br/>
+
+      </span>
+        </div>
+        <div class="payer">
+            <label class="payer--personal--label">
+                <span>Payer’s name and address</span>
+            </label>
+            <span class="payer--personal">
+        MAIJA MAKSAJA<br/>
+        VIIVATIE 15<br/>
+        09999 KOODILA
+      </span>
+            <label class="payer--signature--label">
+        <span>
+          Signature
+
+        </span>
+            </label>
+            <span class="payer--signature">
+      </span>
+            <label class="payer--from-account--label">
+                <span>From account no.</span>
+            </label>
+            <span class="payer--from-account">
+        123456-7890
+      </span>
+        </div>
+        <div class="payment">
+      <span class="payment--info">
+        Osuuteni itsenäisyyspäivän lounaasta. t. Maijа
+      </span>
+            <label class="payment--reference--label">
+                <span>Ref. No. </span>
+            </label>
+            <span class="payment--reference">
+        12 34561
+      </span>
+            <label class="payment--due--label">
+                Due date
+            </label>
+            <span class="payment--due">
+        30.11.2010
+      </span>
+            <label class="payment--amount--label">
+                Euro
+            </label>
+            <span class="payment--amount">
+        50,00
+      </span>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

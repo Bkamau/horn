@@ -67,12 +67,30 @@
 			<artifactId>vaadin-themes</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.xhtmlrenderer</groupId>
+			<artifactId>flying-saucer-pdf</artifactId>
+			<version>9.0.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.18</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+		<dependency>
 			<groupId>parse4j</groupId>
 			<artifactId>io.vaxly</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
-			<systemPath>/home/bkamau/parse4j.jar</systemPath>
+			<systemPath>${project.basedir}/src/libs/parse4j.jar</systemPath>
 		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -53,6 +53,10 @@
     background-color: #a0a0a0;
   }
 
+  .corners {
+    border: 1px solid;
+    border-radius: 20px;
+  }
 
   .login_buttons{
     color: white;
@@ -95,6 +99,12 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
 
+  .preview-button-loading{
+    margin-right: -250px;
+    margin-bottom: -100px;
+    background-image: url("img/ellipsis.svg");
+  }
+
   .title-layout{
     margin-top: 40px;
 
@@ -127,5 +137,9 @@
   .currency-buttons:hover {
     background-color: rgba(0,0,0,0.1);
   }
+
+.preview-layout{
+  background-color: transparent;
+}
 
 }

@@ -12985,6 +12985,11 @@ div.v-layout.v-horizontal.v-widget {
 	background-color: #a0a0a0;
 }
 
+.mytheme .corners {
+	border: 1px solid;
+	border-radius: 20px;
+}
+
 .mytheme .login_buttons {
 	color: white;
 }
@@ -13026,6 +13031,12 @@ div.v-layout.v-horizontal.v-widget {
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
+.mytheme .preview-button-loading {
+	margin-right: -250px;
+	margin-bottom: -100px;
+	background-image: url("img/ellipsis.svg");
+}
+
 .mytheme .title-layout {
 	margin-top: 40px;
 }
@@ -13056,4 +13067,8 @@ div.v-layout.v-horizontal.v-widget {
 
 .mytheme .currency-buttons:hover {
 	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.mytheme .preview-layout {
+	background-color: transparent;
 }

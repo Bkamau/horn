@@ -17,7 +17,7 @@ public class LoginSignin extends Window implements View, Button.ClickListener, P
     private TabSheet tabSheet = new TabSheet();
     private VerticalLayout loginLayout = new VerticalLayout();
 
-    private TextField loginEmailTextField = new TextField("Email", "");
+    private TextField loginEmailTextField = new TextField("Username", "");
     private TextField loginPasswdTextField = new TextField("Password", "");
 
     private TextField registerNameTextField = new TextField("Username", "");

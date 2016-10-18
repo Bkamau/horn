@@ -40,10 +40,19 @@
     <orderEntry type="library" name="Maven: com.vaadin.external.slf4j:vaadin-slf4j-jdk14:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-client-compiled:7.7.3" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-themes:7.7.3" level="project" />
+    <orderEntry type="library" name="Maven: org.xhtmlrenderer:flying-saucer-pdf:9.0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.xhtmlrenderer:flying-saucer-core:9.0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.18" level="project" />
+    <orderEntry type="library" name="Maven: com.lowagie:itext:2.1.7" level="project" />
+    <orderEntry type="library" name="Maven: bouncycastle:bcmail-jdk14:138" level="project" />
+    <orderEntry type="library" name="Maven: bouncycastle:bcprov-jdk14:138" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bctsp-jdk14:1.38" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk14:1.38" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcmail-jdk14:1.38" level="project" />
     <orderEntry type="module-library">
       <library name="Maven: parse4j:io.vaxly:1.0">
         <CLASSES>
-          <root url="jar://$USER_HOME$/parse4j.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/libs/parse4j.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
