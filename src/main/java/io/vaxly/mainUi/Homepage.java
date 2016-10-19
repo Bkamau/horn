@@ -97,7 +97,7 @@ public class Homepage extends Panel implements View, Button.ClickListener {
         if (clickEvent.getButton() ==  createBtn){
             navigate(CreateInvoice.NAME);
         } else if (clickEvent.getButton() == loginBtn){
-            UI.getCurrent().addWindow(new LoginSignin());
+            UI.getCurrent().addWindow(new LoginSignIn());
         }
     }
 }

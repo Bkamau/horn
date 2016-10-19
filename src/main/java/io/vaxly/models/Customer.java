@@ -1,17 +1,14 @@
 package io.vaxly.models;
 
 /**
- * Created by bkamau on 14.10.2016.
+ * Created by arne on 19.10.2016.
  */
-public class Company {
+public class Customer {
 
     private String name;
     private String address;
     private String zip;
     private String city;
-    private String companyNumber;
-    private String bankAcc;
-    private String bankBic;
 
     public String getName() {
         return name;
@@ -45,27 +42,7 @@ public class Company {
         this.city = city;
     }
 
-    public String getCompanyNumber() {
-        return companyNumber;
-    }
 
-    public void setCompanyNumber(String companyNumber) {
-        this.companyNumber = companyNumber;
-    }
 
-    public String getBankAcc() {
-        return bankAcc;
-    }
 
-    public void setBankAcc(String bankAcc) {
-        this.bankAcc = bankAcc;
-    }
-
-    public String getBankBic() {
-        return bankBic;
-    }
-
-    public void setBankBic(String bankBic) {
-        this.bankBic = bankBic;
-    }
 }

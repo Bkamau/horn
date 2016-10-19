@@ -28,6 +28,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: org.xhtmlrenderer:flying-saucer-pdf:9.0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.xhtmlrenderer:flying-saucer-core:9.0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.18" level="project" />
+    <orderEntry type="library" name="Maven: com.lowagie:itext:2.1.7" level="project" />
+    <orderEntry type="library" name="Maven: bouncycastle:bcmail-jdk14:138" level="project" />
+    <orderEntry type="library" name="Maven: bouncycastle:bcprov-jdk14:138" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bctsp-jdk14:1.38" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk14:1.38" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcmail-jdk14:1.38" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: javax.servlet:javax.servlet-api:3.0.1" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-server:7.7.3" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-sass-compiler:0.9.13" level="project" />
@@ -40,8 +49,9 @@
     <orderEntry type="library" name="Maven: com.vaadin.external.slf4j:vaadin-slf4j-jdk14:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-client-compiled:7.7.3" level="project" />
     <orderEntry type="library" name="Maven: com.vaadin:vaadin-themes:7.7.3" level="project" />
-    <orderEntry type="library" name="Maven: org.xhtmlrenderer:flying-saucer-pdf:9.0.4" level="project" />
-    <orderEntry type="library" name="Maven: org.xhtmlrenderer:flying-saucer-core:9.0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.xhtmlrenderer:flying-saucer-pdf-itext5:9.0.9" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.xhtmlrenderer:flying-saucer-core:9.0.9" level="project" />
     <orderEntry type="library" name="Maven: org.freemarker:freemarker:2.3.18" level="project" />
     <orderEntry type="library" name="Maven: com.lowagie:itext:2.1.7" level="project" />
     <orderEntry type="library" name="Maven: bouncycastle:bcmail-jdk14:138" level="project" />

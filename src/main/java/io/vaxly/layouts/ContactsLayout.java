@@ -5,6 +5,8 @@ import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import io.vaxly.models.Company;
+import io.vaxly.models.Customer;
 
 /**
  * Created by bkamau on 2.10.2016.
@@ -18,11 +20,24 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
     private TextField nameTextField;
     private TextField customerNameTF;
 
+    private TextField addressTextField;
+    private TextField zipCodeTextField;
+    private TextField cityTextField;
+    private TextField companyNoTextField;
+    private TextField bankDetailsTextField;
+    private TextField bicTextField;
+    private TextField customerAddressTF;
+    private TextField customerZipTF;
+    private TextField customerCityTF;
+
     private Button companydBtn;
     private  Button saveCustomerBtn;
 
     private Window companyWindow = myCompanyWindow();
     private Window customerWindow = myCustomerWindow();
+
+    public static Company company;
+    public static Customer customer;
 
     public ContactsLayout() {
 
@@ -61,17 +76,17 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
         nameTextField = new TextField("Name");
         nameTextField.setWidth(230.0f, Unit.PIXELS);
         nameTextField.focus();
-        TextField addressTextField = new TextField("Address");
+        addressTextField = new TextField("Address");
         addressTextField.setWidth(230.0f, Unit.PIXELS);
-        TextField zipCodeTextField = new TextField("Zip Code");
+        zipCodeTextField = new TextField("Zip Code");
         zipCodeTextField.setWidth(230.0f, Unit.PIXELS);
-        TextField cityTextField = new TextField("City");
+        cityTextField = new TextField("City");
         cityTextField.setWidth(230.0f, Unit.PIXELS);
-        TextField companyNoTextField = new TextField("Company No.");
+        companyNoTextField = new TextField("Company No.");
         companyNoTextField.setWidth(230.0f, Unit.PIXELS);
-        TextField bankDetailsTextField = new TextField("Bank Account");
+        bankDetailsTextField = new TextField("Bank Account");
         bankDetailsTextField.setWidth(230.0f, Unit.PIXELS);
-        TextField bicTextField = new TextField("Bank BIC");
+        bicTextField = new TextField("Bank BIC");
         bicTextField.setWidth(230.0f, Unit.PIXELS);
 
         companydBtn = new Button("Save");
@@ -97,8 +112,6 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
         return window;
     }
 
-
-
    private Window myCustomerWindow(){
        Window window = new Window();
        FormLayout formLayout = new FormLayout();
@@ -107,13 +120,13 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
        customerNameTF = new TextField("Name");
        customerNameTF.setWidth(230.0f, Unit.PIXELS);
 
-       TextField customerAddressTF = new TextField("Address");
+       customerAddressTF = new TextField("Address");
        customerAddressTF.setWidth(230.0f, Unit.PIXELS);
 
-       TextField customerZipTF = new TextField("Zip Code");
+       customerZipTF = new TextField("Zip Code");
        customerZipTF.setWidth(230.0f, Unit.PIXELS);
 
-       TextField customerCityTF = new TextField("City");
+       customerCityTF = new TextField("City");
        customerCityTF.setWidth(230.0f, Unit.PIXELS);
 
        saveCustomerBtn = new Button("Save");
@@ -150,21 +163,39 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
         if (clickEvent.getComponent() == companydBtn){
+            company = new Company();
             if (!nameTextField.isEmpty()){
                 toTextField.setValue(nameTextField.getValue());
                 toTextField.addStyleName(ValoTheme.LABEL_LARGE);
                 toTextField.addStyleName(ValoTheme.LABEL_BOLD);
             }
             UI.getCurrent().removeWindow(companyWindow);
+
+            company.setName(nameTextField.getValue());
+            company.setAddress(addressTextField.getValue());
+            company.setZip(zipCodeTextField.getValue());
+            company.setCity(cityTextField.getValue());
+            company.setCompanyNumber(companyNoTextField.getValue());
+            company.setBankAcc(bankDetailsTextField.getValue());
+            company.setBankBic(bicTextField.getValue());
+
         }else if (clickEvent.getComponent() == saveCustomerBtn){
+            customer = new Customer();
             if (!customerNameTF.isEmpty()){
                 fromTextField.setValue(customerNameTF.getValue());
                 fromTextField.addStyleName(ValoTheme.LABEL_LARGE);
                 fromTextField.addStyleName(ValoTheme.LABEL_BOLD);
             }
             UI.getCurrent().removeWindow(customerWindow);
+
+            customer.setName(customerNameTF.getValue());
+            customer.setAddress(customerAddressTF.getValue());
+            customer.setZip(customerZipTF.getValue());
+            customer.setCity(customerCityTF.getValue());
         }
 
     }
+
+
 }
 

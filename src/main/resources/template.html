@@ -372,14 +372,14 @@
             <td colspan="4">
                 <table>
                     <tr>
-                        <td class="title">
-                            <img src="/images/hornbill.png" style="width:100px; max-width:300px;"/>
-                        </td>
-
                         <td >
                             Invoice #: 123<br/>
                             Created: January 1, 2015<br/>
                             Due: February 1, 2015
+                        </td>
+
+                        <td class="title">
+                            <img src="/images/hornbill.png" style="width:100px; max-width:300px;"/>
                         </td>
                     </tr>
                 </table>
@@ -389,16 +389,17 @@
             <td colspan="4">
                 <table>
                     <tr>
+
                         <td>
-                            <p>Next Step Webs, Inc.</p>
-                            <p>12345 Sunny Road </p>
-                            <p>Sunnyville TX 12345</p>
+                            <p> ${company.name}</p>
+                            <p> ${company.address}, ${company.zip} </p>
+                            <p> ${company.city}</p>
                         </td>
 
                         <td>
-                            <p>Acme Corp. </p>
-                            <p>John Doe </p>
-                            <p>john@example.com </p>
+                            <p> ${customer.name} </p>
+                            <p> ${customer.address} , ${customer.zip} </p>
+                            <p> ${customer.city} </p>
                         </td>
                     </tr>
                 </table>

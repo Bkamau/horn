@@ -12,7 +12,7 @@ import org.parse4j.ParseUser;
 /**
  * Created by bkamau on 7.10.2016.
  */
-public class LoginSignin extends Window implements View, Button.ClickListener, Property.ValueChangeListener {
+public class LoginSignIn extends Window implements View, Button.ClickListener, Property.ValueChangeListener {
 
     private TabSheet tabSheet = new TabSheet();
     private VerticalLayout loginLayout = new VerticalLayout();
@@ -29,7 +29,7 @@ public class LoginSignin extends Window implements View, Button.ClickListener, P
     private Button loginButton = new Button("Login");
 
 
-    LoginSignin() {
+    LoginSignIn() {
 
 
         tabSheet.addStyleName(ValoTheme.TABSHEET_FRAMED);

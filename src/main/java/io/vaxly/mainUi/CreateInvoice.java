@@ -4,16 +4,18 @@ import com.vaadin.data.Property;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.*;
+import com.vaadin.server.BrowserWindowOpener;
+import com.vaadin.server.FileResource;
+import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Resource;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
-import io.vaxly.models.Company;
+import io.vaxly.layouts.*;
 import io.vaxly.models.User;
 import io.vaxly.utils.HtmlGenerator;
 import io.vaxly.utils.Konstants;
 import io.vaxly.utils.PdfGenerator;
-import io.vaxly.layouts.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,6 +24,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static io.vaxly.layouts.ContactsLayout.company;
+import static io.vaxly.layouts.ContactsLayout.customer;
+
 /**
  * Created by bkamau on 12.10.2016.
  */
@@ -29,13 +34,9 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
     public static final String NAME = "CreateInvoice";
     Navigator navigator;
-    Panel  mainPaneL = new Panel();
+    private Panel  mainPaneL = new Panel();
     private VerticalLayout firstVerticalLayout;
-    private  HorizontalLayout horizontalLayout;
-    private VerticalLayout mainLayout;
-    private HorizontalLayout billsHorizontalLayout;
     private Button addBtn;
-    private  Button delBtn;
     final static public Button btnpreview = new Button("PREVIEW");
 
     private Button euroBtn ;
@@ -61,7 +62,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
         mainPaneL.setResponsive(true);
 
-        horizontalLayout = new HorizontalLayout();
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.setSizeFull();
 
         mainPaneL.setContent(horizontalLayout);
@@ -69,7 +70,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         VerticalLayout v1 = new VerticalLayout();
         VerticalLayout v2 = new VerticalLayout();
 
-        mainLayout = new VerticalLayout();
+        VerticalLayout mainLayout = new VerticalLayout();
         mainLayout.setMargin(true);
         mainLayout.setStyleName("main-layout");
 
@@ -112,7 +113,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         setContent(mainPaneL);
     }
 
-
     private void showPreview(){
 
         Konstants.printInfo("Showing preview ..");
@@ -143,8 +143,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
         }else {
 
-            Notification.show("deletion", Notification.Type.TRAY_NOTIFICATION);
-
             int delBtnIndex = delBtnList.indexOf(clickEvent.getButton());
 
             Notification.show("del" + delBtnIndex, Notification.Type.TRAY_NOTIFICATION);
@@ -163,7 +161,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
 
         addBtn = new Button("", FontAwesome.PLUS_SQUARE);
-        delBtn = new Button("", FontAwesome.MINUS_SQUARE);
+        Button delBtn = new Button("", FontAwesome.MINUS_SQUARE);
         addBtn.addClickListener(this);
         delBtn.addClickListener(this);
 
@@ -176,7 +174,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         delBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         delBtn.setStyleName("invisible");
 
-        billsHorizontalLayout = new HorizontalLayout();
+        HorizontalLayout billsHorizontalLayout = new HorizontalLayout();
         // billsHorizontalLayout.setMargin(true);
         billsHorizontalLayout.setSpacing(true);
         billsHorizontalLayout.setWidth(100,Unit.PERCENTAGE);
@@ -208,7 +206,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
 
     }
-
 
     private VerticalLayout totalLayout (){
 
@@ -289,7 +286,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         totalPrice();
     }
 
-
     private void totalPrice(){
 
         double sum = 0;
@@ -336,17 +332,13 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
         Map<String,Object> variables = new HashMap<String,Object>();
 
-        //set example of user list
         List<User> users = createUserList();
-        //you can put any variables you want, so that you can use them in freemarker template
-
-        Company company = new Company();
-        company.setAddres("beninkatu 23");
-        company.setId(23);
 
 
         variables.put("users",users);
         variables.put("company", company);
+        variables.put("customer", customer);
+
 
         String htmlStr = null;
 
@@ -408,7 +400,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         user.setAge(age);
         return user;
     }
-
 
     public void navigate(String viewName){
 
