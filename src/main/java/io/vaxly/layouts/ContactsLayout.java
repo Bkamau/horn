@@ -3,6 +3,7 @@ package io.vaxly.layouts;
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.event.LayoutEvents;
 import com.vaadin.server.ThemeResource;
+import com.vaadin.server.UserError;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import io.vaxly.models.Company;
@@ -26,9 +27,11 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
     private TextField companyNoTextField;
     private TextField bankDetailsTextField;
     private TextField bicTextField;
+    private TextField countryTextField;
     private TextField customerAddressTF;
     private TextField customerZipTF;
     private TextField customerCityTF;
+    private TextField customerCountryTF;
 
     private Button companydBtn;
     private  Button saveCustomerBtn;
@@ -62,8 +65,8 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
         setSpacing(true);
         setMargin(false);
         setStyleName("address-layout");
-        addComponent(toTextField);
         addComponent(fromTextField);
+        addComponent(toTextField);
         addLayoutClickListener(this);
     }
 
@@ -88,6 +91,8 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
         bankDetailsTextField.setWidth(230.0f, Unit.PIXELS);
         bicTextField = new TextField("Bank BIC");
         bicTextField.setWidth(230.0f, Unit.PIXELS);
+        countryTextField = new TextField("Country");
+        countryTextField.setWidth(230.0f, Unit.PIXELS);
 
         companydBtn = new Button("Save");
         companydBtn.setWidth(230.0f, Unit.PIXELS);
@@ -96,7 +101,7 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
         companydBtn.addClickListener(this);
 
         FormLayout formLayout = new FormLayout();
-        formLayout.addComponents(nameTextField, addressTextField, zipCodeTextField, cityTextField, companyNoTextField,
+        formLayout.addComponents(nameTextField, addressTextField, zipCodeTextField, cityTextField, countryTextField, companyNoTextField,
                 bankDetailsTextField, bicTextField, companydBtn);
 
         layout.setSpacing(true);
@@ -129,13 +134,16 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
        customerCityTF = new TextField("City");
        customerCityTF.setWidth(230.0f, Unit.PIXELS);
 
+       customerCountryTF = new TextField("Country");
+       customerCountryTF.setWidth(230.0f, Unit.PIXELS);
+
        saveCustomerBtn = new Button("Save");
        saveCustomerBtn.setWidth(230.0f, Unit.PIXELS);
        saveCustomerBtn.addStyleName("preview-button");
        saveCustomerBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
        saveCustomerBtn.addClickListener(this);
 
-       formLayout.addComponents(customerNameTF,customerAddressTF,customerZipTF,customerCityTF,saveCustomerBtn);
+       formLayout.addComponents(customerNameTF,customerAddressTF,customerZipTF,customerCityTF, customerCountryTF,saveCustomerBtn);
 
        layout.setSpacing(true);
        layout.setMargin(true);
@@ -153,9 +161,9 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
 
     @Override
     public void layoutClick(LayoutEvents.LayoutClickEvent layoutClickEvent) {
-        if (layoutClickEvent.getClickedComponent() == toTextField){
+        if (layoutClickEvent.getClickedComponent() == fromTextField){
             UI.getCurrent().addWindow(companyWindow);
-        }else if (layoutClickEvent.getClickedComponent() == fromTextField){
+        }else if (layoutClickEvent.getClickedComponent() == toTextField){
             UI.getCurrent().addWindow(customerWindow);
         }
     }
@@ -165,33 +173,48 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
         if (clickEvent.getComponent() == companydBtn){
             company = new Company();
             if (!nameTextField.isEmpty()){
-                toTextField.setValue(nameTextField.getValue());
-                toTextField.addStyleName(ValoTheme.LABEL_LARGE);
-                toTextField.addStyleName(ValoTheme.LABEL_BOLD);
-            }
-            UI.getCurrent().removeWindow(companyWindow);
+                fromTextField.setValue(nameTextField.getValue());
+                fromTextField.addStyleName(ValoTheme.LABEL_LARGE);
+                fromTextField.addStyleName(ValoTheme.LABEL_BOLD);
 
-            company.setName(nameTextField.getValue());
-            company.setAddress(addressTextField.getValue());
-            company.setZip(zipCodeTextField.getValue());
-            company.setCity(cityTextField.getValue());
-            company.setCompanyNumber(companyNoTextField.getValue());
-            company.setBankAcc(bankDetailsTextField.getValue());
-            company.setBankBic(bicTextField.getValue());
+                company.setName(nameTextField.getValue());
+                company.setAddress(addressTextField.getValue());
+                company.setZip(zipCodeTextField.getValue() + " ");
+                company.setCity(cityTextField.getValue());
+                company.setCompanyNumber(companyNoTextField.getValue());
+                company.setBankAcc(bankDetailsTextField.getValue() + " ");
+                company.setBankBic(bicTextField.getValue());
+                company.setCountry(countryTextField.getValue());
+
+                UI.getCurrent().removeWindow(companyWindow);
+
+            }else {
+                nameTextField.setComponentError(new UserError("This Field is needed"));
+            }
+
+
 
         }else if (clickEvent.getComponent() == saveCustomerBtn){
             customer = new Customer();
             if (!customerNameTF.isEmpty()){
-                fromTextField.setValue(customerNameTF.getValue());
-                fromTextField.addStyleName(ValoTheme.LABEL_LARGE);
-                fromTextField.addStyleName(ValoTheme.LABEL_BOLD);
-            }
-            UI.getCurrent().removeWindow(customerWindow);
+                toTextField.setValue(customerNameTF.getValue());
+                toTextField.addStyleName(ValoTheme.LABEL_LARGE);
+                toTextField.addStyleName(ValoTheme.LABEL_BOLD);
 
-            customer.setName(customerNameTF.getValue());
-            customer.setAddress(customerAddressTF.getValue());
-            customer.setZip(customerZipTF.getValue());
-            customer.setCity(customerCityTF.getValue());
+                customer.setName(customerNameTF.getValue());
+                customer.setAddress(customerAddressTF.getValue());
+                customer.setZip(customerZipTF.getValue() + " ");
+                customer.setCity(customerCityTF.getValue());
+                customer.setCountry(customerCountryTF.getValue());
+
+                UI.getCurrent().removeWindow(customerWindow);
+
+            }else {
+                customerNameTF.setComponentError(new UserError("This Field is needed"));
+            }
+
+
+
         }
 
     }

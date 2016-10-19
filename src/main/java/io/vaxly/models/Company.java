@@ -12,6 +12,7 @@ public class Company {
     private String companyNumber;
     private String bankAcc;
     private String bankBic;
+    private String country;
 
     public String getName() {
         return name;
@@ -67,5 +68,13 @@ public class Company {
 
     public void setBankBic(String bankBic) {
         this.bankBic = bankBic;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

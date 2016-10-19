@@ -47,7 +47,7 @@ public class DetailLayout extends HorizontalLayout {
         detailLogoLayout.setMargin(true);
         detailLogoLayout.addStyleName("detailLogoLayout");
 
-        addComponents(detailDatesLayout,detailLogoLayout);
+        addComponents(detailLogoLayout,detailDatesLayout);
         setExpandRatio(detailDatesLayout, 3);
         setExpandRatio(detailLogoLayout, 2);
 

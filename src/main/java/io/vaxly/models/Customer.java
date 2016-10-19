@@ -9,6 +9,7 @@ public class Customer {
     private String address;
     private String zip;
     private String city;
+    private String country;
 
     public String getName() {
         return name;
@@ -42,7 +43,11 @@ public class Customer {
         this.city = city;
     }
 
+    public String getCountry() {
+        return country;
+    }
 
-
-
+    public void setCountry(String country) {
+        this.country = country;
+    }
 }

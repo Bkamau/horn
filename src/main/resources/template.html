@@ -114,7 +114,7 @@
         .invoice--terms {
             position: absolute;
             top: 80.08mm;
-            left: 145mm;
+            left: 140mm;
             font-size: 6pt;
             width: 54mm;
             padding-top: 3mm;
@@ -162,7 +162,7 @@
         }
         .recipient-bank--iban--list--number {
             padding: 0 2mm;
-            text-align: right;
+            text-align: left;
             display: table-cell;
         }
         .recipient-bank--bic {
@@ -345,7 +345,7 @@
         .payment--amount {
             position: absolute;
             top: 72.5mm;
-            left: 140.4mm;
+            left: 139.4mm;
             width: 44.4mm;
             height: 8.05mm;
             border-bottom: 2px solid #000000;
@@ -377,10 +377,10 @@
                             Created: January 1, 2015<br/>
                             Due: February 1, 2015
                         </td>
-
                         <td class="title">
                             <img src="/images/hornbill.png" style="width:100px; max-width:300px;"/>
                         </td>
+
                     </tr>
                 </table>
             </td>
@@ -391,16 +391,18 @@
                     <tr>
 
                         <td>
+                            <p> ${customer.name} </p>
+                            <p> ${customer.address}  </p>
+                            <p> ${customer.zip} ${customer.city} </p>
+                            <p> ${customer.country} </p>
+                        </td>
+                        <td>
                             <p> ${company.name}</p>
-                            <p> ${company.address}, ${company.zip} </p>
-                            <p> ${company.city}</p>
+                            <p> ${company.address} </p>
+                            <p>  ${company.zip} ${company.city}</p>
+                            <p> ${company.country}</p>
                         </td>
 
-                        <td>
-                            <p> ${customer.name} </p>
-                            <p> ${customer.address} , ${customer.zip} </p>
-                            <p> ${customer.city} </p>
-                        </td>
                     </tr>
                 </table>
             </td>
@@ -478,10 +480,10 @@
         <ul class="recipient-bank--iban--list">
           <li>
             <span class="recipient-bank--iban--list--bank">
-              SAMPO PANKKI
+              BANK
             </span>
             <span class="recipient-bank--iban--list--number">
-              FI16 8000 1400 0502 67
+               ${company.bankAcc}
             </span>
           </li>
 
@@ -492,10 +494,7 @@
             </label>
             <span class="recipient-bank--bic">
         <ul class="recipient-bank--bic--list">
-          <li>DABAFIHH</li>
-          <li>NDEAFIHH</li>
-          <li>OKOYFIHH</li>
-          <li>HELSFIHH</li>
+          <li>${company.bankBic}</li>
         </ul>
       </span>
      </div>
@@ -504,9 +503,9 @@
                 <span>Recipient</span>
             </label>
             <span class="recipient--name">
-        OY YRITYS AB<br/>
-        YRITYSKUJA 12, 4. KRS<br/>
-        12345 KAUPUNKI<br/>
+           ${company.name}<br/>
+           ${company.address}  ${company.zip}<br/>
+           ${company.city}  ${company.country}<br/>
 
       </span>
         </div>
@@ -515,9 +514,11 @@
                 <span>Payer’s name and address</span>
             </label>
             <span class="payer--personal">
-        MAIJA MAKSAJA<br/>
-        VIIVATIE 15<br/>
-        09999 KOODILA
+
+                ${company.name}<br/>
+                ${company.address}<br/>
+                ${company.zip} ${company.city} <br/>
+                ${company.country}
       </span>
             <label class="payer--signature--label">
         <span>

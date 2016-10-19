@@ -52,6 +52,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
     private String totalSum ;
     private String currency ;
 
+    private  String htmlStr ;
     private ArrayList<Button> addBtnList = new ArrayList<>();
     private ArrayList<Button> delBtnList = new ArrayList<>();
     private ArrayList<Component> componentArrayList= new ArrayList<>();
@@ -119,7 +120,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         Resource resource = new FileResource(new File("pdfOutput/invoice.pdf"));
         BrowserWindowOpener opener = new BrowserWindowOpener(resource);
         opener.extend(CreateInvoice.btnpreview);
-
 
     }
 
@@ -334,13 +334,10 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
         List<User> users = createUserList();
 
-
         variables.put("users",users);
         variables.put("company", company);
         variables.put("customer", customer);
 
-
-        String htmlStr = null;
 
         try {
             new File(outputFilePath).delete();
@@ -364,7 +361,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
 
     }
 
