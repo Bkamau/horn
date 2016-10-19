@@ -1,4 +1,4 @@
-package io.vaxly.views;
+package io.vaxly.layouts;
 
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
@@ -7,13 +7,13 @@ import com.vaadin.ui.themes.ValoTheme;
 /**
  * Created by bkamau on 2.10.2016.
  */
-public class FooterView extends HorizontalLayout {
+public class FooterLayout extends HorizontalLayout {
 
     TextField terms;
     TextField notes;
 
 
-    public FooterView( ) {
+    public FooterLayout( ) {
 
         terms = new TextField();
         terms.setWidth(100, Unit.PERCENTAGE);

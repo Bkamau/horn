@@ -13,7 +13,7 @@ import io.vaxly.models.User;
 import io.vaxly.utils.HtmlGenerator;
 import io.vaxly.utils.Konstants;
 import io.vaxly.utils.PdfGenerator;
-import io.vaxly.views.*;
+import io.vaxly.layouts.*;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -31,7 +31,9 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
     Navigator navigator;
     Panel  mainPaneL = new Panel();
     private VerticalLayout firstVerticalLayout;
-
+    private  HorizontalLayout horizontalLayout;
+    private VerticalLayout mainLayout;
+    private HorizontalLayout billsHorizontalLayout;
     private Button addBtn;
     private  Button delBtn;
     final static public Button btnpreview = new Button("PREVIEW");
@@ -59,7 +61,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
         mainPaneL.setResponsive(true);
 
-        HorizontalLayout horizontalLayout = new HorizontalLayout();
+        horizontalLayout = new HorizontalLayout();
         horizontalLayout.setSizeFull();
 
         mainPaneL.setContent(horizontalLayout);
@@ -67,7 +69,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         VerticalLayout v1 = new VerticalLayout();
         VerticalLayout v2 = new VerticalLayout();
 
-        VerticalLayout mainLayout = new VerticalLayout();
+        mainLayout = new VerticalLayout();
         mainLayout.setMargin(true);
         mainLayout.setStyleName("main-layout");
 
@@ -78,12 +80,13 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
         firstVerticalLayout = new VerticalLayout();
         VerticalLayout seconVerticalLayoutd = new VerticalLayout();
+
         seconVerticalLayoutd.setWidth(100, Unit.PERCENTAGE);
         mainLayout.addComponents(firstVerticalLayout, seconVerticalLayoutd);
 
         firstVerticalLayout.addComponent(new DetailLayout());
-        firstVerticalLayout.addComponent(new AddressView());
-        firstVerticalLayout.addComponent(new TitleView());
+        firstVerticalLayout.addComponent(new ContactsLayout());
+        firstVerticalLayout.addComponent(new TitleLayout());
 
         VerticalLayout totalVerticalLayout = totalLayout();
 
@@ -101,7 +104,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         seconVerticalLayoutd.addComponent(btnpreview);
         seconVerticalLayoutd.setComponentAlignment(btnpreview, Alignment.BOTTOM_RIGHT);
 
-        HorizontalLayout footerLayout = new FooterView();
+        HorizontalLayout footerLayout = new FooterLayout();
         seconVerticalLayoutd.addComponent(footerLayout);
         seconVerticalLayoutd.setComponentAlignment(footerLayout, Alignment.BOTTOM_CENTER);
 
@@ -122,17 +125,26 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
-        if (clickEvent.getButton() == addBtn){
+
+        if (clickEvent.getButton() == btnpreview){
+
+            //  GearsView view = new GearsView();
+            //  UI.getCurrent().addWindow(view);
+            generatePdf();
+
+        }else if (clickEvent.getButton() == addBtn) {
 
             addDemBills();
 
-            delBtnList.get((delBtnList.size()-2)).setStyleName("visible");
-            delBtnList.get((delBtnList.size()-2)).addStyleName(ValoTheme.BUTTON_BORDERLESS);
+            delBtnList.get((delBtnList.size() - 2)).setStyleName("visible");
+            delBtnList.get((delBtnList.size() - 2)).addStyleName(ValoTheme.BUTTON_BORDERLESS);
             int addBtnIndex = addBtnList.indexOf(addBtn);
-            addBtnList.get(addBtnIndex -1).setStyleName("invisible");
+            addBtnList.get(addBtnIndex - 1).setStyleName("invisible");
 
+        }else {
 
-        }else if (clickEvent.getButton() == delBtn){
+            Notification.show("deletion", Notification.Type.TRAY_NOTIFICATION);
+
             int delBtnIndex = delBtnList.indexOf(clickEvent.getButton());
 
             Notification.show("del" + delBtnIndex, Notification.Type.TRAY_NOTIFICATION);
@@ -144,27 +156,9 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
             priceArrayList.remove(delBtnIndex);
             totalPrice();
 
-
-        }else if (clickEvent.getButton() == euroBtn){
-            String currency = " EURO";
-            totalLable.setValue(totalSum + "&nbsp; &nbsp; " + currency);
-            totalLable.setContentMode(ContentMode.HTML);
-            popup.setVisible(false);
-
-        }else if (clickEvent.getButton() == poundBtn){
-
-        }else if (clickEvent.getButton() == dollarBtn){
-
-        }else if (clickEvent.getButton() == btnpreview){
-
-          //  GearsView view = new GearsView();
-          //  UI.getCurrent().addWindow(view);
-            generatePdf();
-
         }
 
     }
-
     private void addDemBills(){
 
 
@@ -182,7 +176,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         delBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         delBtn.setStyleName("invisible");
 
-        HorizontalLayout billsHorizontalLayout = new HorizontalLayout();
+        billsHorizontalLayout = new HorizontalLayout();
         // billsHorizontalLayout.setMargin(true);
         billsHorizontalLayout.setSpacing(true);
         billsHorizontalLayout.setWidth(100,Unit.PERCENTAGE);
@@ -196,7 +190,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
         priceTextField.addValueChangeListener(this);
 
-        HorizontalLayout billz = new BillsView(qntytTextField, descTextField, amtTextField, priceTextField);
+        HorizontalLayout billz = new ItemsLayout(qntytTextField, descTextField, amtTextField, priceTextField);
 
         billsHorizontalLayout.addComponents(addBtn, billz, delBtn);
         billsHorizontalLayout.setExpandRatio(addBtn,1);

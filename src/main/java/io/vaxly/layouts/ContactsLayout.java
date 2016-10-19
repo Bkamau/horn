@@ -1,4 +1,4 @@
-package io.vaxly.views;
+package io.vaxly.layouts;
 
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.event.LayoutEvents;
@@ -10,7 +10,7 @@ import com.vaadin.ui.themes.ValoTheme;
  * Created by bkamau on 2.10.2016.
  */
 @PreserveOnRefresh
-public class AddressView extends HorizontalLayout implements LayoutEvents.LayoutClickListener, Button.ClickListener{
+public class ContactsLayout extends HorizontalLayout implements LayoutEvents.LayoutClickListener, Button.ClickListener{
 
     private TextField toTextField;
     private TextField fromTextField;
@@ -24,7 +24,7 @@ public class AddressView extends HorizontalLayout implements LayoutEvents.Layout
     private Window companyWindow = myCompanyWindow();
     private Window customerWindow = myCustomerWindow();
 
-    public AddressView() {
+    public ContactsLayout() {
 
         toTextField = new TextField();
         toTextField.setWidth(100, Unit.PERCENTAGE);

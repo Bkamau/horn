@@ -1,4 +1,4 @@
-package io.vaxly.views;
+package io.vaxly.layouts;
 
 import com.vaadin.data.Property;
 import com.vaadin.ui.HorizontalLayout;
@@ -8,12 +8,12 @@ import com.vaadin.ui.themes.ValoTheme;
 /**
  * Created by bkamau on 2.10.2016.
  */
-public class BillsView extends HorizontalLayout {
+public class ItemsLayout extends HorizontalLayout {
 
     double quantity,amount;
 
 
-    public BillsView( TextField qntytTextField,TextField descTextField , TextField amtTextField , TextField priceTextField) {
+    public ItemsLayout(TextField qntytTextField, TextField descTextField , TextField amtTextField , TextField priceTextField) {
         super();
 
         descTextField.setInputPrompt("Enter product/service description");

@@ -1,4 +1,4 @@
-package io.vaxly.views;
+package io.vaxly.layouts;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
