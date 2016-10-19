@@ -117,7 +117,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
     private void showPreview(){
 
         Konstants.printInfo("Showing preview ..");
-        Resource resource = new FileResource(new File("pdfOutput/invoice.pdf"));
+        Resource resource = new FileResource(new File("output/pdf/invoice.pdf"));
         BrowserWindowOpener opener = new BrowserWindowOpener(resource);
         opener.extend(CreateInvoice.btnpreview);
 
@@ -127,9 +127,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
     public void buttonClick(Button.ClickEvent clickEvent) {
 
         if (clickEvent.getButton() == btnpreview){
-
-            //  GearsView view = new GearsView();
-            //  UI.getCurrent().addWindow(view);
             generatePdf();
 
         }else if (clickEvent.getButton() == addBtn) {
@@ -310,23 +307,19 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
             tax = 1.24;
         }
 
-
-
         Double finalSum = sum*tax;
 
         totalSum  =  String.valueOf(finalSum);
         currency = " EURO";
         totalLable.setValue(totalSum + "&nbsp; &nbsp; " + currency);
         totalLable.setContentMode(ContentMode.HTML);
-
-
-
     }
 
     private void generatePdf() {
 
-        String outputFilePath = "pdfOutput/invoice.pdf";
-        String tampleFile = "src/main/resources/template.html";Resource resource = new FileResource(new File("pdfOutput/invoice.pdf"));
+        String outputFilePath = "output/pdf/invoice.pdf";
+        String tampleFile = "src/main/resources/template.html";
+        Resource resource = new FileResource(new File("output/pdf/invoice.pdf"));
         BrowserWindowOpener opener = new BrowserWindowOpener(resource);
         opener.extend(CreateInvoice.btnpreview);
 
@@ -337,7 +330,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         variables.put("users",users);
         variables.put("company", company);
         variables.put("customer", customer);
-
 
         try {
             new File(outputFilePath).delete();

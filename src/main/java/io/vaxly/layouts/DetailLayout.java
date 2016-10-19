@@ -10,10 +10,7 @@ import com.vaadin.server.StreamVariable;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -21,6 +18,9 @@ import java.util.GregorianCalendar;
  * Created by bkamau on 2.10.2016.
  */
 public class DetailLayout extends HorizontalLayout {
+
+    public static byte[] byteArray;
+    public static String image;
 
      FormLayout detailDatesLayout = new FormLayout();
      VerticalLayout detailLogoLayout = new VerticalLayout();
@@ -86,7 +86,6 @@ public class DetailLayout extends HorizontalLayout {
         detailLogoLayout.addComponent(dropBox);
         detailLogoLayout.setComponentAlignment(dropBox, Alignment.MIDDLE_CENTER);
 
-
         setSizeFull();
         setStyleName("defaul-layout");
     }
@@ -95,8 +94,8 @@ public class DetailLayout extends HorizontalLayout {
     @StyleSheet("dragndropexample.css")
     public class ImageDropBox extends DragAndDropWrapper implements DropHandler {
 
-        public byte[] byteArray;
 
+        ByteArrayOutputStream bas;
         public Component component;
         private static final long FILE_SIZE_LIMIT = 2 * 1024 * 1024; // 2MB
 
@@ -122,7 +121,7 @@ public class DetailLayout extends HorizontalLayout {
                                         Notification.Type.WARNING_MESSAGE);
                     } else {
 
-                        final ByteArrayOutputStream bas = new ByteArrayOutputStream();
+                        bas = new ByteArrayOutputStream();
                         final StreamVariable streamVariable = new StreamVariable() {
 
                             @Override
@@ -174,22 +173,20 @@ public class DetailLayout extends HorizontalLayout {
 
         private void showFile(final String name, final String type,
                               final ByteArrayOutputStream bas) {
-            // resource for serving the file contents
+
             final StreamResource.StreamSource streamSource = new StreamResource.StreamSource() {
                 @Override
                 public InputStream getStream() {
                     if (bas != null) {
                          byteArray = bas.toByteArray();
-
                         return new ByteArrayInputStream(byteArray);
                     }
                     return null;
                 }
             };
+
             final StreamResource resource = new StreamResource(streamSource, name);
 
-
-            // show the file contents - images only for now
             final Embedded embedded = new Embedded(name, resource);
             embedded.setWidth(150.0f, Unit.PIXELS);
             embedded.setHeight(150.0f, Unit.PIXELS);
@@ -198,7 +195,14 @@ public class DetailLayout extends HorizontalLayout {
 
             dropPane.removeComponent(infoLabel);
             dropPane.removeStyleName("droparea");
+            dropPane.removeAllComponents();
             dropPane.addComponent(component);
+
+            try (OutputStream stream = new FileOutputStream("output/logo/logo.bmp")) {
+                stream.write(bas.toByteArray());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         }
 

@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e03870b4-2b08-454f-b4d5-9758aabafbe2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pdfOutput/invoice.pdf" afterPath="$PROJECT_DIR$/pdfOutput/invoice.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/mainUi/CreateInvoice$1.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/mainUi/CreateInvoice$1.class" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pdfOutput/invoice.pdf" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/mainUi/CreateInvoice.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/mainUi/CreateInvoice.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/layouts/ContactsLayout.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/layouts/ContactsLayout.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/layouts/DetailLayout.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/layouts/DetailLayout.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/mainUi/CreateInvoice.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/mainUi/CreateInvoice.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/models/Company.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/models/Company.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/models/Customer.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/models/Customer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/template.html" afterPath="$PROJECT_DIR$/src/main/resources/template.html" />
     </list>
     <ignored path="hornbill.iws" />
@@ -33,18 +29,7 @@
     <favorites_list name="hornbill" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="template.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/template.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1981">
-              <caret line="347" column="21" selection-start-line="347" selection-start-column="21" selection-end-line="347" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -101,10 +86,10 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/io/vaxly/models/Company.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/vaxly/models/Customer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/vaxly/layouts/ContactsLayout.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/template.html" />
         <option value="$PROJECT_DIR$/src/main/java/io/vaxly/layouts/DetailLayout.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/vaxly/mainUi/CreateInvoice.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/template.html" />
-        <option value="$PROJECT_DIR$/src/main/java/io/vaxly/layouts/ContactsLayout.java" />
       </list>
     </option>
   </component>
@@ -167,30 +152,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="hornbill" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hornbill" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hornbill" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hornbill" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="hornbill" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pdfOutput" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -720,12 +681,12 @@
       <workItem from="1476831099717" duration="4546000" />
       <workItem from="1476870019953" duration="35000" />
       <workItem from="1476870149915" duration="4939000" />
-      <workItem from="1476875096375" duration="12780000" />
+      <workItem from="1476875096375" duration="29806000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="232013000" />
+    <option name="totallyTimeSpent" value="249039000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1920" height="1056" extended-state="6" />
@@ -738,7 +699,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988167" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3071279" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30648535" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -811,20 +772,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/layouts/FooterLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="22" column="6" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/layouts/DetailLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/layouts/ItemsLayout.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
@@ -909,13 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/target/generated-resources/gwt/AppWidgetset.gwt.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/views/CurrencyFieldContent.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/mainUi/LoginPage.java" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/VAADIN/themes/mytheme/img/hornbill.png">
@@ -929,14 +869,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/layouts/FooterLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1060,32 +992,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/layouts/DetailLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="49" column="39" selection-start-line="49" selection-start-column="39" selection-end-line="49" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/utils/PdfGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/layouts/ContactsLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="184" column="71" selection-start-line="184" selection-start-column="71" selection-end-line="184" selection-end-column="71" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/models/Company.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -1105,16 +1011,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/utils/PdfGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/target/generated-resources/gwt/AppWidgetset.gwt.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/darksouls.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/abc.bmp">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/layouts/ContactsLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="184" column="71" selection-start-line="184" selection-start-column="71" selection-end-line="184" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/layouts/FooterLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/layouts/DetailLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2264">
+          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/template.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="377" column="31" selection-start-line="377" selection-start-column="31" selection-end-line="377" selection-end-column="31" />
+          <folding>
+            <element signature="n#style#0;n#img#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/mainUi/CreateInvoice.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="55">
-          <caret line="324" column="0" selection-start-line="324" selection-start-column="0" selection-end-line="324" selection-end-column="0" />
+        <state relative-caret-position="1425">
+          <caret line="331" column="44" selection-start-line="331" selection-start-column="44" selection-end-line="331" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;class#CreateInvoice#0" expanded="false" />
             <element signature="method#CreateInvoice#0;class#CreateInvoice#0" expanded="false" />
             <element signature="method#buttonClick#0;class#CreateInvoice#0" expanded="false" />
-            <element signature="e#4337#4374#0" expanded="false" />
             <element signature="method#addDemBills#0;class#CreateInvoice#0" expanded="false" />
             <element signature="method#totalLayout#0;class#CreateInvoice#0" expanded="false" />
             <element signature="method#totalPrice#0;class#CreateInvoice#0" expanded="false" />
@@ -1123,14 +1092,6 @@
             <element signature="method#navigate#0;class#CreateInvoice#0" expanded="false" />
             <element signature="method#enter#0;class#CreateInvoice#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/template.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1981">
-          <caret line="347" column="21" selection-start-line="347" selection-start-column="21" selection-end-line="347" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
