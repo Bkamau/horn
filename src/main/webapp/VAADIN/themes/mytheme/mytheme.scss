@@ -36,6 +36,15 @@
 
   // Insert your own theme rules here
 
+  .parent {position: relative;}
+
+  .child {
+    position: relative;
+    transform: perspective(1px) translateY(-50%);
+  }
+
+
+
   .main-layout{
     border-radius: 5px;
     border: 2px;
@@ -99,6 +108,21 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
 
+
+  .user-button{
+    color: white;
+    width: 200px;
+    background-color: rgba(0,0,0,0.5);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+
+  .save-button:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+
+
+
   .preview-button-loading{
     margin-right: -250px;
     margin-bottom: -100px;
@@ -141,5 +165,7 @@
 .preview-layout{
   background-color: transparent;
 }
+
+
 
 }

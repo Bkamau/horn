@@ -37,11 +37,12 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
     private Panel  mainPaneL = new Panel();
     private VerticalLayout firstVerticalLayout;
     private Button addBtn;
-    final static public Button btnpreview = new Button("PREVIEW");
 
     private Button euroBtn ;
     private Button poundBtn ;
     private Button dollarBtn;
+    private Button btnPreview;
+    private Button btnSave;
 
     private TextField subTitle ;
     private TextField taxTitle ;
@@ -61,12 +62,20 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
     public CreateInvoice(){
 
-        mainPaneL.setResponsive(true);
+        VerticalLayout mainHorizontalLayout = new VerticalLayout();
+        mainHorizontalLayout.setSizeFull();
+
+        HorizontalLayout userLayout = new UserLayout();
+        HorizontalLayout submitLayout = new SubmitLayout();
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.setSizeFull();
 
-        mainPaneL.setContent(horizontalLayout);
+        mainHorizontalLayout.addComponent(userLayout);
+        mainHorizontalLayout.addComponents(horizontalLayout);
+        mainHorizontalLayout.addComponent(submitLayout);
+        mainHorizontalLayout.setComponentAlignment(userLayout, Alignment.TOP_CENTER);
+        mainHorizontalLayout.setComponentAlignment(submitLayout, Alignment.BOTTOM_CENTER);
 
         VerticalLayout v1 = new VerticalLayout();
         VerticalLayout v2 = new VerticalLayout();
@@ -97,39 +106,35 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         seconVerticalLayoutd.addComponent(totalVerticalLayout);
         seconVerticalLayoutd.setComponentAlignment(totalVerticalLayout, Alignment.MIDDLE_RIGHT);
 
-        btnpreview.addStyleName("preview-button");
-        btnpreview.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        btnpreview.addStyleName(ValoTheme.BUTTON_HUGE);
-        btnpreview.addClickListener(this);
+        btnPreview = previewBtn();
+        seconVerticalLayoutd.addComponent(btnPreview);
+        seconVerticalLayoutd.setComponentAlignment(btnPreview, Alignment.BOTTOM_RIGHT);
+
+        btnSave = saveBtn();
+        seconVerticalLayoutd.addComponent(btnSave);
+        seconVerticalLayoutd.setComponentAlignment(btnSave, Alignment.BOTTOM_RIGHT);
 
 
-        seconVerticalLayoutd.addComponent(btnpreview);
-        seconVerticalLayoutd.setComponentAlignment(btnpreview, Alignment.BOTTOM_RIGHT);
-
-        HorizontalLayout footerLayout = new FooterLayout();
+        FooterLayout footerLayout = new FooterLayout();
         seconVerticalLayoutd.addComponent(footerLayout);
         seconVerticalLayoutd.setComponentAlignment(footerLayout, Alignment.BOTTOM_CENTER);
 
-        showPreview();
+        mainPaneL.setContent(mainHorizontalLayout);
+        mainPaneL.setResponsive(true);
         setContent(mainPaneL);
     }
 
-    private void showPreview(){
 
-        Konstants.printInfo("Showing preview ..");
-        Resource resource = new FileResource(new File("output/pdf/invoice.pdf"));
-        BrowserWindowOpener opener = new BrowserWindowOpener(resource);
-        opener.extend(CreateInvoice.btnpreview);
-
-    }
 
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
 
-        if (clickEvent.getButton() == btnpreview){
+        if (clickEvent.getButton() == btnPreview){
             generatePdf();
 
-        }else if (clickEvent.getButton() == addBtn) {
+        }else if (clickEvent.getButton() == btnSave){
+            Konstants.printInfo("saved...");
+        } else if (clickEvent.getButton() == addBtn) {
 
             addDemBills();
 
@@ -141,8 +146,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         }else {
 
             int delBtnIndex = delBtnList.indexOf(clickEvent.getButton());
-
-            Notification.show("del" + delBtnIndex, Notification.Type.TRAY_NOTIFICATION);
 
             addBtnList.remove(delBtnIndex);
             delBtnList.remove(delBtnIndex);
@@ -319,9 +322,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
         String outputFilePath = "output/pdf/invoice.pdf";
         String tampleFile = "src/main/resources/template.html";
-        Resource resource = new FileResource(new File("output/pdf/invoice.pdf"));
-        BrowserWindowOpener opener = new BrowserWindowOpener(resource);
-        opener.extend(CreateInvoice.btnpreview);
+
 
         Map<String,Object> variables = new HashMap<String,Object>();
 
@@ -354,6 +355,37 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
             e.printStackTrace();
         }
 
+    }
+
+    private void showPreview(){
+
+        Konstants.printInfo("Showing preview ..");
+        Resource resource = new FileResource(new File("output/pdf/invoice.pdf"));
+        BrowserWindowOpener opener = new BrowserWindowOpener(resource);
+        opener.extend(btnPreview);
+
+    }
+
+    private Button previewBtn(){
+
+        Button button = new Button("PREVIEW");
+        button.addStyleName("preview-button");
+        button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        button.addStyleName(ValoTheme.BUTTON_HUGE);
+        button.addClickListener(this);
+
+        return button;
+    }
+
+    private Button saveBtn(){
+
+        Button button = new Button("Save");
+        button.addStyleName("save-button");
+        button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        button.addStyleName(ValoTheme.BUTTON_HUGE);
+        button.addClickListener(this);
+
+        return button;
     }
 
     private static List<User> createUserList() {

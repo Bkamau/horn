@@ -12968,6 +12968,15 @@ div.v-layout.v-horizontal.v-widget {
 	overflow: hidden;
 }
 
+.mytheme .parent {
+	position: relative;
+}
+
+.mytheme .child {
+	position: relative;
+	transform: perspective(1px) translateY(-50%);
+}
+
 .mytheme .main-layout {
 	border-radius: 5px;
 	border: 2px;
@@ -13028,6 +13037,18 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .preview-button:hover {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.mytheme .user-button {
+	color: white;
+	width: 200px;
+	background-color: rgba(0, 0, 0, 0.5);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
+}
+
+.mytheme .save-button:hover {
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
