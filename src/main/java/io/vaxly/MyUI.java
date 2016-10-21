@@ -7,7 +7,6 @@ import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
-import io.vaxly.mainUi.CreateInvoice;
 import io.vaxly.mainUi.Homepage;
 import org.parse4j.Parse;
 
@@ -46,7 +45,7 @@ public class MyUI extends UI {
 
         // Add some Views
         navigator.addView("", new Homepage());
-        navigator.addView(CreateInvoice.NAME, new CreateInvoice());
+
 
 
 

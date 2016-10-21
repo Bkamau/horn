@@ -91,7 +91,7 @@ public class DetailLayout extends HorizontalLayout {
     }
 
 
-    @StyleSheet("dragndropexample.css")
+    @StyleSheet("draganddrop.css")
     public class ImageDropBox extends DragAndDropWrapper implements DropHandler {
 
 

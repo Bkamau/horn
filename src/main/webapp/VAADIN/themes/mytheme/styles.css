@@ -13040,6 +13040,10 @@ div.v-layout.v-horizontal.v-widget {
 	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
+.mytheme .user-layout {
+	margin: 5px;
+}
+
 .mytheme .user-button {
 	color: white;
 	width: 200px;

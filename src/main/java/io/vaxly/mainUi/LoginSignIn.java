@@ -6,6 +6,7 @@ import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.UserError;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import io.vaxly.utils.Konstants;
 import org.parse4j.ParseException;
 import org.parse4j.ParseUser;
 
@@ -30,6 +31,7 @@ public class LoginSignIn extends Window implements View, Button.ClickListener, P
 
 
     LoginSignIn() {
+
 
 
         tabSheet.addStyleName(ValoTheme.TABSHEET_FRAMED);
@@ -97,6 +99,9 @@ public class LoginSignIn extends Window implements View, Button.ClickListener, P
         }else {
             try {
                 ParseUser.login(email,password );
+                getUI().getNavigator().addView(CreateInvoice.NAME, new CreateInvoice());
+                navigate(CreateInvoice.NAME);
+                Konstants.printInfo(ParseUser.currentUser.getUsername());
                 UI.getCurrent().removeWindow(this);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -142,5 +147,9 @@ public class LoginSignIn extends Window implements View, Button.ClickListener, P
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
 
+    }
+
+    private void navigate(String viewName){
+        getUI().getNavigator().navigateTo(viewName);
     }
 }

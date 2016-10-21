@@ -4,28 +4,14 @@ import com.vaadin.data.Property;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.server.BrowserWindowOpener;
-import com.vaadin.server.FileResource;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.server.Resource;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import io.vaxly.layouts.*;
-import io.vaxly.models.User;
-import io.vaxly.utils.HtmlGenerator;
-import io.vaxly.utils.Konstants;
-import io.vaxly.utils.PdfGenerator;
+import org.parse4j.ParseUser;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import static io.vaxly.layouts.ContactsLayout.company;
-import static io.vaxly.layouts.ContactsLayout.customer;
 
 /**
  * Created by bkamau on 12.10.2016.
@@ -41,8 +27,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
     private Button euroBtn ;
     private Button poundBtn ;
     private Button dollarBtn;
-    private Button btnPreview;
-    private Button btnSave;
 
     private TextField subTitle ;
     private TextField taxTitle ;
@@ -60,21 +44,29 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
     private ArrayList<TextField> priceArrayList = new ArrayList<>();
 
 
+    private  VerticalLayout mainHorizontalLayout;
+
     public CreateInvoice(){
 
         VerticalLayout mainHorizontalLayout = new VerticalLayout();
         mainHorizontalLayout.setSizeFull();
 
-        HorizontalLayout userLayout = new UserLayout();
+
         HorizontalLayout submitLayout = new SubmitLayout();
 
         HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.setSizeFull();
 
-        mainHorizontalLayout.addComponent(userLayout);
+        if (ParseUser.currentUser != null){
+
+            HorizontalLayout userLayout = new UserLayout();
+            mainHorizontalLayout.addComponent(userLayout);
+            mainHorizontalLayout.setComponentAlignment(userLayout, Alignment.TOP_CENTER);
+        }
+
+
         mainHorizontalLayout.addComponents(horizontalLayout);
         mainHorizontalLayout.addComponent(submitLayout);
-        mainHorizontalLayout.setComponentAlignment(userLayout, Alignment.TOP_CENTER);
         mainHorizontalLayout.setComponentAlignment(submitLayout, Alignment.BOTTOM_CENTER);
 
         VerticalLayout v1 = new VerticalLayout();
@@ -106,14 +98,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         seconVerticalLayoutd.addComponent(totalVerticalLayout);
         seconVerticalLayoutd.setComponentAlignment(totalVerticalLayout, Alignment.MIDDLE_RIGHT);
 
-        btnPreview = previewBtn();
-        seconVerticalLayoutd.addComponent(btnPreview);
-        seconVerticalLayoutd.setComponentAlignment(btnPreview, Alignment.BOTTOM_RIGHT);
-
-        btnSave = saveBtn();
-        seconVerticalLayoutd.addComponent(btnSave);
-        seconVerticalLayoutd.setComponentAlignment(btnSave, Alignment.BOTTOM_RIGHT);
-
 
         FooterLayout footerLayout = new FooterLayout();
         seconVerticalLayoutd.addComponent(footerLayout);
@@ -124,17 +108,10 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         setContent(mainPaneL);
     }
 
-
-
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
 
-        if (clickEvent.getButton() == btnPreview){
-            generatePdf();
-
-        }else if (clickEvent.getButton() == btnSave){
-            Konstants.printInfo("saved...");
-        } else if (clickEvent.getButton() == addBtn) {
+     if (clickEvent.getButton() == addBtn) {
 
             addDemBills();
 
@@ -157,10 +134,11 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         }
 
     }
+
     private void addDemBills(){
 
 
-        addBtn = new Button("", FontAwesome.PLUS_SQUARE);
+        addBtn = new Button( FontAwesome.PLUS_SQUARE);
         Button delBtn = new Button("", FontAwesome.MINUS_SQUARE);
         addBtn.addClickListener(this);
         delBtn.addClickListener(this);
@@ -168,6 +146,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         addBtn.setWidth(100, Unit.PERCENTAGE);
         addBtn.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
         addBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+
 
         delBtn.setWidth(100, Unit.PERCENTAGE);
         delBtn.addStyleName(ValoTheme.BUTTON_ICON_ONLY);
@@ -281,11 +260,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
     }
 
-    @Override
-    public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
-        totalPrice();
-    }
-
     private void totalPrice(){
 
         double sum = 0;
@@ -318,113 +292,15 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         totalLable.setContentMode(ContentMode.HTML);
     }
 
-    private void generatePdf() {
-
-        String outputFilePath = "output/pdf/invoice.pdf";
-        String tampleFile = "src/main/resources/template.html";
-
-
-        Map<String,Object> variables = new HashMap<String,Object>();
-
-        List<User> users = createUserList();
-
-        variables.put("users",users);
-        variables.put("company", company);
-        variables.put("customer", customer);
-
-        try {
-            new File(outputFilePath).delete();
-            Konstants.printInfo("File Deleted ..");
-        }catch (UnknownError ue){
-            ue.printStackTrace();
-        }
-
-        try {
-            htmlStr = HtmlGenerator.generate(tampleFile, variables);
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
-        try {
-            PdfGenerator.generate(htmlStr, new FileOutputStream(outputFilePath));
-        } catch (Exception e1) {
-            e1.printStackTrace();
-        }
-        try {
-            Thread.sleep(4000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void showPreview(){
-
-        Konstants.printInfo("Showing preview ..");
-        Resource resource = new FileResource(new File("output/pdf/invoice.pdf"));
-        BrowserWindowOpener opener = new BrowserWindowOpener(resource);
-        opener.extend(btnPreview);
-
-    }
-
-    private Button previewBtn(){
-
-        Button button = new Button("PREVIEW");
-        button.addStyleName("preview-button");
-        button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        button.addStyleName(ValoTheme.BUTTON_HUGE);
-        button.addClickListener(this);
-
-        return button;
-    }
-
-    private Button saveBtn(){
-
-        Button button = new Button("Save");
-        button.addStyleName("save-button");
-        button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        button.addStyleName(ValoTheme.BUTTON_HUGE);
-        button.addClickListener(this);
-
-        return button;
-    }
-
-    private static List<User> createUserList() {
-        User user1 = createUser(1, "marine core", 12);
-        User user2 = createUser(2, "benito", 34);
-        User user3 = createUser(3, "becccccccccccccccccccccnso", 26);
-        User user4 = createUser(3, "beccccccccccccccccccccccccccccn", 5);
-        User user5 = createUser(3, "marggggggggggggggggggggggggine", 265);
-
-        User user14 = createUser(3, "beccccccccccccccccccccccccccccn", 5);
-        User user15 = createUser(3, "marggggggggggggggggggggggggine", 265);
-
-
-        List<User> users = new ArrayList<User>();
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
-        users.add(user4);
-        users.add(user5);
-
-        users.add(user14);
-        users.add(user15);
-
-
-        return users;
-    }
-
-    private static User createUser(long id, String username, int age) {
-        User user = new User();
-        user.setId(id);
-        user.setUsername(username);
-        user.setAge(age);
-        return user;
-    }
-
     public void navigate(String viewName){
 
         getUI().getNavigator().navigateTo(viewName);
 
+    }
+
+    @Override
+    public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
+        totalPrice();
     }
 
     @Override

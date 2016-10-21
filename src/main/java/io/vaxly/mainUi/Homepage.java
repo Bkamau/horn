@@ -95,6 +95,7 @@ public class Homepage extends Panel implements View, Button.ClickListener {
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
         if (clickEvent.getButton() ==  createBtn){
+            getUI().getNavigator().addView(CreateInvoice.NAME, new CreateInvoice());
             navigate(CreateInvoice.NAME);
         } else if (clickEvent.getButton() == loginBtn){
             UI.getCurrent().addWindow(new LoginSignIn());

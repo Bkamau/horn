@@ -44,6 +44,7 @@ public class UserLayout extends HorizontalLayout implements View {
         setComponentAlignment(customerBtn, Alignment.TOP_RIGHT);
         setComponentAlignment(invoiceBtn, Alignment.TOP_RIGHT);
         setComponentAlignment(nameBtn,Alignment.TOP_LEFT);
+        addStyleName("user-layout");
 
         setSpacing(true);
 
