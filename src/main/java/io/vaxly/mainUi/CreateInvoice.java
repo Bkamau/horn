@@ -9,9 +9,16 @@ import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import io.vaxly.layouts.*;
+import io.vaxly.models.Invoice;
+import io.vaxly.models.Item;
 import org.parse4j.ParseUser;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
+import static io.vaxly.layouts.DetailLayout.dueDate;
+import static io.vaxly.layouts.DetailLayout.invoiceField;
+import static io.vaxly.layouts.DetailLayout.issueDate;
 
 /**
  * Created by bkamau on 12.10.2016.
@@ -22,6 +29,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
     Navigator navigator;
     private Panel  mainPaneL = new Panel();
     private VerticalLayout firstVerticalLayout;
+    HorizontalLayout billz;
     private Button addBtn;
 
     private Button euroBtn ;
@@ -43,8 +51,13 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
     private ArrayList<Component> componentArrayList= new ArrayList<>();
     private ArrayList<TextField> priceArrayList = new ArrayList<>();
 
+    public static ArrayList<Item> itemsData = new ArrayList<Item>();
+    private Component billshl;
+    private HorizontalLayout bills;
 
     private  VerticalLayout mainHorizontalLayout;
+
+    public static Invoice invoice = new Invoice();
 
     public CreateInvoice(){
 
@@ -167,7 +180,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
         priceTextField.addValueChangeListener(this);
 
-        HorizontalLayout billz = new ItemsLayout(qntytTextField, descTextField, amtTextField, priceTextField);
+        billz = new ItemsLayout(qntytTextField, descTextField, amtTextField, priceTextField);
 
         billsHorizontalLayout.addComponents(addBtn, billz, delBtn);
         billsHorizontalLayout.setExpandRatio(addBtn,1);
@@ -298,9 +311,136 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
     }
 
+     /*
+        *Method loops through the item rows
+        * Then loops through the row textfields
+        * Gets the values
+        * Checks whether null
+        * sets the values to an Item(model) object
+        * adds the objects to an empty(cleared) arraylist
+    */
+
+    public void setitems() {
+        int billzSize = billz.getComponentCount();
+        int billzhlsize = componentArrayList.size();
+        System.out.println("billsSize: " + billzSize);
+        System.out.println("billsHorizontalLayout Size: " + billzhlsize);
+        itemsData.clear();
+
+        for (int i = 0; i < billzhlsize; i++) {
+            Item realItem = new Item();
+            Component componentlist = componentArrayList.get(i);
+            HorizontalLayout hl = (HorizontalLayout) componentlist;
+            billshl = hl.getComponent(1);
+            bills = (HorizontalLayout) billshl;
+
+            for (int j = 0; j < billzSize; j++) {
+                Component comp = bills.getComponent(j);
+                TextField txfield = (TextField) comp;
+                String value = txfield.getValue();
+                if(!value.isEmpty()) {
+
+                    switch (j) {
+                        case 0:
+                            realItem.setName(value);
+                            break;
+                        case 1:
+                            realItem.setQuantity(value);
+                            break;
+                        case 2:
+                            realItem.setPrice(value);
+                            break;
+                        case 3:
+                            realItem.setAmount(value);
+                            break;
+                    }
+                }
+                else{
+                    System.out.println("Value (" + j + " " + i  + ") is null");
+                    System.out.println("Value set to empty" );
+
+                    switch (j){
+                        case 1:
+                            realItem.setQuantity("");
+                            break;
+                        case 2:
+                            realItem.setPrice("");
+                            break;
+                        case 3:
+                            realItem.setAmount("");
+                            break;
+                    }
+                }
+
+            }
+            if((realItem.getName() == null))  {
+                System.out.println("Name is null" );
+
+            }
+            else {
+                System.out.println("Name is not null" + i);
+
+                itemsData.add(realItem);
+            }
+
+        }
+
+    }
+
+
+    /*
+        *Gets values from TextFields
+        * Sets the values to invoice(model) object
+        * prints values to log
+     */
+
+    private void setInvoiceDetails(){
+
+        System.out.println("***** Get Values and set to models ******");
+
+        String DATE_FORMAT = "dd-MM-yyyy";
+        SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+
+        String invoiceNo = invoiceField.getValue();
+        int id = Integer.parseInt(invoiceNo);
+        System.out.println("Invoice id: " + id);
+
+        String issuedate = sdf.format(issueDate.getValue());
+        System.out.println("issueDate: " + issuedate);
+
+        String duedate = sdf.format(dueDate.getValue());
+        System.out.println("dueDate: " + duedate);
+
+        String subTotal = subTitle.getValue();
+        System.out.println("subTotal: " + subTotal);
+
+        String tax = taxTitle.getValue();
+        System.out.println("tax: " + tax);
+
+        String finalTotal = totalSum;
+        System.out.println("finalTotal: " + finalTotal);
+
+        String curr = currency;
+        System.out.println("Currency: " + curr);
+
+        System.out.println("************************");
+
+        invoice.setDueDate(duedate);
+        invoice.setIssueDate(issuedate);
+        invoice.setId(id);
+        invoice.setSubTotal(subTotal);
+        invoice.setTax(tax);
+        invoice.setTotal(finalTotal);
+        invoice.setCurrency(curr);
+
+    }
+
+
     @Override
     public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
         totalPrice();
+        setitems();
+        setInvoiceDetails();
     }
 
     @Override

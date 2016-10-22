@@ -25,9 +25,9 @@ public class DetailLayout extends HorizontalLayout {
      FormLayout detailDatesLayout = new FormLayout();
      VerticalLayout detailLogoLayout = new VerticalLayout();
 
-     TextField invoiceField = new TextField("Invoice #", "");
-     DateField issueDate = new PopupDateField("Issue Date");
-     DateField dueDate = new PopupDateField("Due Date");
+    public static TextField invoiceField = new TextField("Invoice #", "");
+    public static DateField issueDate = new PopupDateField("Issue Date");
+    public static DateField dueDate = new PopupDateField("Due Date");
 
      VerticalLayout dropPane;
      Label infoLabel;
@@ -55,7 +55,7 @@ public class DetailLayout extends HorizontalLayout {
         calEnd.roll(java.util.Calendar.DATE, -1);
 
         invoiceField.setWidth(100.0f, Unit.PERCENTAGE);
-        invoiceField.setValue("  001");
+        invoiceField.setValue("001");
         issueDate.setWidth(100.0f, Unit.PERCENTAGE);
         issueDate.setValue(new Date());
         issueDate.setDateFormat("dd-MM-yyyy");

@@ -10,6 +10,7 @@ import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.themes.ValoTheme;
+import io.vaxly.mainUi.CreateInvoice;
 import io.vaxly.models.User;
 import io.vaxly.utils.HtmlGenerator;
 import io.vaxly.utils.Konstants;
@@ -24,6 +25,8 @@ import java.util.Map;
 
 import static io.vaxly.layouts.ContactsLayout.company;
 import static io.vaxly.layouts.ContactsLayout.customer;
+import static io.vaxly.mainUi.CreateInvoice.itemsData;
+import static io.vaxly.mainUi.CreateInvoice.invoice;
 
 /**
  * Created by bkamau on 20.10.2016.
@@ -70,9 +73,6 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
         setComponentAlignment(downloadBtn,Alignment.TOP_LEFT);
         setMargin(true);
         setSpacing(true);
-
-
-
     }
 
 
@@ -90,9 +90,9 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
 
         Map<String,Object> variables = new HashMap<String,Object>();
 
-        List<User> users = createUserList();
 
-        variables.put("users",users);
+        variables.put("items",itemsData);
+        variables.put("invoice",invoice);
         variables.put("company", company);
         variables.put("customer", customer);
 
@@ -136,39 +136,6 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
         BrowserWindowOpener opener = new BrowserWindowOpener(resource);
         opener.extend(previewBtn);
     }
-    private static List<User> createUserList() {
-        User user1 = createUser(1, "marine core", 12);
-        User user2 = createUser(2, "benito", 34);
-        User user3 = createUser(3, "becccccccccccccccccccccnso", 26);
-        User user4 = createUser(3, "beccccccccccccccccccccccccccccn", 5);
-        User user5 = createUser(3, "marggggggggggggggggggggggggine", 265);
-
-        User user14 = createUser(3, "beccccccccccccccccccccccccccccn", 5);
-        User user15 = createUser(3, "marggggggggggggggggggggggggine", 265);
-
-
-        List<User> users = new ArrayList<User>();
-        users.add(user1);
-        users.add(user2);
-        users.add(user3);
-        users.add(user4);
-        users.add(user5);
-
-        users.add(user14);
-        users.add(user15);
-
-
-        return users;
-    }
-
-    private static User createUser(long id, String username, int age) {
-        User user = new User();
-        user.setId(id);
-        user.setUsername(username);
-        user.setAge(age);
-        return user;
-    }
-
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
         if (clickEvent.getComponent() == previewBtn){

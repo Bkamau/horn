@@ -373,9 +373,9 @@
                 <table>
                     <tr>
                         <td style="" >
-                           <span> Invoice #: 123</span><br/>
-                           <span>  Created: January 1, 2015</span><br/>
-                           <span>Due: February 1, 2015</span>
+                           <span> Invoice #  : ${invoice.id}</span><br/>
+                           <span> Issue Date : ${invoice.issueDate}</span><br/>
+                           <span> Due Date   : ${invoice.dueDate}</span>
                         </td>
                         <td class="title">
                             <img src="output/logo/logo.bmp" style="width:150px; max-width:300px;"/>
@@ -423,22 +423,22 @@
                 Price
             </td>
         </tr>
-        <#list 1..users?size as i>
+        <#list 1..items?size as i>
             <tr class="item last">
                 <td style="text-align: left">
-                    ${users[i-1].username}
+                    ${items[i-1].name}
                 </td>
 
                 <td style="text-align: center">
-                    ${users[i-1].id}
+                    ${items[i-1].quantity}
                 </td>
 
                 <td style="text-align: center">
-                    ${users[i-1].age}
+                    ${items[i-1].price}
                 </td>
 
                 <td style="text-align: center">
-                    ${users[i-1].age}
+                    ${items[i-1].amount}
                 </td>
             </tr>
 
@@ -446,15 +446,15 @@
         </#list>
         <tr class="total" >
             <td></td>
-            <td  colspan="3"> Sub Total:    385.00 </td>
+            <td  colspan="3"> Sub Total:    ${invoice.subTotal} </td>
         </tr>
         <tr class="myTotal" >
             <td></td> <td></td>
-            <td  colspan="3"> Tax 24%:  385.00 </td>
+            <td  colspan="3"> Tax 24%:  ${invoice.tax} </td>
         </tr>
         <tr class="myTotal" >
             <td></td> <td></td>
-            <td  colspan="3"> Total:    385.00 </td>
+            <td  colspan="3"> Total:    ${invoice.total} </td>
         </tr>
     </table>
 </div>
@@ -549,13 +549,13 @@
                 Due date
             </label>
             <span class="payment--due">
-        30.11.2010
+        ${invoice.dueDate}
       </span>
             <label class="payment--amount--label">
-                Euro
+                ${invoice.currency}
             </label>
             <span class="payment--amount">
-        50,00
+        ${invoice.total}
       </span>
         </div>
 
