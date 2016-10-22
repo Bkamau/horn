@@ -2,13 +2,17 @@ package io.vaxly.layouts;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
-import com.vaadin.ui.*;
+import com.vaadin.ui.Alignment;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.themes.ValoTheme;
+import io.vaxly.mainUi.Homepage;
+import org.parse4j.ParseUser;
 
 /**
  * Created by bkamau on 20.10.2016.
  */
-public class UserLayout extends HorizontalLayout implements View {
+public class UserLayout extends HorizontalLayout implements View, Button.ClickListener {
 
 
     private Button logoutBtn;
@@ -27,6 +31,7 @@ public class UserLayout extends HorizontalLayout implements View {
         logoutBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         logoutBtn.addStyleName(ValoTheme.LABEL_LARGE);
         logoutBtn.addStyleName("user-button");
+        logoutBtn.addClickListener(this);
 
         invoiceBtn = new Button("Invoices");
         invoiceBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
@@ -51,9 +56,21 @@ public class UserLayout extends HorizontalLayout implements View {
     }
 
 
-
     @Override
     public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
 
+    }
+
+    @Override
+    public void buttonClick(Button.ClickEvent clickEvent) {
+        if (clickEvent.getComponent() == logoutBtn){
+            ParseUser.currentUser = null;
+            getUI().getNavigator().addView(Homepage.NAME, new Homepage());
+            navigate(Homepage.NAME);
+        }
+    }
+
+    private void navigate(String viewName){
+        getUI().getNavigator().navigateTo(viewName);
     }
 }

@@ -59,28 +59,28 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
     public static Invoice invoice = new Invoice();
 
+    static HorizontalLayout topHorizontalLayout;
     public CreateInvoice(){
 
-        VerticalLayout mainHorizontalLayout = new VerticalLayout();
+        mainHorizontalLayout = new VerticalLayout();
         mainHorizontalLayout.setSizeFull();
 
+        topHorizontalLayout = new HorizontalLayout();
+        topHorizontalLayout.setSizeFull();
 
         HorizontalLayout submitLayout = new SubmitLayout();
-
         HorizontalLayout horizontalLayout = new HorizontalLayout();
         horizontalLayout.setSizeFull();
 
-        if (ParseUser.currentUser != null){
 
-            HorizontalLayout userLayout = new UserLayout();
-            mainHorizontalLayout.addComponent(userLayout);
-            mainHorizontalLayout.setComponentAlignment(userLayout, Alignment.TOP_CENTER);
-        }
+        addUserButtons();
 
-
+        mainHorizontalLayout.addComponent(topHorizontalLayout);
         mainHorizontalLayout.addComponents(horizontalLayout);
         mainHorizontalLayout.addComponent(submitLayout);
+        mainHorizontalLayout.setComponentAlignment(topHorizontalLayout, Alignment.TOP_CENTER);
         mainHorizontalLayout.setComponentAlignment(submitLayout, Alignment.BOTTOM_CENTER);
+
 
         VerticalLayout v1 = new VerticalLayout();
         VerticalLayout v2 = new VerticalLayout();
@@ -119,6 +119,14 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         mainPaneL.setContent(mainHorizontalLayout);
         mainPaneL.setResponsive(true);
         setContent(mainPaneL);
+    }
+
+    public static void addUserButtons(){
+        if (ParseUser.currentUser != null){
+            HorizontalLayout userLayout = new UserLayout();
+            topHorizontalLayout.addComponent(userLayout);
+            topHorizontalLayout.setComponentAlignment(userLayout, Alignment.TOP_CENTER);
+        }
     }
 
     @Override

@@ -30,7 +30,7 @@ public class LoginSignIn extends Window implements View, Button.ClickListener, P
     private Button loginButton = new Button("Login");
 
 
-    LoginSignIn() {
+    public LoginSignIn() {
 
 
 
@@ -42,6 +42,10 @@ public class LoginSignIn extends Window implements View, Button.ClickListener, P
 
         loginEmailTextField.setWidth(100.0f, Unit.PERCENTAGE);
         loginPasswdTextField.setWidth(100.0f, Unit.PERCENTAGE);
+
+        // TODO: 22.10.2016 To  used for tests only
+        loginEmailTextField.setValue("username");
+        loginPasswdTextField.setValue("password");
 
         loginEmailTextField.addValueChangeListener(this);
         loginPasswdTextField.addValueChangeListener(this);
@@ -99,10 +103,16 @@ public class LoginSignIn extends Window implements View, Button.ClickListener, P
         }else {
             try {
                 ParseUser.login(email,password );
-                getUI().getNavigator().addView(CreateInvoice.NAME, new CreateInvoice());
-                navigate(CreateInvoice.NAME);
-                Konstants.printInfo(ParseUser.currentUser.getUsername());
-                UI.getCurrent().removeWindow(this);
+
+                if (UI.getCurrent().getNavigator().getCurrentView().getClass() == Homepage.class) {
+                    Konstants.printInfo(UI.getCurrent().getNavigator().getCurrentView().getClass().getName());
+                    getUI().getNavigator().addView(CreateInvoice.NAME, new CreateInvoice());
+                    navigate(CreateInvoice.NAME);
+                    UI.getCurrent().removeWindow(this);
+                }else if (UI.getCurrent().getNavigator().getCurrentView().getClass() == CreateInvoice.class){
+                    CreateInvoice.addUserButtons();
+                    UI.getCurrent().removeWindow(this);
+                }
             } catch (ParseException e) {
                 e.printStackTrace();
                 Notification.show(e.getMessage());

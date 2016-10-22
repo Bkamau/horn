@@ -13,7 +13,7 @@ import com.vaadin.ui.themes.ValoTheme;
  */
 public class Homepage extends Panel implements View, Button.ClickListener {
 
-    static final String NAME = "Homepage";
+    public static final String NAME = "Homepage";
     private Panel mainPanel;
     private Navigator navigator;
     private Button createBtn;

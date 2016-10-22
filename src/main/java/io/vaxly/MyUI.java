@@ -27,15 +27,15 @@ import java.util.Properties;
 public class MyUI extends UI {
 
     Navigator navigator;
-    private final Properties properties = new Properties();
+    public static final Properties properties = new Properties();
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
 
         if(this.loadProperties("constants.properties")){
-            String appID = this.properties.getProperty("APP_ID");
-            String restID = this.properties.getProperty("REST_ID");
-            String URL = this.properties.getProperty("URL");
+            String appID = properties.getProperty("APP_ID");
+            String restID = properties.getProperty("REST_ID");
+            String URL = properties.getProperty("URL");
             Parse.initialize(appID, restID, URL);
         }
 

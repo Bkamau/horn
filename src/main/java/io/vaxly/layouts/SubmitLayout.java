@@ -6,27 +6,27 @@ import com.vaadin.server.BrowserWindowOpener;
 import com.vaadin.server.FileDownloader;
 import com.vaadin.server.FileResource;
 import com.vaadin.server.Resource;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
-import io.vaxly.mainUi.CreateInvoice;
-import io.vaxly.models.User;
+import io.vaxly.mainUi.LoginSignIn;
 import io.vaxly.utils.HtmlGenerator;
 import io.vaxly.utils.Konstants;
 import io.vaxly.utils.PdfGenerator;
+import io.vaxly.utils.SendMail;
+import org.parse4j.ParseUser;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import static io.vaxly.MyUI.properties;
 import static io.vaxly.layouts.ContactsLayout.company;
 import static io.vaxly.layouts.ContactsLayout.customer;
-import static io.vaxly.mainUi.CreateInvoice.itemsData;
 import static io.vaxly.mainUi.CreateInvoice.invoice;
+import static io.vaxly.mainUi.CreateInvoice.itemsData;
 
 /**
  * Created by bkamau on 20.10.2016.
@@ -34,7 +34,7 @@ import static io.vaxly.mainUi.CreateInvoice.invoice;
 public class SubmitLayout extends HorizontalLayout implements View, Button.ClickListener {
 
     private  static  String outputFilePath = "output/pdf/invoice.pdf";
-
+    private  Button loginBtn;
     private Button downloadBtn;
     private Button saveBtn;
     private Button previewBtn;
@@ -49,10 +49,17 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
         downloadBtn.addStyleName(ValoTheme.LABEL_LARGE);
         downloadBtn.addStyleName("user-button");
 
-        saveBtn = new Button("Save");
+        loginBtn = new Button("Login");
+        loginBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        loginBtn.addStyleName(ValoTheme.LABEL_LARGE);
+        loginBtn.addStyleName("user-button");
+        loginBtn.addClickListener(this);
+
+        saveBtn = (ParseUser.currentUser != null) ? new Button("Save"): new Button("Login");
         saveBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         saveBtn.addStyleName(ValoTheme.LABEL_LARGE);
         saveBtn.addStyleName("user-button");
+        saveBtn.addClickListener(this);
 
         previewBtn = new Button("Preview");
         previewBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
@@ -64,13 +71,17 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
         sendBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         sendBtn.addStyleName(ValoTheme.LABEL_LARGE);
         sendBtn.addStyleName("user-button");
+        sendBtn.addClickListener(this);
 
 
-        addComponents(downloadBtn,saveBtn,previewBtn,sendBtn);
-        setComponentAlignment(sendBtn, Alignment.TOP_RIGHT);
-        setComponentAlignment(previewBtn, Alignment.TOP_RIGHT);
-        setComponentAlignment(saveBtn, Alignment.TOP_RIGHT);
-        setComponentAlignment(downloadBtn,Alignment.TOP_LEFT);
+        if (ParseUser.currentUser != null){
+            addComponent(saveBtn);
+        }
+        else {
+            addComponent(loginBtn);
+        }
+        addComponents(downloadBtn,previewBtn,sendBtn);
+
         setMargin(true);
         setSpacing(true);
     }
@@ -127,6 +138,7 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
         Konstants.printInfo("File download complete...");
 
     }
+
     private void showPreview(){
 
         generatePdf();
@@ -136,10 +148,45 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
         BrowserWindowOpener opener = new BrowserWindowOpener(resource);
         opener.extend(previewBtn);
     }
+
+    private void sendMail(){
+
+        // SMTP info
+        String host = properties.getProperty("host");
+        String port = properties.getProperty("port");
+        String mailFrom = properties.getProperty("mailFrom");
+        String password = properties.getProperty("password");
+
+        // message info
+        String mailTo = "xcalibah@gmail.com";
+        String subject = "Seconds with attachments";
+        String message = "Have i got attachments for you.";
+
+        // attachments
+        String[] attachFiles = new String[1];
+        attachFiles[0] = "output/pdf/invoice.pdf";
+
+
+        try {
+            SendMail.sendmail(host, port, mailFrom, password, mailTo,
+                    subject, message ,attachFiles);
+            Konstants.printInfo("Mail sent ...");
+        } catch (Exception ex) {
+            Konstants.printInfo("Could not send email...");
+            ex.printStackTrace();
+        }
+    }
+
+
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
         if (clickEvent.getComponent() == previewBtn){
             showPreview();
+        }else if (clickEvent.getComponent() == loginBtn){
+            Konstants.printInfo(UI.getCurrent().getNavigator().getCurrentView().getClass().getName());
+            UI.getCurrent().addWindow(new LoginSignIn());
+        }else if (clickEvent.getComponent() == sendBtn){
+            sendMail();
         }
     }
 }
