@@ -395,7 +395,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
     }
 
-
     /*
         *Gets values from TextFields
         * Sets the values to invoice(model) object

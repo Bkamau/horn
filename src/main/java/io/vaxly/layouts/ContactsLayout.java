@@ -124,7 +124,7 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
 
        customerNameTF = new TextField("Name");
        customerNameTF.setWidth(230.0f, Unit.PIXELS);
-
+       customerNameTF.focus();
        customerAddressTF = new TextField("Address");
        customerAddressTF.setWidth(230.0f, Unit.PIXELS);
 

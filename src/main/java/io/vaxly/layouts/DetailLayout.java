@@ -20,7 +20,9 @@ import java.util.GregorianCalendar;
 public class DetailLayout extends HorizontalLayout {
 
     public static byte[] byteArray;
-    public static String image;
+    public static byte [] image;
+
+    //public static String image;
 
      FormLayout detailDatesLayout = new FormLayout();
      VerticalLayout detailLogoLayout = new VerticalLayout();
@@ -184,6 +186,7 @@ public class DetailLayout extends HorizontalLayout {
                     return null;
                 }
             };
+             image = bas.toByteArray();
 
             final StreamResource resource = new StreamResource(streamSource, name);
 
