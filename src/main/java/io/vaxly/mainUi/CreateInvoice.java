@@ -14,6 +14,8 @@ import io.vaxly.models.Item;
 import io.vaxly.utils.Konstants;
 import org.parse4j.ParseUser;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -225,12 +227,9 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         subTitle.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
         subTitle.addStyleName("textfield-background");
 
-
         totalLable.setCaption("TOTAL");
         totalLable.setStyleName(ValoTheme.LABEL_BOLD);
         totalLable.setStyleName(ValoTheme.LABEL_HUGE);
-
-
 
         euroBtn = new Button("Euro " , FontAwesome.EURO);
         poundBtn= new Button("Pound" , FontAwesome.GBP);
@@ -244,17 +243,13 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         poundBtn.addStyleName(ValoTheme.BUTTON_FRIENDLY);
         dollarBtn.addStyleName(ValoTheme.BUTTON_FRIENDLY);
 
-
         euroBtn.addStyleName("currency-buttons");
         poundBtn.addStyleName("currency-buttons");
         dollarBtn.addStyleName("currency-buttons");
 
-
         euroBtn.addClickListener(this);
         poundBtn.addClickListener(this);
         dollarBtn.addClickListener(this);
-
-
 
 
         VerticalLayout popupContent = new VerticalLayout();
@@ -263,9 +258,6 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
         popup = new PopupView("Change Currency", popupContent);
         popup.setHideOnMouseOut(false);
-
-
-
 
 
         totalFormLayout.addComponents(subTitle,taxTitle,totalLable, popup);
@@ -282,6 +274,9 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
     }
 
     private void totalPrice(){
+
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
 
         double sum = 0;
         for (int i = 0; i < priceArrayList.size(); i++){
@@ -307,7 +302,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
         Double finalSum = sum*tax;
 
-        totalSum  =  String.valueOf(finalSum);
+        totalSum  =  String.valueOf(df.format(finalSum));
         currency = " EURO";
         totalLable.setValue(totalSum + "&nbsp; &nbsp; " + currency);
         totalLable.setContentMode(ContentMode.HTML);

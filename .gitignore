@@ -8,6 +8,7 @@ bin/
 
 # Intellij
 .idea/
+.idea/workspace.xml
 *.iml
 *.iws
 
@@ -19,5 +20,6 @@ log/
 target/
 
 src/main/resources/constants.properties
+
 
 

@@ -58,35 +58,11 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
 
     public SubmitLayout( ){
 
-        downloadBtn = new Button("Download PDF");
-        downloadBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        downloadBtn.addStyleName(ValoTheme.LABEL_LARGE);
-        downloadBtn.addStyleName("user-button");
-
-        loginBtn = new Button("Login");
-        loginBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        loginBtn.addStyleName(ValoTheme.LABEL_LARGE);
-        loginBtn.addStyleName("user-button");
-        loginBtn.addClickListener(this);
-
-        saveBtn =  new Button("Save");
-        saveBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        saveBtn.addStyleName(ValoTheme.LABEL_LARGE);
-        saveBtn.addStyleName("user-button");
-        saveBtn.addClickListener(this);
-
-        previewBtn = new Button("Preview");
-        previewBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        previewBtn.addStyleName(ValoTheme.LABEL_LARGE);
-        previewBtn.addStyleName("user-button");
-        previewBtn.addClickListener(this);
-
-        sendBtn = new Button("Send");
-        sendBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        sendBtn.addStyleName(ValoTheme.LABEL_LARGE);
-        sendBtn.addStyleName("user-button");
-        sendBtn.addClickListener(this);
-
+        downloadBtn = createButton ("Download PDF");
+        loginBtn = createButton("Login");
+        saveBtn =  createButton("Save");
+        previewBtn = createButton("Preview");
+        sendBtn = createButton("Send");
 
         if (ParseUser.currentUser != null){
             addComponent(saveBtn);
@@ -100,6 +76,15 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
         setSpacing(true);
     }
 
+    private Button createButton(String name){
+        Button btn = new Button(name);
+        btn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        btn.addStyleName(ValoTheme.LABEL_LARGE);
+        btn.addStyleName("user-button");
+        btn.addClickListener(this);
+
+        return btn;
+    }
 
 
     @Override

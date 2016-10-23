@@ -28,6 +28,7 @@ public class ItemsLayout extends HorizontalLayout {
 
         descTextField.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
         descTextField.addStyleName("textfield-background");
+        descTextField.focus();
 
         qntytTextField.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
         qntytTextField.addStyleName("textfield-background");
