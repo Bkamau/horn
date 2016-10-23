@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e03870b4-2b08-454f-b4d5-9758aabafbe2" name="Default" comment="...">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/logo/logo.bmp" afterPath="$PROJECT_DIR$/output/logo/logo.bmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/output/pdf/invoice.pdf" afterPath="$PROJECT_DIR$/output/pdf/invoice.pdf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/io/vaxly/mainUi/CreateInvoice.class" afterPath="$PROJECT_DIR$/target/classes/io/vaxly/mainUi/CreateInvoice.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/layouts/SubmitLayout.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/layouts/SubmitLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/layouts/UserLayout.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/layouts/UserLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/io/vaxly/mainUi/CreateInvoice.java" afterPath="$PROJECT_DIR$/src/main/java/io/vaxly/mainUi/CreateInvoice.java" />
-    </list>
+    <list default="true" id="e03870b4-2b08-454f-b4d5-9758aabafbe2" name="Default" comment="..." />
     <ignored path="hornbill.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -70,8 +62,8 @@
       <file leaf-file-name="UserLayout.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/layouts/UserLayout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="374" column="0" selection-start-line="374" selection-start-column="0" selection-end-line="374" selection-end-column="0" />
+            <state relative-caret-position="170">
+              <caret line="360" column="0" selection-start-line="360" selection-start-column="0" selection-end-line="360" selection-end-column="0" />
               <folding>
                 <element signature="method#getInvoice#0;class#UserLayout#0" expanded="false" />
                 <marker date="1477255217951" expanded="false" signature="2586:2801" ph="{...}" />
@@ -932,12 +924,12 @@
       <workItem from="1477148931888" duration="10765000" />
       <workItem from="1477160281176" duration="6035000" />
       <workItem from="1477232377492" duration="7589000" />
-      <workItem from="1477242299931" duration="12276000" />
+      <workItem from="1477242299931" duration="12462000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="323757000" />
+    <option name="totallyTimeSpent" value="323943000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="19" width="1920" height="1050" extended-state="0" />
@@ -950,7 +942,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988167" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2900433" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2900433" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.08982684" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1297,8 +1289,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/vaxly/layouts/UserLayout.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="374" column="0" selection-start-line="374" selection-start-column="0" selection-end-line="374" selection-end-column="0" />
+        <state relative-caret-position="170">
+          <caret line="360" column="0" selection-start-line="360" selection-start-column="0" selection-end-line="360" selection-end-column="0" />
           <folding>
             <element signature="method#getInvoice#0;class#UserLayout#0" expanded="false" />
             <marker date="1477255217951" expanded="false" signature="2586:2801" ph="{...}" />
