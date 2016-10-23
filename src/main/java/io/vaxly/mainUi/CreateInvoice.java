@@ -278,6 +278,9 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         DecimalFormat df = new DecimalFormat("#.##");
         df.setRoundingMode(RoundingMode.CEILING);
 
+        DecimalFormat sf = new DecimalFormat("#.###");
+        sf.setRoundingMode(RoundingMode.CEILING);
+
         double sum = 0;
         for (int i = 0; i < priceArrayList.size(); i++){
             String value = priceArrayList.get(i).getValue();
@@ -291,7 +294,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         }
 
         double tax;
-        subTitle.setValue(String.valueOf(sum));
+        subTitle.setValue(String.valueOf(sf.format(sum)));
 
         String taxation = taxTitle.getValue();
         if (!taxation.isEmpty()){

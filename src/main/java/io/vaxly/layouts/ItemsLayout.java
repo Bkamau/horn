@@ -5,6 +5,9 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.themes.ValoTheme;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 /**
  * Created by bkamau on 2.10.2016.
  */
@@ -15,6 +18,9 @@ public class ItemsLayout extends HorizontalLayout {
 
     public ItemsLayout(TextField qntytTextField, TextField descTextField , TextField amtTextField , TextField priceTextField) {
         super();
+
+        DecimalFormat sf = new DecimalFormat("#.###");
+        sf.setRoundingMode(RoundingMode.CEILING);
 
         descTextField.setInputPrompt("Enter product/service description");
         qntytTextField.setWidth(100, Unit.PERCENTAGE);
@@ -49,7 +55,7 @@ public class ItemsLayout extends HorizontalLayout {
                     quantity = Double.parseDouble(qntytTextField.getValue());
                 }
 
-                priceTextField.setValue(String.valueOf(quantity*amount));
+                priceTextField.setValue(String.valueOf(sf.format(quantity*amount)));
             }
         });
 
@@ -62,10 +68,9 @@ public class ItemsLayout extends HorizontalLayout {
                     amount = Double.parseDouble(amtTextField.getValue());
                 }
 
-                priceTextField.setValue(String.valueOf(quantity*amount));
+                priceTextField.setValue(String.valueOf(sf.format(quantity*amount)));
             }
         });
-
 
 
         addComponents(descTextField,qntytTextField,amtTextField,priceTextField);
