@@ -8,12 +8,11 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.ValoTheme;
 import io.vaxly.mainUi.Homepage;
-import io.vaxly.utils.Konstants;
-import org.parse4j.ParseUser;
 import io.vaxly.models.Company;
 import io.vaxly.models.Customer;
 import io.vaxly.models.Invoice;
 import io.vaxly.models.Item;
+import io.vaxly.utils.Konstants;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.parse4j.ParseException;
@@ -42,9 +41,9 @@ public class UserLayout extends HorizontalLayout implements View, Button.ClickLi
     public UserLayout( ){
 
 
-        nameBtn = createButton("Account");
-        logoutBtn = createButton("Logout");
-        invoiceBtn = createButton("Invoices");
+        nameBtn     = createButton("Account");
+        logoutBtn   = createButton("Logout");
+        invoiceBtn  = createButton("Invoices");
         customerBtn = createButton("Customers");
 
         addComponents(nameBtn,invoiceBtn,customerBtn,logoutBtn);
@@ -62,6 +61,7 @@ public class UserLayout extends HorizontalLayout implements View, Button.ClickLi
         * Method creates a button
     */
 
+    @SuppressWarnings("Duplicates")
     private Button createButton(String btnName){
         Button btn = new Button(btnName);
         btn.addStyleName(ValoTheme.BUTTON_BORDERLESS);

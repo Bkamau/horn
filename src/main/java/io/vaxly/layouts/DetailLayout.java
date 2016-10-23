@@ -24,15 +24,15 @@ public class DetailLayout extends HorizontalLayout {
 
     //public static String image;
 
-     FormLayout detailDatesLayout = new FormLayout();
-     VerticalLayout detailLogoLayout = new VerticalLayout();
+    FormLayout detailDatesLayout = new FormLayout();
+    VerticalLayout detailLogoLayout = new VerticalLayout();
 
     public static TextField invoiceField = new TextField("Invoice #", "");
     public static DateField issueDate = new PopupDateField("Issue Date");
     public static DateField dueDate = new PopupDateField("Due Date");
 
-     VerticalLayout dropPane;
-     Label infoLabel;
+    VerticalLayout dropPane;
+    Label infoLabel;
 
     GregorianCalendar calEnd = new GregorianCalendar();
 
@@ -180,13 +180,13 @@ public class DetailLayout extends HorizontalLayout {
                 @Override
                 public InputStream getStream() {
                     if (bas != null) {
-                         byteArray = bas.toByteArray();
+                        byteArray = bas.toByteArray();
                         return new ByteArrayInputStream(byteArray);
                     }
                     return null;
                 }
             };
-             image = bas.toByteArray();
+            image = bas.toByteArray();
 
             final StreamResource resource = new StreamResource(streamSource, name);
 

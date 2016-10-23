@@ -36,7 +36,7 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
     private Button companydBtn;
     private  Button saveCustomerBtn;
 
-    private Window companyWindow = myCompanyWindow();
+    private Window companyWindow  = myCompanyWindow();
     private Window customerWindow = myCustomerWindow();
 
     public static Company company;
@@ -44,22 +44,8 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
 
     public ContactsLayout() {
 
-        toTextField = new TextField();
-        toTextField.setWidth(100, Unit.PERCENTAGE);
-        toTextField.setImmediate(true);
-        toTextField.setCaption("TO");
-        toTextField.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
-        toTextField.addStyleName("textfield-background");
-        toTextField.setInputPrompt("ADD CUSTOMER");
-
-
-        fromTextField = new TextField();
-        fromTextField.setWidth(100,Unit.PERCENTAGE);
-        fromTextField.setImmediate(true);
-        fromTextField.setCaption("FROM");
-        fromTextField.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);;
-        fromTextField.addStyleName("textfield-background");
-        fromTextField.setInputPrompt("ADD COMPANY");
+        toTextField   = mainFields("TO", "ADD CUSTOMER");
+        fromTextField = mainFields("FROM", "ADD COMPANY");
 
         setWidth(100, Unit.PERCENTAGE);
         setSpacing(true);
@@ -74,40 +60,24 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
     private Window myCompanyWindow (){
 
         Window window = new Window();
-        VerticalLayout layout = new VerticalLayout();
 
-        nameTextField = new TextField("Name");
-        nameTextField.setWidth(230.0f, Unit.PIXELS);
+        nameTextField        = createFields("Name");
         nameTextField.focus();
-        addressTextField = new TextField("Address");
-        addressTextField.setWidth(230.0f, Unit.PIXELS);
-        zipCodeTextField = new TextField("Zip Code");
-        zipCodeTextField.setWidth(230.0f, Unit.PIXELS);
-        cityTextField = new TextField("City");
-        cityTextField.setWidth(230.0f, Unit.PIXELS);
-        companyNoTextField = new TextField("Company No.");
-        companyNoTextField.setWidth(230.0f, Unit.PIXELS);
-        bankDetailsTextField = new TextField("Bank Account");
-        bankDetailsTextField.setWidth(230.0f, Unit.PIXELS);
-        bicTextField = new TextField("Bank BIC");
-        bicTextField.setWidth(230.0f, Unit.PIXELS);
-        countryTextField = new TextField("Country");
-        countryTextField.setWidth(230.0f, Unit.PIXELS);
+        addressTextField     = createFields("Address");
+        zipCodeTextField     = createFields("Zip Code");
+        cityTextField        = createFields("City");
+        companyNoTextField   = createFields("Company No.");
+        bankDetailsTextField = createFields("Bank Account");
+        bicTextField         = createFields("Bank BIC");
+        countryTextField     = createFields("Country");
+        companydBtn          = createButtons();
 
-        companydBtn = new Button("Save");
-        companydBtn.setWidth(230.0f, Unit.PIXELS);
-        companydBtn.addStyleName("preview-button");
-        companydBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        companydBtn.addClickListener(this);
 
         FormLayout formLayout = new FormLayout();
         formLayout.addComponents(nameTextField, addressTextField, zipCodeTextField, cityTextField, countryTextField, companyNoTextField,
                 bankDetailsTextField, bicTextField, companydBtn);
 
-        layout.setSpacing(true);
-        layout.setMargin(true);
-        layout.setWidth(400, Unit.PIXELS);
-        layout.addComponent(formLayout);
+        VerticalLayout layout =  createVerticalLayout(formLayout);
 
         window.setContent(layout);
         window.setResizable(false);
@@ -117,47 +87,65 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
         return window;
     }
 
-   private Window myCustomerWindow(){
-       Window window = new Window();
-       FormLayout formLayout = new FormLayout();
-       VerticalLayout layout = new VerticalLayout();
+    private Window myCustomerWindow(){
+        Window window = new Window();
+        FormLayout formLayout = new FormLayout();
 
-       customerNameTF = new TextField("Name");
-       customerNameTF.setWidth(230.0f, Unit.PIXELS);
-       customerNameTF.focus();
-       customerAddressTF = new TextField("Address");
-       customerAddressTF.setWidth(230.0f, Unit.PIXELS);
+        customerNameTF    = createFields("Name");
+        customerNameTF.focus();
+        customerAddressTF = createFields("Address");
+        customerZipTF     = createFields("Zip Code");
+        customerCityTF    = createFields("City");
+        customerCountryTF = createFields("Country");
+        saveCustomerBtn   = createButtons();
 
-       customerZipTF = new TextField("Zip Code");
-       customerZipTF.setWidth(230.0f, Unit.PIXELS);
+        formLayout.addComponents(customerNameTF,customerAddressTF,customerZipTF,customerCityTF, customerCountryTF,saveCustomerBtn);
 
-       customerCityTF = new TextField("City");
-       customerCityTF.setWidth(230.0f, Unit.PIXELS);
+        VerticalLayout layout =  createVerticalLayout(formLayout);
 
-       customerCountryTF = new TextField("Country");
-       customerCountryTF.setWidth(230.0f, Unit.PIXELS);
+        window.setContent(layout);
+        window.setResizable(false);
+        window.addStyleName("corners");
+        window.setPosition(960,320);
+        window.setIcon(new ThemeResource("images/client.png"));
+        return window;
+    }
 
-       saveCustomerBtn = new Button("Save");
-       saveCustomerBtn.setWidth(230.0f, Unit.PIXELS);
-       saveCustomerBtn.addStyleName("preview-button");
-       saveCustomerBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-       saveCustomerBtn.addClickListener(this);
+    private VerticalLayout createVerticalLayout(Component component){
+        VerticalLayout layout = new VerticalLayout();
+        layout.setSpacing(true);
+        layout.setMargin(true);
+        layout.setWidth(400, Unit.PIXELS);
+        layout.addComponent(component);
+        return layout;
+    }
 
-       formLayout.addComponents(customerNameTF,customerAddressTF,customerZipTF,customerCityTF, customerCountryTF,saveCustomerBtn);
+    private TextField mainFields(String caption, String inprompt){
+        TextField textField = new TextField();
+        textField.setWidth(100,Unit.PERCENTAGE);
+        textField.setImmediate(true);
+        textField.setCaption(caption);
+        textField.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);;
+        textField.addStyleName("textfield-background");
+        textField.setInputPrompt(inprompt);
 
-       layout.setSpacing(true);
-       layout.setMargin(true);
-       layout.setWidth(400, Unit.PIXELS);
-       layout.addComponent(formLayout);
+        return textField;
+    }
 
+    private TextField createFields(String name){
+        TextField textField = new TextField(name);
+        textField.setWidth(230.0f, Unit.PIXELS);
+        return textField;
+    }
 
-       window.setContent(layout);
-       window.setResizable(false);
-       window.addStyleName("corners");
-       window.setPosition(960,320);
-       window.setIcon(new ThemeResource("images/client.png"));
-       return window;
-   }
+    private Button createButtons(){
+        Button button = new Button("Save");
+        button.setWidth(230.0f, Unit.PIXELS);
+        button.addStyleName("preview-button");
+        button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        button.addClickListener(this);
+        return button;
+    }
 
     @Override
     public void layoutClick(LayoutEvents.LayoutClickEvent layoutClickEvent) {
@@ -221,4 +209,3 @@ public class ContactsLayout extends HorizontalLayout implements LayoutEvents.Lay
 
 
 }
-

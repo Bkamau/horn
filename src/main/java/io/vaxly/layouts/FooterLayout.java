@@ -15,26 +15,23 @@ public class FooterLayout extends HorizontalLayout {
 
     public FooterLayout( ) {
 
-        terms = new TextField();
-        terms.setWidth(100, Unit.PERCENTAGE);
-        terms.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
-        terms.addStyleName("textfield-background");
-        terms.setImmediate(true);
-        terms.setCaption("ADD TERMS");
-
-        notes = new TextField();
-        notes.setWidth(100,Unit.PERCENTAGE);
-        notes.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
-        notes.addStyleName("textfield-background");
-        notes.setImmediate(true);
-        notes.setCaption("NOTES");
-
-
+        terms =createTextField("TERMS");
+        notes = createTextField("NOTES");
 
         setWidth(100, Unit.PERCENTAGE);
         setSpacing(true);
         setStyleName("address-layout");
         addComponent(terms);
         addComponent(notes);
+    }
+
+    private TextField createTextField(String caption){
+        TextField textField = new TextField();
+        textField.setWidth(100, Unit.PERCENTAGE);
+        textField.addStyleName(ValoTheme.TEXTFIELD_BORDERLESS);
+        textField.addStyleName("textfield-background");
+        textField.setImmediate(true);
+        textField.setCaption(caption);
+        return textField;
     }
 }

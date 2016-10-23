@@ -59,10 +59,10 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
     public SubmitLayout( ){
 
         downloadBtn = createButton ("Download PDF");
-        loginBtn = createButton("Login");
-        saveBtn =  createButton("Save");
-        previewBtn = createButton("Preview");
-        sendBtn = createButton("Send");
+        loginBtn    = createButton("Login");
+        saveBtn     =  createButton("Save");
+        previewBtn  = createButton("Preview");
+        sendBtn     = createButton("Send");
 
         if (ParseUser.currentUser != null){
             addComponent(saveBtn);
@@ -77,14 +77,14 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
     }
 
     private Button createButton(String name){
-        Button btn = new Button(name);
-        btn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
-        btn.addStyleName(ValoTheme.LABEL_LARGE);
-        btn.addStyleName("user-button");
-        btn.addClickListener(this);
-
-        return btn;
+        Button button = new Button(name);
+        button.addStyleName(ValoTheme.BUTTON_BORDERLESS);
+        button.addStyleName(ValoTheme.LABEL_LARGE);
+        button.addStyleName("user-button");
+        button.addClickListener(this);
+        return button;
     }
+
 
 
     @Override
@@ -331,7 +331,6 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
 
         return customerobj;
     }
-
 
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
