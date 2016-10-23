@@ -55,7 +55,7 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
         loginBtn.addStyleName("user-button");
         loginBtn.addClickListener(this);
 
-        saveBtn = (ParseUser.currentUser != null) ? new Button("Save"): new Button("Login");
+        saveBtn =  new Button("Save");
         saveBtn.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         saveBtn.addStyleName(ValoTheme.LABEL_LARGE);
         saveBtn.addStyleName("user-button");
@@ -158,9 +158,9 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
         String password = properties.getProperty("password");
 
         // message info
-        String mailTo = "xcalibah@gmail.com";
-        String subject = "Seconds with attachments";
-        String message = "Have i got attachments for you.";
+        String mailTo = "mndungu@abo.fi";
+        String subject = "Invoice";
+        String message = "Please find your new invoice attached to this email. We thank you for your loyalty.";
 
         // attachments
         String[] attachFiles = new String[1];
@@ -177,13 +177,11 @@ public class SubmitLayout extends HorizontalLayout implements View, Button.Click
         }
     }
 
-
     @Override
     public void buttonClick(Button.ClickEvent clickEvent) {
         if (clickEvent.getComponent() == previewBtn){
             showPreview();
         }else if (clickEvent.getComponent() == loginBtn){
-            Konstants.printInfo(UI.getCurrent().getNavigator().getCurrentView().getClass().getName());
             UI.getCurrent().addWindow(new LoginSignIn());
         }else if (clickEvent.getComponent() == sendBtn){
             sendMail();

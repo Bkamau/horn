@@ -98,8 +98,8 @@ public class LoginSignIn extends Window implements View, Button.ClickListener, P
 
     private void loginUser(String email, String password){
         if (loginEmailTextField.isEmpty() || loginPasswdTextField.isEmpty()){
-            loginEmailTextField.setComponentError(new UserError("Cant be empyt"));
-            loginPasswdTextField.setComponentError(new UserError("Cant be empyt"));
+            loginEmailTextField.setComponentError(new UserError("Can't be empty"));
+            loginPasswdTextField.setComponentError(new UserError("Can't be empty"));
         }else {
             try {
                 ParseUser.login(email,password );
