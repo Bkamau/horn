@@ -11,14 +11,13 @@ import com.vaadin.ui.themes.ValoTheme;
 import io.vaxly.layouts.*;
 import io.vaxly.models.Invoice;
 import io.vaxly.models.Item;
+import io.vaxly.utils.Konstants;
 import org.parse4j.ParseUser;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import static io.vaxly.layouts.DetailLayout.dueDate;
-import static io.vaxly.layouts.DetailLayout.invoiceField;
-import static io.vaxly.layouts.DetailLayout.issueDate;
+import static io.vaxly.layouts.DetailLayout.*;
 
 /**
  * Created by bkamau on 12.10.2016.
@@ -122,6 +121,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
     }
 
     public static void addUserButtons(){
+
         if (ParseUser.currentUser != null){
             HorizontalLayout userLayout = new UserLayout();
             topHorizontalLayout.addComponent(userLayout);
@@ -331,8 +331,8 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
     public void setitems() {
         int billzSize = billz.getComponentCount();
         int billzhlsize = componentArrayList.size();
-        System.out.println("billsSize: " + billzSize);
-        System.out.println("billsHorizontalLayout Size: " + billzhlsize);
+        Konstants.printInfo("billsSize: " + billzSize);
+        Konstants.printInfo("billsHorizontalLayout Size: " + billzhlsize);
         itemsData.clear();
 
         for (int i = 0; i < billzhlsize; i++) {
@@ -364,8 +364,8 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
                     }
                 }
                 else{
-                    System.out.println("Value (" + j + " " + i  + ") is null");
-                    System.out.println("Value set to empty" );
+                    Konstants.printInfo("Value (" + j + " " + i  + ") is null");
+                    Konstants.printInfo("Value set to empty" );
 
                     switch (j){
                         case 1:
@@ -382,11 +382,11 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
             }
             if((realItem.getName() == null))  {
-                System.out.println("Name is null" );
+                Konstants.printInfo("Name is null" );
 
             }
             else {
-                System.out.println("Name is not null" + i);
+                Konstants.printInfo("Name is not null" + i);
 
                 itemsData.add(realItem);
             }
@@ -403,34 +403,34 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
     private void setInvoiceDetails(){
 
-        System.out.println("***** Get Values and set to models ******");
+        Konstants.printInfo("***** Get Values and set to models ******");
 
         String DATE_FORMAT = "dd-MM-yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
 
         String invoiceNo = invoiceField.getValue();
         int id = Integer.parseInt(invoiceNo);
-        System.out.println("Invoice id: " + id);
+        Konstants.printInfo("Invoice id: " + id);
 
         String issuedate = sdf.format(issueDate.getValue());
-        System.out.println("issueDate: " + issuedate);
+        Konstants.printInfo("issueDate: " + issuedate);
 
         String duedate = sdf.format(dueDate.getValue());
-        System.out.println("dueDate: " + duedate);
+        Konstants.printInfo("dueDate: " + duedate);
 
         String subTotal = subTitle.getValue();
-        System.out.println("subTotal: " + subTotal);
+        Konstants.printInfo("subTotal: " + subTotal);
 
         String tax = taxTitle.getValue();
-        System.out.println("tax: " + tax);
+        Konstants.printInfo("tax: " + tax);
 
         String finalTotal = totalSum;
-        System.out.println("finalTotal: " + finalTotal);
+        Konstants.printInfo("finalTotal: " + finalTotal);
 
         String curr = currency;
-        System.out.println("Currency: " + curr);
+        Konstants.printInfo("Currency: " + curr);
 
-        System.out.println("************************");
+        Konstants.printInfo("************************");
 
         invoice.setDueDate(duedate);
         invoice.setIssueDate(issuedate);

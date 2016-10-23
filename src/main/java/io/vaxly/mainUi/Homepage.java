@@ -24,6 +24,7 @@ public class Homepage extends Panel implements View, Button.ClickListener {
         final VerticalLayout layout = new VerticalLayout();
         layout.setSpacing(true);
         layout.setMargin(true);
+        layout.addStyleName("overlay");
         layout.setStyleName("homepage_layout");
         layout.setSizeFull();
 
@@ -40,7 +41,7 @@ public class Homepage extends Panel implements View, Button.ClickListener {
         logoLayout.setComponentAlignment(logoImage,Alignment.TOP_CENTER);
 
 
-        Resource logoName = new ThemeResource("img/hornbill.png");
+        Resource logoName = new ThemeResource("img/hornbillwhite.png");
         Image logoNameImage = new Image(null, logoName);
         logoNameImage.setWidth(600, Unit.PIXELS);
         logoNameImage.setHeight(225, Unit.PIXELS);
