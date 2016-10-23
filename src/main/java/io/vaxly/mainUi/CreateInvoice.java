@@ -403,7 +403,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
 
     private void setInvoiceDetails(){
 
-        Konstants.printInfo("***** Get Values and set to models ******");
+        Konstants.printInfo("****** Get Values and set to models ******");
 
         String DATE_FORMAT = "dd-MM-yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
@@ -430,7 +430,7 @@ public class CreateInvoice extends Panel implements View, Button.ClickListener, 
         String curr = currency;
         Konstants.printInfo("Currency: " + curr);
 
-        Konstants.printInfo("************************");
+        Konstants.printInfo("************************************");
 
         invoice.setDueDate(duedate);
         invoice.setIssueDate(issuedate);
